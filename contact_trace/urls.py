@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from users.views import wait_list
+
 urlpatterns = [
     path(
         'profile/',
@@ -29,4 +31,10 @@ urlpatterns = [
         'admin/',
         admin.site.urls
     ),
+    path(
+        '',
+        wait_list,
+        name='wait_list'
+
+    )
 ]

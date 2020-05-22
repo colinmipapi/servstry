@@ -25,10 +25,23 @@ if not HEROKU:
     )
     env_file = os.path.join(BASE_DIR, '.env')
     environ.Env.read_env(env_file)
+else:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(
+        dsn="https://0fcbeba108974fed93dc125a4c1b9498@o396884.ingest.sentry.io/5250860",
+        integrations=[DjangoIntegration()],
+
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 DEBUG = os.environ.get('DEBUG')
 REDIS_CELERY_URL = os.environ.get('REDIS_URL')
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -42,6 +55,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'companies.apps.CompaniesConfig',
+    'track.apps.TrackConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'phonenumber_field',
     'rest_framework',
     'import_export',
@@ -71,7 +86,7 @@ ROOT_URLCONF = 'contact_trace.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,8 +159,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if HEROKU:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Crispy Form Settings
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Django Phone Number
 
@@ -171,3 +197,11 @@ CELERY_BROKER_POOL_LIMIT = None
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+# SENDGRID Settings
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
