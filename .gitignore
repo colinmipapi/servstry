@@ -1,0 +1,13 @@
+### Django ###
+.DS_Store
+*.log
+*.pot
+*.pyc
+__pycache__/
+migrations/
+!**/migrations
+!**/migrations/__init__.py
+
+### Environments ###
+venv/
+.env
