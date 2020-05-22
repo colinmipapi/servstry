@@ -16,9 +16,10 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LOCAL = os.environ.get('LOCAL', True)
+HEROKU = os.environ.get('HEROKU', False)
+print(HEROKU)
 
-if LOCAL:
+if not HEROKU:
     import environ
     env = environ.Env(
         DEBUG=(bool, False),
