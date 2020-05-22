@@ -21,9 +21,9 @@ env = environ.Env(
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
-REDIS_CELERY_URL = env('REDIS_CELERY_URL')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG')
+REDIS_CELERY_URL = os.environ.get('REDIS_CELERY_URL')
 
 ALLOWED_HOSTS = [
     'localhost',
