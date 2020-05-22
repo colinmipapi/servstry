@@ -2,6 +2,7 @@ amqp==2.5.2
 asgiref==3.2.7
 Babel==2.8.0
 billiard==3.6.3.0
+boto==2.49.0
 celery==4.4.2
 defusedxml==0.6.0
 diff-match-patch==20181111
