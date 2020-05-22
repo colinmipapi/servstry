@@ -20,6 +20,7 @@ env = environ.Env(
     DEBUG=(bool, False),
 )
 env_file = os.path.join(BASE_DIR, '.env')
+print(env_file)
 if env_file:
     environ.Env.read_env(env_file)
 
