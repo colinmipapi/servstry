@@ -16,6 +16,8 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+print(os.environ.get('DEBUG'))
+
 if not os.environ.get('DEBUG'):
     import environ
     env = environ.Env(
@@ -26,7 +28,7 @@ if not os.environ.get('DEBUG'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
-REDIS_CELERY_URL = os.environ.get('REDIS_CELERY_URL')
+REDIS_CELERY_URL = os.environ.get('REDIS_URL')
 
 ALLOWED_HOSTS = [
     'localhost',
