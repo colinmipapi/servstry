@@ -26,7 +26,7 @@ if not HEROKU:
     env_file = os.path.join(BASE_DIR, '.env')
     environ.Env.read_env(env_file)
 
-SECRET_KEY = os.environ.get('SECRET_KEY', )
+SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 DEBUG = os.environ.get('DEBUG')
 REDIS_CELERY_URL = os.environ.get('REDIS_URL')
 
