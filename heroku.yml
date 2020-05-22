@@ -1,0 +1,13 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: daphne contact_trace.asgi:application --bind 0.0.0.0:$PORT
+  worker:
+    command:
+      - celery -A contact_trace worker -l info --concurrency=4
+    image: worker
+release:
+  image: web
+  command:
+    - python manage.py collectstatic --noinput

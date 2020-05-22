@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
   db:
     image: postgres
     environment:
@@ -17,3 +21,19 @@ services:
       - "8000:8000"
     depends_on:
         - db
+  celery:
+    build: .
+    command: celery -A contact_trace worker -l info --concurrency=4
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    build: .
+    command: celery -A contact_trace beat -l info --pidfile=/tmp/celeryd.pid
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis

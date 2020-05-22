@@ -8,6 +8,9 @@ migrations/
 !**/migrations
 !**/migrations/__init__.py
 
+### Celery ###
+celerybeat-schedule
+
 ### Environments ###
 venv/
 .env
