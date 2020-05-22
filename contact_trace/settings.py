@@ -18,13 +18,20 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    LOCAL=(bool, False)
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
+LOCAL = env('LOCAL')
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
+if LOCAL:
+    SECRET_KEY = env('SECRET_KEY')
+    DEBUG = env('DEBUG')
+    REDIS_CELERY_URL = env('REDIS_CELERY_URL')
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    REDIS_CELERY_URL = os.environ.get('REDIS_CELERY_URL')
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -162,7 +169,7 @@ REST_FRAMEWORK = {
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-CELERY_BROKER_URL = env('REDIS_CELERY_URL')
+CELERY_BROKER_URL = REDIS_CELERY_URL
 CELERY_BROKER_POOL_LIMIT = None
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
