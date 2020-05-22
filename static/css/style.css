@@ -1,5 +1,23 @@
+:root {
+    --pink: #FF5CF0;
+    --blue: #1428BF;
+    --gray: #CEE1F2;
+    --white: #FFFFFF;
+}
+
+.btn-blue {
+    background-color: var(--blue);
+    color: var(--gray);
+    font-family: 'Cabin', sans-serif;
+}
+
+.btn-blue:hover {
+    font-weight: 800;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 .waiting-list-background {
-    background: url('/static/media/imgs/outdoor-seating.jpg');
+    background: url('/static/media/imgs/cafe-interior-2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0;
@@ -32,7 +50,7 @@
 }
 
 .wait-list-form-box h1{
-    color: white;
+    color: var(--white);
     font-size: 2rem;
     font-family: 'Cabin', sans-serif;
 }
