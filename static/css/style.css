@@ -49,7 +49,7 @@
     min-width: 300px;
 }
 
-.wait-list-form-box h1{
+.wait-list-form-box h1 {
     color: var(--white);
     font-size: 2rem;
     font-family: 'Cabin', sans-serif;
@@ -57,4 +57,5 @@
 
 .wait-list-form-box input {
     width: 100%;
+    padding: 10px;
 }

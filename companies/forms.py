@@ -9,7 +9,7 @@ class WaitListForm(forms.ModelForm):
         label='',
         widget=forms.EmailInput(
             attrs={
-                'placeholder': 'Enter your e-mail',
+                'placeholder': 'Enter email address',
             }
         )
     )
