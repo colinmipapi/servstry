@@ -17,13 +17,16 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env(
-    DEBUG=(bool, False),
-    LOCAL=(bool, False)
-)
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+try:
+    env = environ.Env(
+        DEBUG=(bool, False),
+        LOCAL=(bool, False)
+    )
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-LOCAL = env('LOCAL')
+    LOCAL = env('LOCAL')
+except:
+    LOCAL = False
 
 if LOCAL:
     SECRET_KEY = env('SECRET_KEY')
