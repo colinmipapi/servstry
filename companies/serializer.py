@@ -43,13 +43,7 @@ class CompanySerializer(serializers.ModelSerializer):
             'website_pretty',
             'phone_pretty',
             'gmaps_url',
-            'tagline',
-            'bio',
             'logo_url',
-            'employee_count',
-            'get_employee_count_display',
-            'tags',
-            'page_owner',
             'admins'
         )
         depth = 1

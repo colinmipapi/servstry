@@ -13,6 +13,7 @@ if not HEROKU:
     )
     env_file = os.path.join(BASE_DIR, '.env')
     environ.Env.read_env(env_file)
+    DEBUG = True
 else:
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
@@ -25,9 +26,9 @@ else:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
+    DEBUG = False
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
-DEBUG = os.environ.get('DEBUG', default=False)
 REDIS_CELERY_URL = os.environ.get('REDIS_URL')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 ES_HOST = os.environ.get('ES_HOST')
