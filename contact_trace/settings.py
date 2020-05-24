@@ -27,7 +27,7 @@ else:
     )
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG', default=False)
 REDIS_CELERY_URL = os.environ.get('REDIS_URL')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 ES_HOST = os.environ.get('ES_HOST')
