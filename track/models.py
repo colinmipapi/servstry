@@ -11,7 +11,7 @@ import phonenumbers
 
 def confirmation_code_generator(size=6, chars=string.ascii_uppercase + string.digits):
     code = ''.join(random.choice(chars) for _ in range(size))
-    while GuestVisit.objects.filter(code=code).exists():
+    while GuestVisit.objects.filter(confirmation=code).exists():
         code = ''.join(random.choice(chars) for _ in range(size))
     return code
 
