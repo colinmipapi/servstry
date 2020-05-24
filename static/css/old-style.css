@@ -906,7 +906,7 @@ label.custom-file-label {
 /* 400, 403, 404 and 500 pages */
 
 .error-page-background {
-  background: url('/static/media/pictures/hanging-glasses.jpg') no-repeat fixed;
+  background: url('/static/media/imgs/hanging-glasses.jpg') no-repeat fixed;
   background-size: cover;
   background-position: 0;
   overflow: hidden !important;
