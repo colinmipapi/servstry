@@ -1,0 +1,1184 @@
+@font-face {
+  font-family: 'Montserrat Bold';
+  src: local('Montserrat Bold'),
+       url('/static/fonts/Montserrat_Bold/Montserrat-Bold.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: local('Montserrat Regular'),
+       url('/static/fonts/Montserrat_Regular/Montserrat-Regular.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'Poppins Regular';
+  src: local('Poppins Regular'),
+       url('/static/fonts/Poppins_Regular/Poppins-Regular.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'Merriweather Light';
+  src: local('Merriweather Light'),
+       url('/static/fonts/Merriweather_Light/Merriweather-Light.ttf') format("truetype");
+}
+
+/* Variables */
+:root {
+    --pink: #FF5CF0;
+    --blue: #1428BF;
+    --orange: #F61067;
+    --black: #1E1B18;
+    --white: #fff;
+    --grey: #FAFAFA;
+    --gray: #FAFAFA;
+    --background: rgba(var(--b3f,250,250,250),1);
+    --title: 'Montserrat Bold', sans-serif;
+    --large: 'Montserrat Regular', sans-serif;
+    --small: 'Poppins Regular', sans-serif;
+    --alt: 'Merriweather Light', serif;
+}
+
+/* General */
+
+.font-title {
+    font-family: var(--title) !important;
+}
+
+.font-large {
+    font-family: var(--large) !important;
+}
+
+.font-small {
+    font-family: var(--small) !important;
+}
+
+.font-alt {
+    font-family: var(--alt) !important;
+}
+
+.font-grey, .font-gray {
+    color: var(--grey) !important;
+}
+
+.font-white {
+    color: var(--white) !important;
+}
+
+.font-black {
+    color: var(--black) !important;
+}
+
+.font-pink {
+    color: var(--pink) !important;
+}
+
+.font-orange {
+    color: var(--orange) !important;
+}
+
+.font-blue {
+    color: var(--blue) !important;
+}
+
+.bg-blue {
+    background: var(--blue) !important;
+}
+
+.bg-grey, .bg-gray {
+    background: var(--grey) !important;
+}
+
+.social-btn .btn {
+    margin-top: 10px;
+    padding-left: 10%;
+    font-size: 15px;
+    text-align: left;
+    line-height: 24px;
+    min-width: 135px;
+    max-width: 250px;
+}
+
+.social-btn .btn i {
+	float: left;
+	margin: 2px 12.5px  0 5px;
+    min-width: 15px;
+}
+
+.btn-facebook {
+    background-color: #3578E5;
+    border-color: #3578E5;
+    color: #F2F3F5;
+}
+
+.btn-blue {
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: var(--large);
+}
+
+.btn-white {
+    background-color: var(--white);
+    color: var(--blue);
+    font-family: var(--title);
+}
+
+.navbar .navbar-brand img {
+    width: 15vw;
+    object-fit: scale;
+}
+
+.navbar-nav .nav-link {
+    font-family: var(--large);
+    color: var(--blue);
+}
+
+.user-landing .title {
+    margin-top: 7.5vh;
+    display: flex;
+}
+
+.user-landing .title .left {
+    width: 50vw;
+    height: 100vh;
+}
+
+.user-landing .title .left .background-square {
+    z-index: -1;
+    width: 50vw;
+    height: 45vh;
+    top: 32vh;
+    min-height: 150px;
+    background-color: var(--pink);
+    position: absolute;
+}
+
+.user-landing .title .left .background-square .img-sm {
+    display: none;
+}
+
+.user-landing .title .left .img-one {
+    width: 10vw;
+    height: 50vh;
+    margin-left: 3em;
+    object-fit: cover;
+    vertical-align: top;
+    margin-top: 1.5rem;
+}
+
+.user-landing .title .left .img-two {
+    width: 10vw;
+    height: 80vh;
+    object-fit: cover;
+}
+
+.user-landing .title .left .img-three {
+    width: 10vw;
+    height: 60vh;
+    object-fit: cover;
+    margin-right: 3rem;
+}
+
+.user-landing .title .right {
+    width: 50vw;
+    padding: 3rem;
+    margin-top: 2rem;
+    margin-left: 6rem;
+}
+
+.user-landing .title .right h1 {
+    font-family: var(--title);
+    color: var(--blue);
+    font-size: 2rem;
+}
+
+.job-btn-container {
+    margin-top: 1.5rem;
+}
+
+.user-landing .title .right p {
+    font-family: var(--small);
+    color: var(--black);
+    padding: 2rem;
+}
+
+.user-landing .companies {
+    margin-bottom: 7rem;
+}
+
+.company-box {
+  padding: 10pt;
+  margin-bottom: 20pt;
+  margin-left: 25pt;
+  margin-right:25pt;
+  border: 2px solid #efefef;
+  border-radius: 3px;
+  background-color: var(--gray);
+}
+
+.company-box img {
+    object-fit: contain
+}
+
+.features {
+   height: 65vh;
+   width: 100%;
+   margin-bottom: 50vh;
+}
+
+.user-landing #feature-background {
+    background: url('/static/media/imgs/empty-bar.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0;
+    opacity: 0.9;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    z-index: -2;
+}
+
+.feature-screen {
+    background-color: #000000;
+    opacity: 0.5;
+    width: 100%;
+    height: 65vh;
+    position: absolute;
+    z-index: -1;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+}
+
+.features h1 {
+    margin-top: 2rem;
+    color: var(--white);
+    font-family: var(--title);
+    width: 50vw;
+    z-index: 2;
+}
+
+.feature-box-sm {
+    display: none;
+}
+
+.features .feature-card {
+    background-color: var(--orange);
+    color: var(--white);
+    padding: 2rem;
+    height: 50vh;
+}
+
+.feature-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.features .feature-card h3 {
+    font-family: var(--title);
+    font-size: 1.25rem;
+}
+
+.features .feature-card p {
+    margin-top: .75rem;
+    font-family: var(--small);
+    text-align: center;
+    font-size: .85rem;
+}
+
+.user-landing .more-info {
+    margin-bottom: 10vh;
+}
+
+.user-landing .photo-box {
+    background-color: var(--blue);
+    height: 85vh;
+    width: 30vw;
+}
+
+.user-landing .photo-box img{
+    height: 85vh;
+    width: 30vw;
+    margin-top: 8vh;
+    margin-left: 4vw;
+    object-fit: cover;
+}
+
+.user-landing .more-info .info-box {
+    width: 40vw;
+    min-height: 33vh;
+    float: right;
+    background-color: var(--pink);
+    color: var(--white);
+    margin-top: 10vh;
+    padding-left: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 4rem;
+}
+
+.user-landing .more-info .info-box .info-icon {
+    font-size: 3rem;
+    margin-right: 2rem;
+}
+
+.user-landing .more-info .info-box h2 {
+    font-family: var(--title);
+    margin-bottom: 0;
+}
+
+.user-landing .more-info .info-box p {
+    font-family: var(--small);
+}
+
+.footer {
+    margin-top: 10rem;
+    height: 22vh;
+    background-color: var(--gray);
+}
+
+.footer .brandmark {
+    height: 15vh;
+    width: 15vh;
+    object-fit: scale-down;
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer ul a {
+    font-family: var(--large);
+    color: var(--blue);
+    font-size: .75rem;
+}
+
+.employer-landing .title {
+    display: flex;
+    height: 90vh;
+    margin-top: 4rem;
+}
+
+.employer-landing .title .left {
+    width: 40vw;
+    padding: 3rem;
+    padding-left: 4rem;
+    padding-right: 2rem;
+    margin-top: 3rem;
+}
+
+.employer-landing .title .left h1 {
+    color: var(--blue);
+    font-family: var(--title);
+}
+
+.employer-landing .title .left p {
+    color: var(--black);
+    font-family: var(--small);
+    padding: 1rem;
+    margin-top: 2rem
+}
+
+.employer-landing .title .left .btn-blue {
+    margin-top: 2rem;
+}
+
+.employer-landing .title .right {
+    width: 60vw;
+}
+
+.employer-landing .title .right .dashboard-laptop {
+    width: 60vw;
+    height: 60vh;
+    object-fit: contain;
+    padding-right: 1rem;
+}
+
+.employer-landing .title .right .background-square {
+    z-index: -1;
+    position: absolute;
+    width: 45vw;
+    height: 57.5vh;
+    max-height: 45vw;
+    background-color: var(--blue);
+    top: 30vh;
+    right: 0;
+}
+
+.employer-landing #feature-background {
+    background: url('/static/media/imgs/backs-turned.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0;
+    opacity: 0.9;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    z-index: -2;
+}
+
+.phones {
+    margin-bottom: 15vh;
+}
+
+.phone-text-sm {
+    display: none;
+}
+
+.phones .user-profile-phone, .phones .company-profile-phone {
+    height: 80vh;
+    display: flex;
+}
+
+.phone-background-square {
+     position: absolute;
+     width: 33vw;
+     height:30%;
+     z-index: -1;
+}
+
+.phones .user-profile-phone .phone-background-square {
+    background-color: var(--pink);
+    left: 0;
+}
+
+.phones .company-profile-phone .phone-background-square {
+    background-color: var(--orange);
+    right: 0;
+}
+
+.phones .company-profile-phone {
+    margin-top: 15vh;
+}
+
+.phones .user-profile-phone .left, .phones .company-profile-phone .right {
+    width: 33vw;
+    height: 100%;
+}
+
+.phones .user-profile-phone .left img, .phones .company-profile-phone .right img {
+    height: 100%;
+    width: 80%;
+    object-fit: contain;
+}
+
+.phones .user-profile-phone .right,  .phones .company-profile-phone .left {
+    width: 67vw;
+    padding-top: 12.5vh;
+    padding-bottom: 17.5vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.phones ul {
+    height: 100%;
+}
+
+.phones li {
+    list-style: none;
+    text-align: left !important;
+    display: block;
+}
+
+.phone-icon {
+    font-size: 6rem;
+    color: var(--blue);
+}
+
+.phones h2 {
+    color: var(--blue);
+    font-family: var(--title);
+}
+
+.phones p {
+    color: var(--black);
+    font-family: var(--small);
+    padding-left: 1.25rem;
+    padding-right: 7rem;
+    padding-top: 1rem;
+}
+
+.dispnon {
+    display: none;
+}
+
+.demo {
+    height: 85vh;
+    margin-bottom: 25vh;
+}
+
+.demo .photo-one {
+    background-color: var(--pink);
+    height: 79.5%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+}
+
+.demo .photo-one img{
+    width: 100%;
+    height: 100%;
+    margin-top: 30%;
+    object-fit: cover
+}
+
+.demo .photo-two {
+    background-color: var(--orange);
+    height: 100%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+}
+
+.demo .photo-two img{
+    width: 100%;
+    height: 100%;
+    padding-bottom: 40%;
+    object-fit: cover
+}
+
+.demo .demo-form-container {
+    width: 80%;
+    padding-top: 2rem;
+    float: right;
+}
+
+.demo h1 {
+    color: var(--blue);
+    font-family: var(--title);
+}
+
+.demo p {
+    color: var(--black);
+    font-family: var(--small);
+    padding-left: 1.25rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
+}
+
+.demo-form {
+    float: right;
+    background-color: var(--blue);
+    width: 65%;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-top: 2rem;
+}
+
+#successContainer h5{
+    font-family: var(--large);
+    color: var(--white);
+}
+
+.demo-form label {
+    font-family: var(--large);
+    color: var(--white);
+}
+
+
+@media (max-width: 1024px) {
+    .navbar .navbar-brand img {
+        width: 20vw;
+        object-fit: scale;
+    }
+    .title h1 {
+        font-size: 1.75rem;
+    }
+     .title p {
+        font-size: .75rem;
+        padding: .5rem;
+    }
+    .title .btn-blue {
+        font-size: 1rem;
+        padding: .33rem .75rem;
+    }
+    .features{
+        margin-bottom: 40vh;
+    }
+    .features .feature-card {
+        width: 100%;
+        min-height: 40vh;
+    }
+    .features h1{
+        font-size: 2rem;
+    }
+    .user-landing .features .btn-white {
+        font-size: 1rem;
+        padding: .33rem .75rem;
+    }
+    .feature-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    .features .feature-card h3 {
+        font-family: var(--title);
+        font-size: .9rem;
+    }
+    .features .feature-card p {
+        margin-top: 1rem;
+        font-size: .65rem;
+        font-family: var(--small);
+        text-align: center;
+    }
+    .user-landing .more-info .info-box {
+        width: 45vw;
+        padding-left: 2rem;
+        min-height: 25vh;
+    }
+    .user-landing .more-info .info-box .info-icon {
+        font-size: 4rem;
+    }
+    .user-landing .more-info .info-box h2 {
+        font-size: 2rem;
+        margin-left: 2rem;
+    }
+    .user-landing .more-info .info-box p {
+        font-size: .75rem;
+    }
+    .employer-landing .title {
+        margin-top: 0rem;
+        height: 80vh;
+    }
+    .employer-landing .title .left {
+        padding-left: 2.5rem;
+    }
+    .employer-landing .title .right .background-square {
+        height: 45vh;
+    }
+    .phone-icon {
+        font-size: 4rem;
+        color: var(--blue);
+    }
+    .phones h2 {
+        font-size: 1.5rem;
+    }
+    .phones p {
+        font-size: .9rem;
+        padding-right: 5rem;
+    }
+    .demo {
+        margin-bottom: 50vh;
+    }
+    .demo .demo-form-container {
+        width: 85%
+    }
+    .demo p {
+        font-size: .85rem;
+        padding-right: 3rem;
+    }
+    .demo-form {
+        width: 80%;
+        padding-right: 3rem;
+        padding-left: 3rem;
+    }
+}
+@media (max-width: 992px) {
+    .navbar .navbar-brand img {
+        width: 30vw;
+        object-fit: scale;
+    }
+}
+@media (max-width: 768px) {
+    .navbar .navbar-brand img {
+        width: 35vw;
+        object-fit: scale;
+    }
+    .user-landing .title {
+         margin-top: 3vh;
+         height: 75vh
+    }
+    .user-landing .title .left {
+        width: 40vw;
+    }
+    .user-landing .title .left .background-square {
+        height: 50vw;
+        width: 30vw;
+        position: relative;
+        top: 0;
+        padding-top: 5vw;
+    }
+    .user-landing .title .left .img-sm {
+        display: block !important;
+        object-fit: cover;
+        height: 50vw;
+        width: 30vw;
+        margin-top: 0;
+        margin-left: 5vw;
+    }
+    .user-landing .title .left .img-one, .user-landing .title .left .img-two, .user-landing .title .left .img-three  {
+        display: none;
+    }
+    .user-landing .title .right {
+        width: 60vw;
+        margin-left: 1.75rem;
+        margin-top: 0;
+        padding: 0;
+        padding-top: 3.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .user-landing .title .right h1 {
+        font-size: 2rem;
+    }
+    .user-landing .title .right p {
+        font-size: .75rem;
+        padding: 1rem;
+    }
+    .feature-box-lg {
+        display: none;
+    }
+    .feature-box-sm {
+        display: block !important;
+        margin-top: 1.5rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .features{
+        margin-bottom: 15vh;
+    }
+    .features .feature-card {
+        width: 50%;
+        height: 40vh;
+    }
+    .feature-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    .features .feature-card h3 {
+        font-family: var(--title);
+        font-size: 1.25rem;
+    }
+    .features .feature-card p {
+        margin-top: 1rem;
+        font-size: .8rem;
+        font-family: var(--small);
+        text-align: center;
+    }
+    .features .carousel-indicators {
+        top: 45vh;
+    }
+    .features .carousel-indicators li {
+        background-color: var(--blue);
+    }
+    .features .carousel-indicators li.active{
+        background-color: var(--pink);
+    }
+    .user-landing .more-info {
+        margin-bottom: 5vh;
+    }
+    .user-landing .more-info .photo-box {
+        display: none;
+    }
+    .user-landing .more-info .info-box {
+        width: 75vw;
+    }
+    .user-landing .more-info .info-box h2 {
+        margin-left: 1rem;
+    }
+    .user-landing .more-info .info-box p {
+        font-size: .85rem;
+    }
+    .user-landing .footer {
+        margin-top: 15vh;
+    }
+    .footer .row {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .employer-landing .title {
+        height: 60vh;
+    }
+    .employer-landing .title .left {
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+    }
+    .employer-landing .title h1 {
+        font-size: 1.5rem;
+    }
+    .employer-landing .title p {
+        font-size: .75rem;
+        margin-top: 1rem !important;
+    }
+    .employer-landing .title .right .background-square {
+        height: 30vh;
+    }
+    .employer-landing .title .btn-blue {
+        margin-top: 1rem !important;
+        font-size: .8rem;
+        padding: .33rem .75rem;
+    }
+    .phones {
+        margin-bottom: 7.5vh;
+    }
+    .phones h2 {
+        font-size: 1.25rem;
+    }
+    .phones p {
+        font-size: .75rem;
+        padding-top: .5rem;
+        padding-right: 3rem;
+    }
+    .phones .company-profile-phone {
+        margin-top: 0rem;
+    }
+    .phones .user-profile-phone {
+        padding-top: 4rem;
+    }
+    .phones .user-profile-phone, .phones .company-profile-phone {
+        height: 60vh;
+    }
+    .phone-background-square {
+        height: 20%;
+    }
+    .photo-one-col {
+        max-width: 40% !important;
+        flex: 0 0 40%;
+    }
+    .photo-two-col {
+        display: none !important;
+    }
+    .demo-form-col {
+        flex: 0 0 60%;
+        max-width: 60%;
+    }
+    .demo {
+        margin-bottom: 25vh;
+    }
+}
+@media (max-width: 576px) {
+    .navbar .navbar-brand img {
+        width: 40vw;
+        object-fit: scale;
+    }
+    .user-landing .title {
+         margin-top: 3vh;
+         height: 50vh
+    }
+    .user-landing .title .left {
+        width: 40vw;
+    }
+    .user-landing .title .left .background-square {
+        height: 70vw;
+        width: 30vw;
+        position: relative;
+        top: 0;
+        padding-top: 5vw;
+    }
+    .user-landing .title .left .img-sm {
+        display: block !important;
+        object-fit: cover;
+        height: 70vw;
+        width: 30vw;
+        margin-top: 0;
+        margin-left: 5vw;
+    }
+    .user-landing .title .left .img-one, .user-landing .title .left .img-two, .user-landing .title .left .img-three  {
+        display: none;
+    }
+    .user-landing .title .right {
+        width: 60vw;
+        margin-left: 1.75rem;
+        margin-top: 0;
+        padding: 0;
+        padding-left: .75rem;
+        padding-right: .5rem;
+    }
+    .user-landing .title .right h1 {
+        font-size: 1rem;
+    }
+    .user-landing .title .right p {
+        font-size: .5rem;
+        padding: .5rem;
+    }
+    .user-landing .title .right .btn-blue {
+        font-size: .75rem;
+        padding: .33rem .75rem;
+    }
+    .features {
+        height: 50vh;
+    }
+    .feature-screen {
+        height: 50vh;
+    }
+    .features h1{
+        font-size: 1.5rem;
+        width: 75vw;
+    }
+    .user-landing .job-btn-container {
+        margin-top: .5rem;
+    }
+    .user-landing .features .btn-white {
+        font-size: .75rem;
+        padding: .33rem .75rem;
+    }
+    .feature-box-lg {
+        display: none;
+    }
+    .feature-box-sm {
+        display: block !important;
+        margin-top: 1.5rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .features{
+        margin-bottom: 25vh;
+    }
+    .features .feature-card {
+        width: 75%;
+    }
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    .features .feature-card h3 {
+        font-family: var(--title);
+        font-size: 1rem;
+    }
+
+    .features .feature-card p {
+        margin-top: 1rem;
+        font-size: .75rem;
+        font-family: var(--small);
+        text-align: center;
+    }
+    .features .carousel-indicators {
+        top: 45vh;
+    }
+    .features .carousel-indicators li {
+        background-color: var(--blue);
+    }
+    .features .carousel-indicators li.active{
+        background-color: var(--pink);
+    }
+    .user-landing .more-info {
+        margin-bottom: 5vh;
+    }
+    .user-landing .more-info .photo-box {
+        display: none;
+    }
+    .user-landing .more-info .info-box {
+        width: 75vw;
+        padding: 1rem;
+        min-height: 25vh;
+    }
+    .user-landing .more-info .info-box .info-icon {
+        font-size: 2rem;
+    }
+    .user-landing .more-info .info-box h2 {
+        font-size: 1rem;
+        margin-left: 1rem;
+    }
+    .user-landing .more-info .info-box p {
+        font-size: .75rem;
+    }
+    .user-landing .footer {
+        margin-top: 10vh;
+    }
+    .employer-landing .title {
+        height: 50vh;
+    }
+    .employer-landing .title .left {
+        margin-top: 0;
+    }
+    .employer-landing .title p {
+        font-size: .65rem;
+        margin-top: 1rem !important;
+    }
+    .employer-landing .title .right .background-square {
+        top: 25vh;
+        height: 27.5vh;
+    }
+    .employer-landing .title .right .dashboard-laptop {
+        height: 50vh;
+    }
+    .employer-landing .title .btn-blue {
+        margin-top: 0 !important;
+        font-size: .8rem;
+        padding: .33rem .75rem;
+    }
+    .footer .row {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .footer .brandmark {
+        padding-left: 1rem;
+        height: 10vh;
+        width: 10vh;
+    }
+}
+@media (max-width: 450px) {
+    .user-landing .title {
+         margin-top: 3vh;
+         height: 60vh
+    }
+    .user-landing .title .right {
+        padding-top: 3rem;
+    }
+    .employer-landing .title {
+        display: block;
+        height: 75vh;
+    }
+    .employer-landing .title .left p{
+        padding-bottom: 0;
+    }
+    .employer-landing .title .left {
+        width: 100vw;
+        margin-top: 2rem;
+        padding-top: 0;
+    }
+    .employer-landing .title .left .btn-blue {
+        margin-top: 0 !important;
+    }
+    .employer-landing .title .right {
+        width: 100vw;
+        height: 60%;
+    }
+    .employer-landing .title .right .background-square {
+        top: 45vh;
+        width: 75vw;
+    }
+    .employer-landing .title .right .dashboard-laptop {
+        width: 90%;
+        height: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-right: 0;
+    }
+    .phones {
+        margin-bottom: 0;
+    }
+    .phones .user-profile-phone .right,  .phones .company-profile-phone .left {
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
+    .phone-icon {
+        font-size: 3rem;
+    }
+    .phones h2 {
+        font-size: .9rem;
+    }
+    .phone-text-lg {
+        display: none;
+    }
+    .phone-text-sm {
+        display: flex;
+    }
+    .phones p {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: .65rem;
+    }
+    .user-profile-phone {
+        padding-top: 2rem !important;
+    }
+    .company-profile-phone ul {
+        padding-left: 1rem;
+    }
+    .phones .company-profile-phone .left {
+        padding-top: 7.5vh;
+        padding-bottom: 7.5vh;
+    }
+    .demo {
+        height: 105vh;
+    }
+    .demo .photo-one-col {
+        display: none;
+    }
+    .demo-form-container {
+        margin-right: 3rem;
+    }
+    .demo-form-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+     .footer .brandmark {
+        padding-left: 1rem;
+        height: 15vw;
+        width: 15vw;
+    }
+}
+@media (max-width: 400px) {
+    .user-landing .title {
+         margin-top: 3vh;
+         height: 55vh
+    }
+    .features {
+        height: 60vh;
+        margin-bottom: 20vh;
+    }
+    .feature-screen {
+        height: 60vh;
+    }
+    .features .carousel-indicators {
+        top: 48vh;
+    }
+     .employer-landing .title .right .background-square {
+        top: 52.5vh;
+        width: 75vw;
+    }
+    .demo {
+        height: 115vh;
+    }
+}
+@media (max-width: 350px) {
+    .user-landing .title {
+         margin-top: 3vh;
+         height: 50vh
+    }
+    .user-landing .title .right {
+        padding-top: 1rem;
+    }
+    .features {
+        height: 55vh;
+        margin-bottom: 25vh;
+    }
+    .feature-screen {
+        height: 55vh;
+    }
+    .features .carousel-indicators {
+        top: 48vh;
+    }
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: .5rem;
+    }
+    .features .feature-card {
+        padding-top: 1rem;
+        height: 45vh;
+    }
+    .features .feature-card h3 {
+        font-family: var(--title);
+        font-size: 1rem;
+    }
+    .features .feature-card p {
+        margin-top: .25rem;
+        font-size: .65rem;
+        font-family: var(--small);
+        text-align: center;
+    }
+    .employer-landing .title {
+        height: 85vh;
+    }
+    .employer-landing .title .right .background-square {
+        top: 65vh;
+        width: 75vw;
+    }
+    .phone-icon {
+        font-size: 2.5rem;
+    }
+    .phones h2 {
+        font-size: .75rem;
+    }
+    .phones p {
+        font-size: .5rem;
+    }
+    .demo {
+        height: 125vh;
+    }
+    .demo h1 {
+        font-size: 1.5rem;
+    }
+    .demo p {
+        font-size: .75rem;
+        padding-right: 2rem;
+        margin-bottom: 0;
+    }
+    .demo-form {
+        width: 90%;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+}

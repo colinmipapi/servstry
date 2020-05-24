@@ -1,0 +1,82 @@
+{% load crispy_forms_tags %}
+<div class="modal fade" id="companyLogoModal" tabindex="-1" role="dialog" aria-labelledby="profileImgModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="companyLogoModalLongTitle">Logo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="companyLogoForm" method="post" action="{% url 'company_logo_api' public_id=company.public_id %}" runat="server" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row justify-content-center align-self-middle">
+                        <div class="logo-thumbnail mx-auto mt-3 mb-3" id="companyLogoModalImg">
+                            <img id="logoSampleImg" src="{{ company.logo_url }}" width="100%" height="100%" {% if company.logo_background_color %}style="background-color: {{company.logo_background_color }} !important;}"{% endif %}>
+
+                        </div>
+                    </div>
+                    <div class="row justify-content-center align-self-middle">
+                        <div class="w-75 fieldWrapper custom-file">
+                            {{ logo_form.logo.errors }}
+                            {{ logo_form.logo }}
+                            <label class="custom-file-label" for="{{ logo_form.logo.id_for_label }}">Choose
+                                File</label>
+                        </div>
+                    </div>
+                   <!-- <p class="mt-4 mb-3 ml-3">Logo Background Color</p>
+                    <div class="row d-flex justify-content-center align-items-center pl-0 pr-0">
+                            <div class="col-xs-4">
+                                <div id="logoBackgroundColorPreview" {% if company.logo_background_color %}style="background-color: {{company.logo_background_color }} !important;}"{% endif %}></div>
+                            </div>
+                            <div class="col-xs-8 pl-4">
+                                {{ logo_form.logo_background_color|as_crispy_field }}
+                            </div>
+                    </div> -->
+                </div>
+                <div class="modal-footer mt-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("form#companyLogoForm").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $('#logo').attr('src', data['imgUrl']);
+                $('#companyLogoModal').modal('hide');
+                $('form#companyLogoForm').trigger("reset");
+            },
+             error : function(data, textStatus, xhr) {
+                console.log(data);
+                for (var name in data['responseJSON']) {
+                    console.log(name);
+                    console.log(data['responseJSON'][name][0]);
+                    $('#companyLogoForm').find('#id_' + name).after("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+    $('#companyLogoForm #id_logo_background_color').change(function(e) {
+        var hexColor = $(this).val();
+        try {
+            $('#companyLogoModalImg').css('background-color', hexColor);
+            $('#logoBackgroundColorPreview').css('background-color', hexColor);
+        } catch {
+            console.log('not valid');
+        }
+    });
+</script>

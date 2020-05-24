@@ -1,0 +1,68 @@
+{% extends 'base-content-left-page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Invite Team{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+<h3 class="font-title font-pink signup-form-title">Invite Team</h3>
+<div class="signup-form-container account-page-text mt-2 mb-2">
+    <form method="post" runat="server" action="{% url 'invite_company_admin_form_api' public_id=company.public_id %}" id="inviteUserForm">
+        {% csrf_token %}
+        <div class="form-row mt-5">
+            <h5 class="font-blue font-large mb-3" style="display: none !important;" id="inviteConfirm">Invite Sent!</h5>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-12">
+                {{ form.email|as_crispy_field }}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mb-5">
+            <button id="userInviteSubmit" class="btn btn-blue">
+                <i class="fe fe-paper-plane"></i>
+                Send
+            </button>
+        </div>
+    </form>
+    <hr>
+    <div class="d-flex justify-content-center mt-3 mb-3">
+        <a href="{% url 'create_contact_info' %}" class="btn btn-secondary mr-4">Back</a>
+        <a href="{% url 'create_payment' %}" class="btn btn-blue">Next</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#inviteUserForm').submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr('action');
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: formData, // serializes the form's elements.
+           success: function(data){
+                console.log('success');
+                $('#inviteConfirm').attr('style', 'display: block;');
+                $('#inviteUserForm').trigger('reset');
+           },
+           error: function(data, textStatus, xhr) {
+                console.log('error');
+                var formId = "#outsideApplicantForm";
+                for (var name in data['responseJSON']) {
+                    $('#id_' + name).after("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+         });
+    });
+</script>
+{% endblock %}
+{% block imgclass %}biz-invite-admin-img{% endblock %}

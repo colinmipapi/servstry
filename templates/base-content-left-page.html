@@ -1,0 +1,42 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<title>{% block title %}{% endblock %}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block head %}{% endblock %}
+</head>
+<body class="overflow-y">
+    <div class="signup-container">
+        <span class="signup-form-left">
+            {% block content %}{% endblock %}
+        </span>
+        <span class="signup-img-right {% block imgclass %}{% endblock %}">
+            {% if logo_white %}
+                <!-- <a class="float-right mt-3 mr-3" href="{% url 'home' %}"><img src="{% static 'media/logos/NdustryLink_Logo_White.png' %}" width="225"></a> -->
+            {% elif logo_blue %}
+                <!-- <a class="float-right mt-3 mr-3" href="{% url 'home' %}"><img src="{% static 'media/logos/NdustryLink_Logo.png' %}" width="225"></a> -->
+            {% endif %}
+            {% if description %}
+                <div class="description-box float-left">
+                    {% block description %}{% endblock %}
+                </div>
+            {% endif %}
+        </span>
+    </div>
+</body>
+<footer>
+    {% block footer %}{% endblock %}
+    <script>
+        $("#signUpForm :input").change(function() {
+            var nextText = $('#nextBtn').attr('final');
+            $('#nextBtn').html(nextText);
+        });
+    </script>
+</footer>

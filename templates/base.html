@@ -5,16 +5,192 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="{% static 'icons/feathericon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/essentials/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/old-style.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block header %}{% endblock header %}
 </head>
 <body>
+    {% if nav != False %}
+    <nav class="navbar navbar-expand-lg {% if fixed_nav == True %}fixed-top {% endif %}navbar-light home-bar">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'media/imgs/form.png' %}" height="35px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          {% if request.user.is_authenticated %}
+            <!-- <ul class="navbar-nav mr-auto d-flex align-items-end ml-5">
+                <li class="nav-item active">
+                    <a class="nav-link font-pink font-title" href="#">
+                        Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul> -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{% static 'media/imgs/default-profile-img.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
+                        <a class="dropdown-item" href="{% url 'dashboard' %}">
+                            <i class="flaticon-building mr-2"></i>
+                            Dashboard
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="flaticon-lifebuoy mr-2"></i>
+                            Help
+                        </a>
+                        <a class="dropdown-item" href="{% url 'company_settings' slug=company.slug %}">
+                            <i class="flaticon-settings mr-2"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+          {% else %}
+            {% if landing %}
+                <ul class="navbar-nav ml-auto font-title">
+                  <li class="nav-item">
+                    <a href="{% url 'business_landing' %}" class="nav-link">
+                      Business
+                    </a>
+                  </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a href="#loginModal" class="nav-link" onclick="toggleRegisterModal()">
+                      Sign Up
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#loginModal" class="nav-link" onclick="toggleLoginModal()">
+                      Login
+                    </a>
+                  </li>
+                </ul>
+            {% endif %}
+          {% endif %}
+        </div>
+    </nav>
+    {% if company_admin %}
+        <div class="sidenav" id="adminSideBar" style="">
+            <div class="form-group admin-biz-select">
+                <button class="d-inline btn btn-sm btn-blue w-100 mb-2" onclick="toggleSideBar()">
+                    Toggle Menu
+                    <i class="fe fe-text-align-justify ml-2"></i>
+                </button>
+                <select class="form-control" onchange="changeCompany(this)">
+                    {% for biz in companies %}
+                        <option {% if biz == company %}selected{% endif %} value="{{ biz.slug }}">{{ biz.name }}</option>
+                    {% endfor %}
+                    <option value="new_company">Create New</option>
+                </select>
+            </div>
+            <a href="{% url 'dashboard' %}">
+                <i class="flaticon-home ml-1 mr-2"></i>
+                Dashboard
+            </a>
+            <a href="{% url 'company_profile' slug=company.slug %}">
+              <i class="flaticon-browser ml-1 mr-2"></i>
+              Profile
+            </a>
+            <a href="{% url 'company_settings' slug=company.slug %}">
+                <i class="flaticon-settings ml-1 mr-2"></i>
+                Settings
+            </a>
+        </div>
+        <div class="row w-100 sidebarTop pt-1">
+            <button class="d-inline btn btn-sm btn-blue ml-auto" id="sideBarNoneBtn" onclick="toggleSideBar()" style="">
+                Toggle Menu
+                <i class="fe fe-text-align-justify"></i>
+            </button>
+        </div>
+    {% endif %}
+    {% endif %}
     {% block content %}{% endblock %}
+    {% if not request.user.is_authenticated %}
+        {% include 'register/modals/registration.html' %}
+      {% endif %}
     <footer>
+        {% if company_admin %}
+            <script type="text/javascript">
+                function changeCompany(sel) {
+                    var valueSelected = sel.value;
+                    if (valueSelected === 'new_company') {
+                      var url = '/dashboard/new-company/';
+                    } else {
+                      var base_url = '/dashboard/';
+                      var url = base_url.concat(valueSelected,'/');
+                    }
+                    window.location.replace(url);
+                };
+              function toggleSideBar() {
+                var sidebarBtn = document.getElementById('sideBarNoneBtn');
+                var sidebar = document.getElementById('adminSideBar');
+                var sidebarStyle = getComputedStyle(sidebar);
+                var main = document.getElementById('bizAdminMain');
+                if (sidebarStyle.display === "block") {
+                  sidebar.setAttribute("style", "display: none !important");
+                  $('#bizAdminMain').addClass('sideNavHide');
+                  $('#bizAdminMain').removeClass('sideNavShow');
+                  sidebarBtn.setAttribute("style", "margin-top: 15px; display: block !important");
+                } else {
+                  sidebar.setAttribute("style", "display: block !important");
+                  $('#bizAdminMain').addClass('sideNavShow');
+                  $('#bizAdminMain').removeClass('sideNavHide');
+                  sidebarBtn.setAttribute("style", "display: none !important");
+                }
+              };
+            </script>
+        {% endif %}
+        {% if request.user.is_authenticated == False %}
+            <script type="text/javascript">
+              function toggleRegisterModal() {
+                try {
+                  $('#loginModal').modal('show');
+                  $('#registerTab').tab('show');
+                } catch{
+                  jQuery.noConflict();
+                  $('#loginModal').modal('show');
+                  $('#registerTab').tab('show');
+               }
+              };
+              function toggleLoginModal() {
+                try {
+                  $('#loginModal').modal('show');
+                  $('#loginTab').tab('show');
+                } catch{
+                  jQuery.noConflict();
+                  $('#loginModal').modal('show');
+                  $('#loginTab').tab('show');
+               }
+              };
+            </script>
+        {% endif %}
+        <script type="text/javascript">
+            function readURL(input,id) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  $('#' + id).attr('src', e.target.result);
+                  var newimg = document.getElementById(id);
+                  getExif(newimg, id, input.files[0]);
+                }
+                reader.readAsDataURL(input.files[0]);
+              }
+            };
+          </script>
         {% block footer %}{% endblock %}
     </footer>
 </body>

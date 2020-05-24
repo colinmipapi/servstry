@@ -1,0 +1,16 @@
+{% extends 'base-content-right-page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Payment{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+<h3 class="font-title font-pink signup-form-title">Payment</h3>
+<div class="signup-form-container account-page-text mt-2 mb-2">
+    <hr>
+    <div class="d-flex justify-content-center mt-3 mb-3">
+        <a href="{% url 'create_invite_admins' %}" class="btn btn-secondary mr-4">Back</a>
+        <a href="{% url 'company_dashboard' slug=company.slug %}" class="btn btn-blue">Next</a>
+    </div>
+</div>
+{% endblock %}
+{% block imgclass %}biz-payment-img{% endblock %}

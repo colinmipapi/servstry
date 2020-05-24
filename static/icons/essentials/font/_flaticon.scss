@@ -1,0 +1,304 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 14/02/2020 06:49
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-plus-circle:before { content: "\f100"; }
+.flaticon-lock-closed:before { content: "\f101"; }
+.flaticon-minimize:before { content: "\f102"; }
+.flaticon-down-arrow:before { content: "\f103"; }
+.flaticon-download:before { content: "\f104"; }
+.flaticon-location-pin:before { content: "\f105"; }
+.flaticon-magnifying-glass:before { content: "\f106"; }
+.flaticon-chat-2:before { content: "\f107"; }
+.flaticon-chat-1:before { content: "\f108"; }
+.flaticon-user-interface-menu:before { content: "\f109"; }
+.flaticon-user-interface-cloud:before { content: "\f10a"; }
+.flaticon-user-interface-arrow:before { content: "\f10b"; }
+.flaticon-user-interface-list:before { content: "\f10c"; }
+.flaticon-trash-can:before { content: "\f10d"; }
+.flaticon-tags-line:before { content: "\f10e"; }
+.flaticon-clock:before { content: "\f10f"; }
+.flaticon-sticky-notes:before { content: "\f110"; }
+.flaticon-clipboard:before { content: "\f111"; }
+.flaticon-building:before { content: "\f112"; }
+.flaticon-todo-list-pencil:before { content: "\f113"; }
+.flaticon-document:before { content: "\f114"; }
+.flaticon-facebook:before { content: "\f115"; }
+.flaticon-instagram:before { content: "\f116"; }
+.flaticon-linkedin:before { content: "\f117"; }
+.flaticon-twitter:before { content: "\f118"; }
+.flaticon-pinterest:before { content: "\f119"; }
+.flaticon-youtube:before { content: "\f11a"; }
+.flaticon-skype:before { content: "\f11b"; }
+.flaticon-snapchat:before { content: "\f11c"; }
+.flaticon-google:before { content: "\f11d"; }
+.flaticon-star:before { content: "\f11e"; }
+.flaticon-home:before { content: "\f11f"; }
+.flaticon-worldwide:before { content: "\f120"; }
+.flaticon-email:before { content: "\f121"; }
+.flaticon-pay:before { content: "\f122"; }
+.flaticon-note:before { content: "\f123"; }
+.flaticon-padlock-open:before { content: "\f124"; }
+.flaticon-heart:before { content: "\f125"; }
+.flaticon-lifebuoy:before { content: "\f126"; }
+.flaticon-user-circle:before { content: "\f127"; }
+.flaticon-settings:before { content: "\f128"; }
+.flaticon-user:before { content: "\f129"; }
+.flaticon-browser:before { content: "\f12a"; }
+.flaticon-calendar-day:before { content: "\f12b"; }
+.flaticon-cellphone:before { content: "\f12c"; }
+.flaticon-calendar-month:before { content: "\f12d"; }
+.flaticon-notebook:before { content: "\f12e"; }
+.flaticon-id-book:before { content: "\f12f"; }
+.flaticon-coupe:before { content: "\f130"; }
+.flaticon-margarita-glass:before { content: "\f131"; }
+.flaticon-collins-glasses:before { content: "\f132"; }
+.flaticon-blender:before { content: "\f133"; }
+.flaticon-creations:before { content: "\f134"; }
+.flaticon-cocktails:before { content: "\f135"; }
+.flaticon-resume:before { content: "\f136"; }
+.flaticon-todo-list:before { content: "\f137"; }
+.flaticon-phone:before { content: "\f138"; }
+.flaticon-sight:before { content: "\f139"; }
+.flaticon-like:before { content: "\f13a"; }
+.flaticon-camera:before { content: "\f13b"; }
+.flaticon-share:before { content: "\f13c"; }
+.flaticon-add-user:before { content: "\f13d"; }
+.flaticon-ruler:before { content: "\f13e"; }
+.flaticon-contract:before { content: "\f13f"; }
+.flaticon-folder:before { content: "\f140"; }
+.flaticon-cancel:before { content: "\f141"; }
+.flaticon-bell:before { content: "\f142"; }
+.flaticon-plus-icon:before { content: "\f143"; }
+.flaticon-detective:before { content: "\f144"; }
+.flaticon-network:before { content: "\f145"; }
+.flaticon-dashboard:before { content: "\f146"; }
+.flaticon-work:before { content: "\f147"; }
+.flaticon-suitcase:before { content: "\f148"; }
+.flaticon-staff:before { content: "\f149"; }
+.flaticon-chefs:before { content: "\f14a"; }
+.flaticon-chef-male:before { content: "\f14b"; }
+.flaticon-chef-female:before { content: "\f14c"; }
+.flaticon-cross:before { content: "\f14d"; }
+.flaticon-menu:before { content: "\f14e"; }
+.flaticon-check-mark:before { content: "\f14f"; }
+.flaticon-play:before { content: "\f150"; }
+.flaticon-up-arrow:before { content: "\f151"; }
+.flaticon-target:before { content: "\f152"; }
+.flaticon-user-web:before { content: "\f153"; }
+.flaticon-bartender:before { content: "\f154"; }
+.flaticon-books:before { content: "\f155"; }
+.flaticon-user-network:before { content: "\f156"; }
+.flaticon-spotlight:before { content: "\f157"; }
+.flaticon-user-checklist:before { content: "\f158"; }
+.flaticon-dollar:before { content: "\f159"; }
+.flaticon-percent:before { content: "\f15a"; }
+.flaticon-credit-card-lock:before { content: "\f15b"; }
+.flaticon-medal:before { content: "\f15c"; }
+.flaticon-produce:before { content: "\f15d"; }
+.flaticon-sliders:before { content: "\f15e"; }
+.flaticon-mixer:before { content: "\f15f"; }
+.flaticon-coffee:before { content: "\f160"; }
+.flaticon-stove:before { content: "\f161"; }
+.flaticon-oven:before { content: "\f162"; }
+.flaticon-weight:before { content: "\f163"; }
+.flaticon-tablet-phone:before { content: "\f164"; }
+.flaticon-fridge:before { content: "\f165"; }
+.flaticon-ipad:before { content: "\f166"; }
+.flaticon-computer:before { content: "\f167"; }
+.flaticon-wine-bottle-glasses:before { content: "\f168"; }
+.flaticon-wine-glasses:before { content: "\f169"; }
+.flaticon-bottle-glass:before { content: "\f16a"; }
+.flaticon-beer-tap:before { content: "\f16b"; }
+.flaticon-id-card:before { content: "\f16c"; }
+.flaticon-pin:before { content: "\f16d"; }
+.flaticon-bookmark:before { content: "\f16e"; }
+.flaticon-bow-tie-person:before { content: "\f16f"; }
+.flaticon-shopping-cart:before { content: "\f170"; }
+.flaticon-pie-graph:before { content: "\f171"; }
+.flaticon-lemon:before { content: "\f172"; }
+.flaticon-pineapple:before { content: "\f173"; }
+.flaticon-wine-key-bottle:before { content: "\f174"; }
+.flaticon-barrel:before { content: "\f175"; }
+.flaticon-cleaver:before { content: "\f176"; }
+.flaticon-tongs:before { content: "\f177"; }
+.flaticon-salt-pepper:before { content: "\f178"; }
+.flaticon-wine-bottles:before { content: "\f179"; }
+.flaticon-eggplant:before { content: "\f17a"; }
+.flaticon-burger:before { content: "\f17b"; }
+.flaticon-wine-bottle-glass:before { content: "\f17c"; }
+.flaticon-cutting-board:before { content: "\f17d"; }
+.flaticon-chef-hat:before { content: "\f17e"; }
+.flaticon-grape:before { content: "\f17f"; }
+.flaticon-presentation:before { content: "\f180"; }
+.flaticon-apron:before { content: "\f181"; }
+.flaticon-spatula:before { content: "\f182"; }
+.flaticon-pizza:before { content: "\f183"; }
+    
+    $font-Flaticon-plus-circle: "\f100";
+    $font-Flaticon-lock-closed: "\f101";
+    $font-Flaticon-minimize: "\f102";
+    $font-Flaticon-down-arrow: "\f103";
+    $font-Flaticon-download: "\f104";
+    $font-Flaticon-location-pin: "\f105";
+    $font-Flaticon-magnifying-glass: "\f106";
+    $font-Flaticon-chat-2: "\f107";
+    $font-Flaticon-chat-1: "\f108";
+    $font-Flaticon-user-interface-menu: "\f109";
+    $font-Flaticon-user-interface-cloud: "\f10a";
+    $font-Flaticon-user-interface-arrow: "\f10b";
+    $font-Flaticon-user-interface-list: "\f10c";
+    $font-Flaticon-trash-can: "\f10d";
+    $font-Flaticon-tags-line: "\f10e";
+    $font-Flaticon-clock: "\f10f";
+    $font-Flaticon-sticky-notes: "\f110";
+    $font-Flaticon-clipboard: "\f111";
+    $font-Flaticon-building: "\f112";
+    $font-Flaticon-todo-list-pencil: "\f113";
+    $font-Flaticon-document: "\f114";
+    $font-Flaticon-facebook: "\f115";
+    $font-Flaticon-instagram: "\f116";
+    $font-Flaticon-linkedin: "\f117";
+    $font-Flaticon-twitter: "\f118";
+    $font-Flaticon-pinterest: "\f119";
+    $font-Flaticon-youtube: "\f11a";
+    $font-Flaticon-skype: "\f11b";
+    $font-Flaticon-snapchat: "\f11c";
+    $font-Flaticon-google: "\f11d";
+    $font-Flaticon-star: "\f11e";
+    $font-Flaticon-home: "\f11f";
+    $font-Flaticon-worldwide: "\f120";
+    $font-Flaticon-email: "\f121";
+    $font-Flaticon-pay: "\f122";
+    $font-Flaticon-note: "\f123";
+    $font-Flaticon-padlock-open: "\f124";
+    $font-Flaticon-heart: "\f125";
+    $font-Flaticon-lifebuoy: "\f126";
+    $font-Flaticon-user-circle: "\f127";
+    $font-Flaticon-settings: "\f128";
+    $font-Flaticon-user: "\f129";
+    $font-Flaticon-browser: "\f12a";
+    $font-Flaticon-calendar-day: "\f12b";
+    $font-Flaticon-cellphone: "\f12c";
+    $font-Flaticon-calendar-month: "\f12d";
+    $font-Flaticon-notebook: "\f12e";
+    $font-Flaticon-id-book: "\f12f";
+    $font-Flaticon-coupe: "\f130";
+    $font-Flaticon-margarita-glass: "\f131";
+    $font-Flaticon-collins-glasses: "\f132";
+    $font-Flaticon-blender: "\f133";
+    $font-Flaticon-creations: "\f134";
+    $font-Flaticon-cocktails: "\f135";
+    $font-Flaticon-resume: "\f136";
+    $font-Flaticon-todo-list: "\f137";
+    $font-Flaticon-phone: "\f138";
+    $font-Flaticon-sight: "\f139";
+    $font-Flaticon-like: "\f13a";
+    $font-Flaticon-camera: "\f13b";
+    $font-Flaticon-share: "\f13c";
+    $font-Flaticon-add-user: "\f13d";
+    $font-Flaticon-ruler: "\f13e";
+    $font-Flaticon-contract: "\f13f";
+    $font-Flaticon-folder: "\f140";
+    $font-Flaticon-cancel: "\f141";
+    $font-Flaticon-bell: "\f142";
+    $font-Flaticon-plus-icon: "\f143";
+    $font-Flaticon-detective: "\f144";
+    $font-Flaticon-network: "\f145";
+    $font-Flaticon-dashboard: "\f146";
+    $font-Flaticon-work: "\f147";
+    $font-Flaticon-suitcase: "\f148";
+    $font-Flaticon-staff: "\f149";
+    $font-Flaticon-chefs: "\f14a";
+    $font-Flaticon-chef-male: "\f14b";
+    $font-Flaticon-chef-female: "\f14c";
+    $font-Flaticon-cross: "\f14d";
+    $font-Flaticon-menu: "\f14e";
+    $font-Flaticon-check-mark: "\f14f";
+    $font-Flaticon-play: "\f150";
+    $font-Flaticon-up-arrow: "\f151";
+    $font-Flaticon-target: "\f152";
+    $font-Flaticon-user-web: "\f153";
+    $font-Flaticon-bartender: "\f154";
+    $font-Flaticon-books: "\f155";
+    $font-Flaticon-user-network: "\f156";
+    $font-Flaticon-spotlight: "\f157";
+    $font-Flaticon-user-checklist: "\f158";
+    $font-Flaticon-dollar: "\f159";
+    $font-Flaticon-percent: "\f15a";
+    $font-Flaticon-credit-card-lock: "\f15b";
+    $font-Flaticon-medal: "\f15c";
+    $font-Flaticon-produce: "\f15d";
+    $font-Flaticon-sliders: "\f15e";
+    $font-Flaticon-mixer: "\f15f";
+    $font-Flaticon-coffee: "\f160";
+    $font-Flaticon-stove: "\f161";
+    $font-Flaticon-oven: "\f162";
+    $font-Flaticon-weight: "\f163";
+    $font-Flaticon-tablet-phone: "\f164";
+    $font-Flaticon-fridge: "\f165";
+    $font-Flaticon-ipad: "\f166";
+    $font-Flaticon-computer: "\f167";
+    $font-Flaticon-wine-bottle-glasses: "\f168";
+    $font-Flaticon-wine-glasses: "\f169";
+    $font-Flaticon-bottle-glass: "\f16a";
+    $font-Flaticon-beer-tap: "\f16b";
+    $font-Flaticon-id-card: "\f16c";
+    $font-Flaticon-pin: "\f16d";
+    $font-Flaticon-bookmark: "\f16e";
+    $font-Flaticon-bow-tie-person: "\f16f";
+    $font-Flaticon-shopping-cart: "\f170";
+    $font-Flaticon-pie-graph: "\f171";
+    $font-Flaticon-lemon: "\f172";
+    $font-Flaticon-pineapple: "\f173";
+    $font-Flaticon-wine-key-bottle: "\f174";
+    $font-Flaticon-barrel: "\f175";
+    $font-Flaticon-cleaver: "\f176";
+    $font-Flaticon-tongs: "\f177";
+    $font-Flaticon-salt-pepper: "\f178";
+    $font-Flaticon-wine-bottles: "\f179";
+    $font-Flaticon-eggplant: "\f17a";
+    $font-Flaticon-burger: "\f17b";
+    $font-Flaticon-wine-bottle-glass: "\f17c";
+    $font-Flaticon-cutting-board: "\f17d";
+    $font-Flaticon-chef-hat: "\f17e";
+    $font-Flaticon-grape: "\f17f";
+    $font-Flaticon-presentation: "\f180";
+    $font-Flaticon-apron: "\f181";
+    $font-Flaticon-spatula: "\f182";
+    $font-Flaticon-pizza: "\f183";

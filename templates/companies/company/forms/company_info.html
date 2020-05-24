@@ -1,0 +1,73 @@
+{% load crispy_forms_tags %}
+<form method="post" id="companyInfoForm" action="{% url 'company_info_form_api' public_id=company.public_id %}">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="col-lg-6 h-100">
+            <div class="form-group">
+                {{ company_info_form.name|as_crispy_field }}
+            </div>
+            <div clas="form-group">
+                {{ company_info_form.website|as_crispy_field }}
+            </div>
+            <div class="form-group">
+                {{ company_info_form.phone|as_crispy_field }}
+            </div>
+        </div>
+        <div class="col-lg-6 h-100">
+            <div class="form-group">
+                {{ company_info_form.address1|as_crispy_field }}
+            </div>
+            <div class="form-group">
+                {{ company_info_form.address2|as_crispy_field }}
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    {{ company_info_form.city|as_crispy_field }}
+                </div>
+                <div class="col-md-4">
+                    {{ company_info_form.state|as_crispy_field }}
+                </div>
+                <div class="col-md-3">
+                    {{ company_info_form.zip_code|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-group float-right mt-4">
+                <button type="submit" class="btn btn-blue ml-auto">Save</button>
+                <a href="#" onclick="toggleEditCompany()" class="ml-2">
+                    Cancel
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+{{ company_info_form.media }}
+<script type="text/javascript">
+    $('#companyInfoForm').submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                updateCompanyInfo(data);
+                toggleEditCompany();
+            },
+            error : function(data, textStatus, xhr) {
+                var formId = $(e).attr("id");
+                for (var name in data['responseJSON']) {
+                    if (name === 'phone') {
+                        var $input = $('#phoneNumber');
+                    } else {
+                        var $input = $("#companyInfoForm #id_" + name);
+                    }
+                    $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>

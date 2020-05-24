@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {{ company.name }}
+{% endblock %}
+{% block header %}
+    <script type="text/javascript" src="{% static 'js/companies.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/rotate-profile-img.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+    </script>
+{% endblock %}
+{% block alert %}
+    {% if company_user %}
+        <div class="alert alert-secondary mb-0" role="alert">
+            <div class="form-inline">
+                 <a href="#" class="btn btn-blue btn-sm ml-auto ">Dashboard</a>
+                <button type="button" class="btn btn-blue btn-sm ml-3" onclick="previewCompanyProfile(this)">Preview</button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+<div class="profile">
+    <div class="cover-img-container">
+        <img id="coverImg" src="{{ company.get_cover_img_url }}" class="cover-img">
+        <div class="cover-img-icon">
+            {% if cover_img_form %}
+                <a href="#companyCoverImgModal" class="btn btn-sm btn-blue biz-profile-preview ml-2" data-toggle="modal">
+                    <i class="flaticon-camera"></i>
+                </a>
+            {% endif %}
+            <button data-target="#shareCompanyModal" data-toggle="modal" class="btn btn-blue btn-sm ml-2">
+                <i class="flaticon-share mr-2"></i>
+                Share
+            </button>
+        </div>
+    </div>
+    <div class="biz-profile-img" >
+        <img id="logo" src="{{ company.logo_url }}" width="100%" height="100%" {% if company.logo_background_color %}style="background-color: {{company.logo_background_color }} !important;}"{% endif %}>
+        {% if logo_form %}
+            <a href="#companyLogoModal" class="profile-img-icon btn btn-sm btn-primary biz-profile-preview" data-toggle="modal">
+                <i class="flaticon-camera"></i>
+            </a>
+        {% endif %}
+    </div>
+    <div class="biz-text-section pl-3 pr-3">
+        <h1 class="font-title font-blue text-center" {% if edit %} id="companyName"{% endif %}>{{ company.name }}</h1>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <div class="biz-info-section">
+            <div class="tab-content" id="companyInfo">
+                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+                    {% if company_user %}
+                        <div id="editCompanyInfoSection" class="container" style="display:none !important;">
+                            {% include 'companies/company/forms/company_info.html' %}
+                        </div>
+                    {% endif %}
+                    <div class="container" id="companyInfoSection">
+                        {% if company_user %}
+                            <div class="row mt-2 mb-2">
+                                <a href="#editCompanyInfo" onclick="toggleEditCompany()" class="ml-auto p-1 biz-profile-preview">
+                                    Edit
+                                </a>
+                            </div>
+                        {% endif %}
+                        <div class="row mt-3 mb-3">
+                            <div class="col-lg-6">
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="container biz-info-list">
+                                    <div class="map-box" {% if edit %}id="companyMap"{% endif %} {% if not company.place_id %}style="display: none !important;" {% endif %}>
+                                        <iframe
+                                                width="100%"
+                                                height="75%"
+                                                frameborder="0" style="border:0"
+                                                src="{{ company.get_gmaps_embed_url }}"
+                                                allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                    <div class="pl-5 pr-5 pt-3 pb-3">
+                                        <div class="row" {% if not company.address1 %}style="display: none !important;" {% endif %}>
+                                            <div class="col-xs-2">
+                                                <div class="d-flex align-items-center h-100">
+                                                    <i class="flaticon-location-pin mr-3"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <p>
+                                                    <span {% if edit %} id="companyAddress1"{% endif %}>{{ company.address1 }}</span><br>
+                                                    <span {% if edit %} id="companyAddress2"{% endif %}>
+                                                        {% if company.address2 %}
+                                                            {{ company.address2 }}<br>
+                                                        {% endif %}
+                                                    </span>
+                                                    <span {% if edit %} id="companyAddress3"{% endif %} >
+                                                        {{ company.city }}, {{ company.state }} {{ company.zip_code }}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row" {% if not company.phone %}style="display: none !important;" {% endif %}>
+                                            <div class="col-xs-2">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="flaticon-phone mr-3"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <a href="tel:{{company.phone}}" {% if edit %} id="companyPhone"{% endif %}>{{ company.phone_pretty }}</a>
+                                            </div>
+                                        </div>
+                                        <div class="row" {% if not company.website %}style="display: none !important;" {% endif %}>
+                                            <div class="col-xs-2">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="flaticon-worldwide mr-3"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <a href="{{ company.website }}" {% if edit %} id="companyWebsite"{% endif %}>
+                                                    {{ company.website_pretty }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Include Assets Here (Modals, Forms, Etc.)-->
+    {% include 'companies/company/modals/share.html' %}
+    {% if company_user %}
+        {% include 'companies/company/modals/profile_img.html' %}
+        {% include 'companies/company/modals/cover_img.html' %}
+    {% endif %}
+    <!-- End Include Assets -->
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+    $("#logoInp").change(function(){
+        readURL(this,'logoSampleImg','image');
+    });
+</script>
+{% endblock %}

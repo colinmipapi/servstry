@@ -1,0 +1,57 @@
+<div class="modal fade" id="companyCoverImgModal" tabindex="-1" role="dialog" aria-labelledby="coverImgModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bizCoverImgModalLongTitle">Cover Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="companyCoverImgForm" method="post" action="{% url 'company_cover_img_api' public_id=company.public_id %}" runat="server" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row justify-content-center mb-4 ml-0 mr-0">
+                        <div class="cover-img-sample">
+                            <img id="coverSampleImg" src="{{ company.get_cover_img_url }}" width="100%" height="100%">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="w-75 fieldWrapper custom-file">
+                            {{ cover_img_form.cover_img.errors }}
+                            {{ cover_img_form.cover_img }}
+                            <label class="custom-file-label" for="{{ cover_img_form.cover_img.id_for_label }}">Choose
+                                File</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("form#companyCoverImgForm").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $('#coverImg').attr('src', data['imgUrl']);
+                $('#companyCoverImgModal').modal('hide');
+                $('form#companyCoverImgForm').trigger("reset");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+    $("#coverImgInp").change(function(){
+            readURL(this,'coverSampleImg');
+    });
+</script>

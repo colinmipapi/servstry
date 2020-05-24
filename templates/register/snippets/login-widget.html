@@ -1,0 +1,53 @@
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% with request.login_form as login_form %}
+<div class="d-flex justify-content-center break-text">
+    <form method="post" action="/accounts/login/" class="w-75">
+        {% csrf_token %}
+        {{ login_form|crispy }}
+        <input type="hidden" name="next" value=""/>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-col justify-content-start">
+                <button type="submit" class="btn btn-blue ml-3">Login</button>
+            </div>
+            <div class="form-col d-flex align-items-center ml-3">
+                <a class="font-black" href="{% url 'account_reset_password' %}">
+                    Forgot password?
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endwith %}
+{% if social_apps %}
+<hr>
+<!-- <div class="login-social-box">
+    <div class="d-flex justify-content-center">
+        <h5 class="text-center font-large">Or login with:</h5>
+    </div>
+    <div class="row text-center social-btn d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center">
+            {% providers_media_js %}
+            <a href="{% provider_login_url 'facebook' process='login' method='oauth2' %}" class="btn btn-facebook btn-block">
+                <div class="d-flex align-items-center">
+                    <i class="fe fe-facebook"></i><b>Facebook</b>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-danger btn-block">
+                <div class="d-flex align-items-center">
+                    <i class="fe fe-google"></i><b>Google</b>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <a href="{% provider_login_url 'instagram' process='login' %}" class="btn btn-instagram btn-block">
+                <div class="d-flex align-items-center">
+                    <i class="fe fe-instagram"></i><b>Instagram</b>
+                </div>
+            </a>
+        </div>
+    </div>
+</div> -->
+{% endif %}
