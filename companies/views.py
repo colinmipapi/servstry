@@ -186,9 +186,12 @@ def company_dashboard(request, slug):
             end = guest_filter_form.cleaned_data['end']
             guests = GuestVisit.objects.filter(
                 company=company,
-                arrival__gte=start,
-                arrival__lte=end
+
             ).order_by('-arrival')
+            if start:
+                guests.filter(arrival__gte=start)
+            if end:
+                guests.filter(arrival__lte=end)
         else:
             guests = GuestVisit.objects.none()
             print(guest_filter_form.errors)
