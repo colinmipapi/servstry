@@ -123,6 +123,8 @@ def company_info_form(request, public_id):
     form = EditCompanyInfoForm(request.POST, instance=company)
     if form.is_valid():
         result = form.save()
+        if not result.place_id and result.address1:
+            result.update_gmaps_data()
         serializer = CompanySerializer(result)
         return Response(serializer.data, status.HTTP_200_OK)
     else:
