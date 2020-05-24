@@ -33,5 +33,5 @@ urlpatterns = [
         'payment/',
         create_payment,
         name='create_payment'
-    )
+    ),
 ]

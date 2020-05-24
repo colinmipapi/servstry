@@ -35,6 +35,12 @@ ES_HOST = os.environ.get('ES_HOST')
 GOOGLE_PLACES_API_KEY = os.environ.get('GOOGLE_PLACES_API_KEY')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_TEST_PUBLIC_KEY')
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
+STRIPE_LIVE_PUBLIC_KEY = os.environ.get('STRIPE_LIVE_PUBLIC_KEY')
+STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY')
+DJSTRIPE_WEBHOOK_SECRET = os.environ.get('DJSTRIPE_WEBHOOK_SECRET')
+
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -53,6 +59,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'dal',
     'dal_select2',
+    'djstripe',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

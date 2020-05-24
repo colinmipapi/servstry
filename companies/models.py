@@ -298,3 +298,6 @@ class WaitList(models.Model):
         default=timezone.now,
     )
     email = models.EmailField()
+
+    def __str__(self):
+        return self.email

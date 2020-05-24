@@ -25,6 +25,10 @@ urlpatterns = [
         include('companies.dashboard_urls')
     ),
     path(
+        'confirm/',
+        include('track.urls')
+    ),
+    path(
         'admin/',
         admin.site.urls
     ),
@@ -32,6 +36,14 @@ urlpatterns = [
     path(
         'accounts/',
         include('allauth.urls')
+    ),
+    # Django Stripe (https://dj-stripe.readthedocs.io/)
+    path(
+        "stripe/",
+        include(
+            "djstripe.urls",
+            namespace="djstripe"
+        )
     ),
     path(
         'landing/',

@@ -59,6 +59,10 @@
     color: var(--gray) !important;
 }
 
+.font-white {
+    color: var(--white) !important;
+}
+
 .btn {
     font-family: var(--large) !important;
 }
@@ -489,3 +493,51 @@
     overflow: hidden !important;
     z-index: -3;
 }
+
+#guestFilterForm {
+    background-color: var(--background);
+    border-radius: 5px;
+    border: 1px solid #efefef;
+}
+
+#guestFilterForm .form-group {
+    margin-bottom: 0;
+}
+
+.confirmation-message-container {
+    margin-top: 5%;
+    width: 60%;
+    min-width: 300px;
+}
+
+.confirmation-message-container h1 {
+    color: var(--blue);
+    margin-bottom: 3rem;
+}
+
+.confirmation-message-container h3 {
+    font-family: var(--large);
+}
+
+.confirmation-message-container h5 {
+    margin-top: .5rem;
+    width: 80%;
+    font-family: var(--small);
+    font-size: 1rem;
+}
+
+.confirmation-code-container {
+    background-color: var(--gray);
+    border: 1px solid #efefef;
+    padding: 10px;
+    width: 20%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 3px;
+}
+
+.confirmation-code-container h2 {
+    margin-bottom: 0;
+    color: var(--pink);
+}
+

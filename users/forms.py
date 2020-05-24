@@ -57,7 +57,6 @@ class InviteSingleUserForm(forms.Form):
         return user
 
 
-
 class InviteUsersForm(forms.Form):
 
     emails = CommaSeparatedEmailField(
@@ -71,4 +70,28 @@ class InviteUsersForm(forms.Form):
     body = forms.CharField(
         label='Message',
         widget=forms.Textarea
+    )
+
+
+class RequestDemoForm(forms.Form):
+
+    name = forms.CharField(
+        max_length=200,
+        label='Name'
+    )
+    email = forms.EmailField(
+        label='E-mail'
+    )
+    email_2 = forms.CharField(
+        max_length=500,
+        label='',
+        widget=forms.TextInput(attrs={'class': 'dispnon'}),
+        required=False,
+    )
+    phone = PhoneNumberField(
+        label='Phone'
+    )
+    company = forms.CharField(
+        max_length=200,
+        label='Company'
     )

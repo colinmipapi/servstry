@@ -1,0 +1,7 @@
+Hi {{ guest_visit.first_name }},
+
+We successfully confirmed your information with {{ guest_visit.company.name }}.
+
+Your Confirmation Code: {{ guest_visit.confirmation }}
+
+You will be asked for this code when you arrive.

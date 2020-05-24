@@ -1,5 +1,7 @@
+from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from companies.models import Company
 from companies.forms import (
@@ -7,8 +9,19 @@ from companies.forms import (
     ContactInfoForm,
     LogoForm,
     CoverImgForm,
-    EditCompanyInfoForm
+    EditCompanyInfoForm,
 )
+from track.models import (
+    GuestVisit,
+)
+from track.forms import (
+    GuestVisitForm,
+    GuestVisitFilterForm,
+)
+from track.backends import (
+    get_client_ip,
+)
+
 from users.forms import (
     InviteSingleUserForm,
 )
@@ -105,20 +118,37 @@ def create_payment(request):
 def company_profile(request, slug):
 
     company = Company.objects.get(slug=slug)
-    company_user = company.is_company_user(request.user)
 
-    if company_user:
-        logo_form = LogoForm(instance=company)
-        cover_img_form = CoverImgForm(instance=company)
-        edit = True
-        company_info_form = EditCompanyInfoForm(instance=company)
-        nav = True
+    if request.method == 'POST':
+        guest_visit_form = GuestVisitForm(request.POST)
+        if guest_visit_form.is_valid():
+            gv = guest_visit_form.save(commit=False)
+            gv.company = company
+            gv.ip_address = get_client_ip(request)
+            gv.save()
+            return redirect('confirmation_page', code=gv.confirmation)
     else:
-        logo_form = False
-        cover_img_form = False
-        company_info_form = False
-        edit = False
-        nav = False
+        company_user = company.is_company_user(request.user)
+
+        if company_user:
+            logo_form = LogoForm(instance=company)
+            cover_img_form = CoverImgForm(instance=company)
+            edit = True
+            company_info_form = EditCompanyInfoForm(instance=company)
+        else:
+            logo_form = False
+            cover_img_form = False
+            company_info_form = False
+            edit = False
+
+        if request.user.is_authenticated:
+            nav = True
+        else:
+            nav = False
+
+        guest_vist_form = GuestVisitForm(initial={
+            'arrival': timezone.now()
+        })
 
     return render(request, 'companies/profile.html', {
         'company': company,
@@ -127,7 +157,8 @@ def company_profile(request, slug):
         'cover_img_form': cover_img_form,
         'company_info_form': company_info_form,
         'edit': edit,
-        'nav': nav
+        'nav': nav,
+        'guest_visit_form': guest_vist_form,
     })
 
 
@@ -148,10 +179,34 @@ def company_dashboard(request, slug):
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
 
+    if request.method == 'POST':
+        guest_filter_form = GuestVisitFilterForm(request.POST)
+        if guest_filter_form.is_valid():
+            start = guest_filter_form.cleaned_data['start']
+            end = guest_filter_form.cleaned_data['end']
+            guests = GuestVisit.objects.filter(
+                company=company,
+                arrival__gte=start,
+                arrival__lte=end
+            ).order_by('-arrival')
+        else:
+            guests = GuestVisit.objects.none()
+            print(guest_filter_form.errors)
+    else:
+        guest_filter_form = GuestVisitFilterForm()
+        guests = GuestVisit.objects.filter(company=company).order_by('-arrival')
+
+    paginator = Paginator(guests, 25)
+
+    page = request.GET.get('page')
+    guests_page = paginator.get_page(page)
+
     return render(request, 'companies/dashboard.html', {
         'companies': companies,
         'company': company,
         'company_admin': True,
+        'guests_page': guests_page,
+        'guest_filter_form': guest_filter_form,
     })
 
 
@@ -160,15 +215,9 @@ def dashboard(request):
 
     companies = Company.objects.filter(admins=request.user).order_by('-created')
     if companies:
-        company = companies[0]
+        return redirect('company_dashboard', slug=companies[0].slug)
     else:
         return redirect('account_logout')
-
-    return render(request, 'companies/dashboard.html', {
-        'companies': companies,
-        'company': company,
-        'company_admin': True,
-    })
 
 
 class CompanyAutocomplete(autocomplete.Select2QuerySetView):

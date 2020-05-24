@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from companies.forms import WaitListForm
-from users.forms import UserContactInfoForm
+from users.forms import (
+    UserContactInfoForm,
+    RequestDemoForm,
+)
 
 
 @login_required
@@ -29,8 +32,9 @@ def landing(request):
 
 
 def business_landing(request):
-
+    demo_form = RequestDemoForm()
     return render(request, 'business_landing.html', {
+        'demo_form': demo_form,
         'nav': False,
     })
 
