@@ -23,7 +23,6 @@ class CompanySerializer(serializers.ModelSerializer):
 
     absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
     gmaps_url = serializers.URLField(source='get_gmaps_embed_url', read_only=True)
-    page_owner = BasicCustomUserSerializer()
     admins = BasicCustomUserSerializer(many=True)
 
     class Meta:
