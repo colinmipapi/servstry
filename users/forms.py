@@ -5,6 +5,8 @@ from users.models import CustomUser
 
 from phonenumber_field.formfields import PhoneNumberField
 
+from allauth.account.forms import SignupForm, LoginForm
+
 
 class UserContactInfoForm(forms.ModelForm):
     first_name = forms.CharField(
@@ -95,3 +97,16 @@ class RequestDemoForm(forms.Form):
         max_length=200,
         label='Company'
     )
+
+
+class CustomSignupForm(SignupForm):
+
+    class Meta(LoginForm):
+        model = CustomUser
+        fields = (
+            'email',
+
+        )
+        exclude = (
+            'username',
+        )
