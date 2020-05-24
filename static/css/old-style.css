@@ -921,7 +921,7 @@ label.custom-file-label {
   right: 0;
 }
 
-.error-page {
+.error-page {b
     position: relative;
     z-index: 1;
     height: calc(100% - 72px);
@@ -964,10 +964,6 @@ main {
 html {
   font-size: 1rem;
   height: 100%;
-}
-
-body {
-    height: 100%;
 }
 
 main {
