@@ -76,12 +76,23 @@ STATES = (
 
 class Company(models.Model):
 
+    STATUSES = (
+        ('DL', 'Delinquent'),
+        ('SU', 'Signing Up'),
+        ('SB', 'Subscribed'),
+    )
+
     public_id = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
     )
     created = models.DateTimeField(
         default=timezone.now,
+    )
+    status = models.CharField(
+        max_length=2,
+        choices=STATUSES,
+        default='SU'
     )
     name = models.CharField(
         max_length=300,
@@ -162,6 +173,12 @@ class Company(models.Model):
     )
     cover_img = models.FileField(
         storage=storage_backends.CoverImageMediaStorage(),
+        blank=True,
+        null=True,
+    )
+    # Stripe
+    customer_id = models.CharField(
+        max_length=150,
         blank=True,
         null=True,
     )

@@ -18,7 +18,12 @@ from companies.forms import (
 from companies.serializer import (
     CompanySerializer
 )
-
+from track.forms import (
+    GuestVisitExportForm,
+)
+from track.tasks import (
+    send_report_email,
+)
 from users.forms import (
     InviteSingleUserForm,
 )
@@ -130,3 +135,24 @@ def company_info_form(request, public_id):
     else:
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['POST', ])
+def export_contacts(request, public_id):
+    try:
+        company = Company.objects.get(public_id=public_id)
+    except:
+        raise Http404
+
+    form = GuestVisitExportForm(request.POST)
+
+    if form.is_valid():
+        send_report_email.apply_async([
+            company.id,
+            request.user.id,
+            form.cleaned_data['file_type'],
+            form.cleaned_data['start'],
+            form.cleaned_data['end']
+        ])
+        return Response({'result': 'success', }, status.HTTP_200_OK)
+    else:
+        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="main biz-dashboard" id="bizAdminMain">
-    <div class="pl-5 pr-5">
+    <div class="pl-5 pr-5 pt-4">
         <form method="post" id="guestFilterForm" class="pt-2 pb-3 mb-3 pl-2 pr-2">
             {% csrf_token %}
             <div class="row">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-2 d-flex justify-content-center pt-4">
                     <button class="btn btn-blue btn-sm">Filter</button>
-                    <button type="button" class="btn btn-blue btn-sm ml-2">Export</button>
+                    <button type="button" data-target="#exportFormModal" class="btn btn-blue btn-sm ml-2" data-toggle="modal">Export</button>
                 </div>
             </div>
         </form>
@@ -63,4 +63,5 @@
         {% endif %}
     </div>
 </div>
+{% include 'track/modals/export.html' %}
 {% endblock %}

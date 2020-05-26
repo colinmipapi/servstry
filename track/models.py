@@ -74,6 +74,14 @@ class GuestVisit(models.Model):
         return self.arrival.strftime("%m/%d/%y %I:%M %p")
 
     @property
+    def arrival_date_pretty(self):
+        return self.arrival.strftime("%m/%d/%y")
+
+    @property
+    def arrival_time_pretty(self):
+        return self.arrival.strftime("%I:%M %p")
+
+    @property
     def phone_pretty(self):
         # Phone Field Formatted for Display
         if self.phone:

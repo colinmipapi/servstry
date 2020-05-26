@@ -2,15 +2,56 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Payment{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}
+{% endblock %}
 {% block content %}
 <h3 class="font-title font-pink signup-form-title">Payment</h3>
-<div class="signup-form-container account-page-text mt-2 mb-2">
+<div class="signup-form-container account-page-text mt-5 mb-2">
+    <div class="d-flex justify-content-center mt-3 mb-2">
+        <div class="cost-box">
+            <h3>$65 <small>per mo.</small></h3>
+        </div>
+    </div>
+    <p class="mt-0 mb-5 text-center">You will only be charged after your 7 day free trial.</p>
+    <form id="subscription-form" class="mb-5">
+        {% csrf_token %}
+        <div id="card-element" class="MyCardElement">
+            <!-- Elements will create input elements here -->
+        </div>
+
+        <!-- We'll put the error messages in this element -->
+        <div id="card-errors" role="alert"></div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-blue mt-2">Subscribe</button>
+        </div>
+    </form>
     <hr>
     <div class="d-flex justify-content-center mt-3 mb-3">
         <a href="{% url 'create_invite_admins' %}" class="btn btn-secondary mr-4">Back</a>
-        <a href="{% url 'company_dashboard' slug=company.slug %}" class="btn btn-blue">Next</a>
     </div>
 </div>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+        var stripe = Stripe('{{ stripe_public_key }}');
+        var customerId = '{{ company.customer_id }}';
+        var priceId = '{{ price_id }}';
+
+</script>
+<script src="{% static 'js/stripe-payment.js' %}"></script>
 {% endblock %}
 {% block imgclass %}biz-payment-img{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+    $('#subscription-form').submit(function(e) {
+        e.preventDefault();
+        createPaymentMethod(cardElement, customerId, priceId);
+    })
+    function onSubscriptionComplete(result) {
+      // Payment was successful.
+      if (result.subscription.status === 'active') {
+        console.log('payment success');
+        window.location.href = "/dashboard/";
+      }
+    }
+</script>
+{% endblock %}

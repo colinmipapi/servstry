@@ -27,5 +27,10 @@ urlpatterns = [
         'company-info-form/<uuid:public_id>/',
         views.company_info_form,
         name="company_info_form_api"
+    ),
+    path(
+        'export-contacts/<uuid:public_id>/',
+        views.export_contacts,
+        name='export_contacts_api'
     )
 ]

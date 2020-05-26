@@ -11,6 +11,7 @@ class CompanyAdmin(admin.ModelAdmin):
         ('Contact Info', {
             'fields': (
                 'name',
+                'status',
                 'public_id',
                 'website',
                 'phone',
@@ -43,6 +44,12 @@ class CompanyAdmin(admin.ModelAdmin):
         ('Admins', {
             'fields': (
                 'admins',
+            )
+        }
+         ),
+        ('Stripe', {
+            'fields': (
+                'customer_id',
             )
         }
          ),

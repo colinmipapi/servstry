@@ -37,14 +37,6 @@ urlpatterns = [
         'accounts/',
         include('allauth.urls')
     ),
-    # Django Stripe (https://dj-stripe.readthedocs.io/)
-    path(
-        "stripe/",
-        include(
-            "djstripe.urls",
-            namespace="djstripe"
-        )
-    ),
     path(
         'landing/',
         landing,

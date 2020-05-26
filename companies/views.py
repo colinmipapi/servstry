@@ -1,7 +1,17 @@
 from django.utils import timezone
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import PasswordChangeForm
+
+from contact_trace.settings import (
+    DEBUG,
+    STRIPE_LIVE_PUBLIC_KEY,
+    STRIPE_TEST_PUBLIC_KEY,
+    STRIPE_LIVE_SECRET_KEY,
+    STRIPE_TEST_SECRET_KEY
+)
 
 from companies.models import Company
 from companies.forms import (
@@ -17,16 +27,27 @@ from track.models import (
 from track.forms import (
     GuestVisitForm,
     GuestVisitFilterForm,
+    GuestVisitExportForm
 )
 from track.backends import (
     get_client_ip,
 )
-
 from users.forms import (
     InviteSingleUserForm,
+    EditUserForm,
 )
 
 from dal import autocomplete
+import stripe
+
+if DEBUG:
+    stripe_public_key = STRIPE_TEST_PUBLIC_KEY
+    stripe.api_key = STRIPE_TEST_SECRET_KEY
+    price_id = "plan_HLXj0nHWUjJdbR"
+else:
+    stripe_public_key = STRIPE_LIVE_PUBLIC_KEY
+    stripe.api_key = STRIPE_LIVE_SECRET_KEY
+    price_id = 'plan_HKrTzC63N6wns9'
 
 
 @login_required
@@ -35,8 +56,9 @@ def create_company_name_address(request):
         form = NameAddressForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            company.admin.add(request.user)
+            company.status = 'SU'
             company.save()
+            company.admins.add(request.user)
             form.save_m2m()
             company.update_gmaps_data()
             request.session['company_id'] = str(company.public_id)
@@ -100,24 +122,27 @@ def create_payment(request):
     else:
         return redirect('create_company_name_address')
 
-    if request.method == 'POST':
-        form = None
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = None
+    if not company.customer_id:
+        customer = stripe.Customer.create(
+            email=request.user.email,
+        )
+        company.customer_id = customer.id
+        company.save()
 
     return render(request, 'companies/company/register/create-payment.html', {
         'logo_blue': True,
-        'form': form,
-        'company': company
+        'company': company,
+        'stripe_public_key': stripe_public_key,
+        'price_id': price_id,
     })
 
 
 def company_profile(request, slug):
 
     company = Company.objects.get(slug=slug)
+
+    if company.status != 'SB':
+        raise Http404
 
     if request.method == 'POST':
         guest_visit_form = GuestVisitForm(request.POST)
@@ -167,10 +192,19 @@ def settings(request, slug):
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
 
+    edit_user_info_form = EditUserForm(instance=request.user)
+    company_info_form = EditCompanyInfoForm(instance=company)
+    change_password__form = PasswordChangeForm(request.user)
+
     return render(request, 'companies/settings.html', {
         'companies': companies,
         'company': company,
+        'company_info_form': company_info_form,
+        'edit_user_info_form': edit_user_info_form,
+        'change_password_form': change_password__form,
         'company_admin': True,
+        'tab': 'personal',
+        'fixed_nav': True,
     })
 
 
@@ -178,6 +212,7 @@ def settings(request, slug):
 def company_dashboard(request, slug):
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
+    export_contacts_inital = {}
 
     if request.method == 'POST':
         guest_filter_form = GuestVisitFilterForm(request.POST)
@@ -186,18 +221,21 @@ def company_dashboard(request, slug):
             end = guest_filter_form.cleaned_data['end']
             guests = GuestVisit.objects.filter(
                 company=company,
-
             ).order_by('-arrival')
             if start:
                 guests.filter(arrival__gte=start)
+                export_contacts_inital['start'] = start
             if end:
                 guests.filter(arrival__lte=end)
+                export_contacts_inital['end'] = end
         else:
             guests = GuestVisit.objects.none()
             print(guest_filter_form.errors)
     else:
         guest_filter_form = GuestVisitFilterForm()
         guests = GuestVisit.objects.filter(company=company).order_by('-arrival')
+
+    export_contacts_form = GuestVisitExportForm(initial=export_contacts_inital)
 
     paginator = Paginator(guests, 25)
 
@@ -210,6 +248,8 @@ def company_dashboard(request, slug):
         'company_admin': True,
         'guests_page': guests_page,
         'guest_filter_form': guest_filter_form,
+        'export_contacts_form': export_contacts_form,
+        'fixed_nav': True,
     })
 
 

@@ -1,0 +1,42 @@
+{% load crispy_forms_tags %}
+<div class="modal fade" id="exportFormModal" tabindex="-1" role="dialog" aria-labelledby="exportModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-title font-blue" id="exportModalLongTitle">Export</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="exportForm" method="post" action="{% url 'export_contacts_api' public_id=company.public_id %}" runat="server" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-container p-4">
+                    {{ export_contacts_form|crispy }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-blue">Export</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("form#exportForm").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $('#exportFormModal').modal('hide');
+                $('form#exportForm').trigger("reset");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>

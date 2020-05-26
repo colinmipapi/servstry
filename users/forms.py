@@ -8,6 +8,18 @@ from phonenumber_field.formfields import PhoneNumberField
 from allauth.account.forms import SignupForm, LoginForm
 
 
+class EditUserForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'first_name',
+            'last_name',
+            'phone',
+            'email'
+        )
+
+
 class UserContactInfoForm(forms.ModelForm):
     first_name = forms.CharField(
         required=True,

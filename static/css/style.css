@@ -541,3 +541,56 @@
     color: var(--pink);
 }
 
+/* Stripe Payment Form Styling */
+.cost-box {
+    background-color: var(--background);
+    padding: 15px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+}
+
+.cost-box h3 {
+    font-family: var(--title);
+    color: var(--blue);
+}
+
+.cost-box small {
+    font-size: .75rem;
+}
+
+.MyCardElement {
+  height: 40px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.MyCardElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.MyCardElement--invalid {
+  border-color: #fa755a;
+}
+
+.MyCardElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+/* Company Settings Page */
+
+.company-settings-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}

@@ -3,6 +3,10 @@
 <html>
 <title>{% block title %}Contact Trace{% endblock %}</title>
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="{% static 'icons/feathericon.min.css' %}">
@@ -144,7 +148,7 @@
                   sidebar.setAttribute("style", "display: none !important");
                   $('#bizAdminMain').addClass('sideNavHide');
                   $('#bizAdminMain').removeClass('sideNavShow');
-                  sidebarBtn.setAttribute("style", "margin-top: 15px; display: block !important");
+                  sidebarBtn.setAttribute("style", "margin-top: 85px; display: block !important");
                 } else {
                   sidebar.setAttribute("style", "display: block !important");
                   $('#bizAdminMain').addClass('sideNavShow');

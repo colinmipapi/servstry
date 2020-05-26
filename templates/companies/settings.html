@@ -1,1 +1,125 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Settings{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+<div class="main" id="bizAdminMain">
+    <div class="company-settings-container">
+        <ul class="nav nav-tabs" id="settingsTab">
+            <li class="nav-item">
+                <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab"
+                   aria-controls="general" aria-selected="true">Personal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="company-tab" data-toggle="tab" href="#company" role="tab" aria-controls="admin"
+                   aria-selected="true">Company</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="reports-tab"
+                   data-toggle="tab" href="#reports" role="tab" aria-controls="notifications"
+                   aria-selected="true">Reports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab"
+                   aria-controls="templates" aria-selected="true">Payment</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="settingTabContent">
+            <div class="tab-pane fade show {% if tab == 'personal' %}active{% endif %}" id="personal" role="tabpanel">
+                <div class="d-flex justify-content-center">
+                    <div class="w-75 pt-3 pb-5">
+                        <h5 class="font-title font-blue mt-3 mb-3">Personal Information</h5>
+                        <form method="post" action="" class="font-small pl-5 pr-5 pt-2">
+                            {% csrf_token %}
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="form-group col-md-6">
+                                    {{ edit_user_info_form.first_name|as_crispy_field}}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ edit_user_info_form.last_name|as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="form-row pt-1 d-flex justify-content-center">
+                                <div class="form-group col-md-6">
+                                    {{ edit_user_info_form.phone|as_crispy_field}}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ edit_user_info_form.email|as_crispy_field}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-row pt-1 d-flex justify-content-center">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-blue">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                        <h5 class="font-title font-blue mt-3 mb-3">Change Password</h5>
+                        <form method="post" action="" class="font-small pl-5 pr-5 pt-2">
+                            {% csrf_token %}
+                            {{ change_password_form|crispy }}
+                            <div class="pb-2"></div>
+                            <hr>
+                            <div class="d-flex justify-content-center pt-2">
+                                <button type="submit" class="btn btn-blue">Change Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 tab-pane fade {% if tab == 'company' %}active{% endif %}" id="company" role="tabpanel"
+                 aria-labelledby="company-tab">
+                <div class="d-flex justify-content-center">
+                    <div class="w-75 pt-3 pb-3">
+                        <form method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h5 class="font-title font-blue mt-3 mb-3">Company Information</h5>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    {{ company_info_form.name|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    {{ company_info_form.address1|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    {{ company_info_form.address2|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg-6">
+                                    {{ company_info_form.city|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    {{ company_info_form.state|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    {{ company_info_form.zip_code|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg-6">
+                                    {{ company_info_form.phone|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    {{ company_info_form.website|as_crispy_field }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-center mt-2">
+                                <button type="submit" class="btn btn-blue">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
