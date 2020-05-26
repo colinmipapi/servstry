@@ -44,7 +44,8 @@ def generate_csv_report_email(guest_visits, to_user):
         'E-mail',
         'Phone',
         'Arrival Date',
-        'Arrival Time'
+        'Arrival Time',
+        'Code'
     ])
     for guest in guest_visits:
         csv_writer.writerow([
@@ -53,7 +54,8 @@ def generate_csv_report_email(guest_visits, to_user):
             guest.email,
             guest.phone_pretty,
             guest.arrival_date_pretty,
-            guest.arrival_time_pretty
+            guest.arrival_time_pretty,
+            guest.confirmation
         ])
 
     date = timezone.now().strftime('%m/%d/%Y %I:%M %p')
@@ -91,7 +93,8 @@ def generate_xls_report_email(guest_visits, to_user):
         'E-mail',
         'Phone',
         'Arrival Date',
-        'Arrival Time'
+        'Arrival Time',
+        'Code'
     ]
 
     for col_num in range(len(columns)):
@@ -107,7 +110,8 @@ def generate_xls_report_email(guest_visits, to_user):
             guest.email,
             guest.phone_pretty,
             guest.arrival_date_pretty,
-            guest.arrival_time_pretty
+            guest.arrival_time_pretty,
+            guest.confirmation
         ]
 
         row_num += 1

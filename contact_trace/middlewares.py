@@ -15,7 +15,9 @@ class LoginFormMiddleware(object):
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if form.is_valid():
-                pass
+                print('valid')
+            else:
+                print(form.errors)
         else:
             form = LoginForm()
 

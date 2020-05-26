@@ -32,6 +32,9 @@ from track.forms import (
 from track.backends import (
     get_client_ip,
 )
+from track.tasks import (
+    send_confirmation_code_email,
+)
 from users.forms import (
     InviteSingleUserForm,
     EditUserForm,
@@ -151,6 +154,7 @@ def company_profile(request, slug):
             gv.company = company
             gv.ip_address = get_client_ip(request)
             gv.save()
+            send_confirmation_code_email.apply_async(gv.id)
             return redirect('confirmation_page', code=gv.confirmation)
     else:
         company_user = company.is_company_user(request.user)

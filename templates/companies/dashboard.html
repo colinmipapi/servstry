@@ -29,6 +29,7 @@
                     <th scope="col">Last</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">Code</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                         <td>{{ guest.last_name }}</td>
                         <td>{{ guest.email }}</td>
                         <td>{{ guest.phone_pretty }}</td>
+                        <td>{{ guest.confirmation }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
