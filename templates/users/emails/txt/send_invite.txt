@@ -1,0 +1,7 @@
+Hi {{ to_user.name }}
+
+{{ sender.name }} invited you to join Servstry. Use the link below to activate your profile.
+
+{{ message }}
+
+Create Your Profile: {{ accept_url }}

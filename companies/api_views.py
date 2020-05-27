@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.http import JsonResponse
+from django.contrib.contenttypes.models import ContentType
 
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -23,6 +24,10 @@ from track.forms import (
 )
 from track.tasks import (
     send_report_email,
+)
+from users.models import (
+    CustomUser,
+    Invitation
 )
 from users.forms import (
     InviteSingleUserForm,
@@ -100,7 +105,18 @@ def invite_page_admin(request, public_id):
     if company.is_company_user(request.user):
         form = InviteSingleUserForm(request.POST)
         if form.is_valid():
-            user = form.create_user()
+            existing_user = CustomUser.objects.filter(email=form.cleaned_data['email'])
+            if existing_user:
+                user = existing_user[0]
+            else:
+                user = form.create_user()
+                Invitation.objects.create(
+                    email=form.cleaned_data['email'],
+                    user=user,
+                    invitation_type='C',
+                    inviter_content_type=ContentType.objects.get_for_model(company),
+                    inviter_object_id=company.id
+                )
             company.admins.add(user)
             company.save()
             data = {

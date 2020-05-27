@@ -28,7 +28,7 @@ def generate_confirmation_code_email(guest_visit):
     send_mail(
         subject,
         text,
-        '',
+        'Servstry <notifications@servstry.com>',
         [guest_visit.email, ],
         html_message=html
     )

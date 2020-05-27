@@ -13,7 +13,7 @@ def generate_waitlist_email(waitlist):
     send_mail(
         subject,
         plain_message,
-        '',
+        'Servstry <notifications@servstry.com>',
         [waitlist.email, ],
         html_message=html_message
     )

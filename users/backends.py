@@ -1,5 +1,7 @@
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
 
 from users.models import CustomUser
 
@@ -26,6 +28,35 @@ def demo_request_email(data):
         send_mail(
             subject,
             email_text,
-            '',
+            'Servstry <notifications@servstry.com>',
             recipients,
         )
+
+
+def generate_user_invite_email(invitation):
+    request = None
+    accept_url = ''.join(['https://www.', get_current_site(request).domain, invitation.get_absolute_url()])
+
+    w_subject = "%s Added Your Application to NdustryLink" % invitation.inviter.name
+    message = '%s added you as an applicant on NdustryLink. Create a profile to manage your application and recieve updates' % invitation.inviter.name
+
+    message_dict = {
+        'sender': {
+            'name': invitation.inviter.name,
+        },
+        'to_user': {
+            'name': invitation.user.name,
+        },
+        'message': message,
+        'accept_url': accept_url
+    }
+
+    html_message = render_to_string('users/emails/html/send_invite.html', message_dict)
+    plain_message = render_to_string('users/emails/txt/send_invite.txt', message_dict)
+    send_mail(
+        w_subject,
+        plain_message,
+        'Servstry <notifications@servstry.com>',
+        [invitation.user.email, ],
+        html_message=html_message
+    )

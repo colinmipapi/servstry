@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
 from contact_trace.custom_form_fields import CommaSeparatedEmailField
 
 from users.models import CustomUser
@@ -122,3 +124,36 @@ class CustomSignupForm(SignupForm):
         exclude = (
             'username',
         )
+
+
+class InvitationSignupForm(UserContactInfoForm):
+
+    password = None
+    email = forms.EmailField(
+        label='E-mail',
+        required=True
+    )
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput()
+    )
+    password2 = forms.CharField(
+        label='Confirm Password',
+        widget=forms.PasswordInput()
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'phone'
+        )
+
+        def clean_password2(self):
+            password1 = self.cleaned_data.get("password1")
+            password2 = super(UserCreationForm, self).clean_password2()
+            if password1 != password2:
+                raise forms.ValidationError("Passwords must match")
+            return password2
