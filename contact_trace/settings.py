@@ -46,7 +46,8 @@ ALLOWED_HOSTS = [
     'localhost',
     '0.0.0.0',
     '127.0.0.1',
-    'fathomless-earth-16672.herokuapp.com'
+    'servstry.herokuapp.com',
+    'servstry.com'
 ]
 
 
