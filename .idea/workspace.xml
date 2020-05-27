@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/company/register/create-name-address.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/company/register/create-name-address.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_trace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +18,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/base.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1314">
-                  <caret line="52" column="60" selection-start-line="52" selection-start-column="60" selection-end-line="52" selection-end-column="60" />
+                <state relative-caret-position="131">
+                  <caret line="146" column="68" selection-start-line="146" selection-start-column="68" selection-end-line="146" selection-end-column="68" />
                 </state>
               </provider>
             </entry>
@@ -50,15 +48,10 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/static/media/imgs/company-profile-phone.png">
-              <provider selected="true" editor-type-id="images" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/companies/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="376">
-                  <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
+                <state relative-caret-position="58">
+                  <caret line="217" column="40" selection-start-line="217" selection-start-column="40" selection-end-line="217" selection-end-column="40" />
                   <folding>
                     <element signature="e#0#33#0" expanded="true" />
                   </folding>
@@ -66,11 +59,14 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/companies/company/register/create-name-address.html">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/contact_trace/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+                <state relative-caret-position="640">
+                  <caret line="87" selection-start-line="87" selection-end-line="87" />
+                  <folding>
+                    <element signature="e#0#32#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -123,10 +119,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/users/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3023">
+                <state relative-caret-position="1318">
                   <caret line="213" column="40" selection-start-line="213" selection-start-column="40" selection-end-line="213" selection-end-column="40" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
@@ -135,7 +131,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/contact_trace/signup_urls.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="285">
@@ -249,7 +245,6 @@
         <option value="$PROJECT_DIR$/static/css/old-style.css" />
         <option value="$PROJECT_DIR$/templates/base-content-right-page.html" />
         <option value="$PROJECT_DIR$/templates/base-content-left-page.html" />
-        <option value="$PROJECT_DIR$/contact_trace/urls.py" />
         <option value="$PROJECT_DIR$/users/forms.py" />
         <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/templates/info-pages/terms_and_conditions.html" />
@@ -257,11 +252,12 @@
         <option value="$PROJECT_DIR$/templates/track/confirmation_page.html" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/templates/business_landing.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/companies/company/register/create-invite-admins.html" />
         <option value="$PROJECT_DIR$/companies/models.py" />
         <option value="$PROJECT_DIR$/templates/companies/company/register/create-name-address.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/companies/views.py" />
+        <option value="$PROJECT_DIR$/contact_trace/urls.py" />
       </list>
     </option>
   </component>
@@ -820,9 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/landing.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/business_landing.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
@@ -859,13 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1314">
-          <caret line="52" column="60" selection-start-line="52" selection-start-column="60" selection-end-line="52" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/companies/company/register/create-name-address.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -882,13 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contact_trace/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/companies/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1224">
@@ -899,9 +878,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/contact_trace/signup_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="146" column="68" selection-start-line="146" selection-start-column="68" selection-end-line="146" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/users/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3023">
+        <state relative-caret-position="1318">
           <caret line="213" column="40" selection-start-line="213" selection-start-column="40" selection-end-line="213" selection-end-column="40" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
@@ -909,22 +905,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/landing.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/companies/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
+        <state relative-caret-position="58">
+          <caret line="217" column="40" selection-start-line="217" selection-start-column="40" selection-end-line="217" selection-end-column="40" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contact_trace/signup_urls.py">
+    <entry file="file://$PROJECT_DIR$/contact_trace/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="640">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

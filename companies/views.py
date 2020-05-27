@@ -107,6 +107,7 @@ def create_invite_admins(request):
         form = InviteSingleUserForm(request.POST)
         if form.is_valid():
             form.save()
+            request.session['company_id'] = None
             return redirect('home')
     else:
         form = InviteSingleUserForm()
@@ -214,6 +215,8 @@ def settings(request, slug):
 
 @login_required
 def company_dashboard(request, slug):
+    request.session['company_id'] = None
+
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
     export_contacts_inital = {}

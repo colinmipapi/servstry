@@ -80,3 +80,8 @@ urlpatterns = [
 
     )
 ]
+
+handler400 = 'users.views.handler400'
+handler403 = 'users.views.handler403'
+handler404 = 'users.views.handler404'
+handler500 = 'users.views.handler500'
