@@ -4,12 +4,17 @@
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/landing.css' %}">
     <link rel="stylesheet" href="{% static 'icons/landing-pages/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/servstry-landing-page/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'icons/feathericon.min.css' %}">
 {% endblock %}
 {% block content %}
 <div class="employer-landing">
     <nav class="navbar navbar-expand-sm navbar-light">
         <a class="navbar-brand" href="#">
+            <div class="d-flex">
+                <img src="{% static 'media/imgs/form.png' %}" height="35px" class="mr-3">
+                <h2 class="font-pink">Servstry</h2>
+            </div>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,8 +35,7 @@
         <div class="left">
             <h1>Helping You Reopen</h1>
             <p>
-                Get from job posting to job offer faster than ever before. We've used our experience working in bars and
-                restaurants to build tools that meet the unique needs of our industry.
+                Contact Tracing Built for Bars and Restaurants. Ease of Use and Peace of Mind for your Guests and Staff.
             </p>
             <a href="#loginModal" onclick="toggleRegisterModal()" class="btn btn-lg btn-blue float-right mr-5">Get Started</a>
         </div>
@@ -43,19 +47,18 @@
     <div class="features" id="feature-background">
         <div class="feature-screen"></div>
         <div class="d-flex justify-content-center">
-            <h1 class="text-center">Built To Help Your Team Work Together</h1>
+            <h1 class="text-center">Doing What's Necessary to Protect Our Community</h1>
         </div>
         <div class="row justify-content-between align-items-center h-100 ml-5 mr-5 feature-box-lg">
             <div class="col-3 feature-card d-flex justify-content-center">
                 <div class="d-flex flex-column">
                     <div class="d-flex justify-content-center">
-                        <i class="feature-icon flaticon-race-track"></i>
+                        <i class="feature-icon flaticon-post"></i>
                     </div>
-                    <h3 class="text-center">Applicant Tracking</h3>
+                    <h3 class="text-center">Easy to Share</h3>
                     <div class="d-flex justify-content-center">
                         <p>
-                            Track applicants as they move through your hiring process. Add applications you received
-                            from other websites.
+                            We provide you with a branded link to share with your guests.
                         </p>
                     </div>
                 </div>
@@ -63,13 +66,12 @@
             <div class="col-3 feature-card d-flex justify-content-center">
                 <div class="d-flex flex-column">
                     <div class="d-flex justify-content-center">
-                        <i class="feature-icon text-center flaticon-resume-file ml-3"></i>
+                        <i class="feature-icon text-center flaticon-cleaning-gloves ml-3"></i>
                     </div>
-                    <h3 class="text-center">Schedule Interviews</h3>
+                    <h3 class="text-center">Contactless</h3>
                     <div class="d-flex justify-content-center">
                         <p>
-                            A single place for all of your company’s interviews. Applicants are
-                            notified of interview changes and cancellations.
+                            Guests are provided with a confirmation code to show they submitted their information.
                         </p>
                     </div>
                 </div>
@@ -79,11 +81,10 @@
                     <div class="d-flex justify-content-center">
                         <i class="feature-icon flaticon-tools-and-utensils"></i>
                     </div>
-                    <h3 class="text-center">Notes & To-Dos</h3>
+                    <h3 class="text-center">Quick Setup</h3>
                     <div class="d-flex justify-content-center">
                         <p>
-                            Add internal notes and tasks to an applicant. Know what’s been done and
-                            what needs to be done next.
+                            Cross this off your reopening to-do list. You'll be ready to go in less than 10 minutes.
                         </p>
                     </div>
                 </div>
@@ -104,11 +105,10 @@
                                     <div class="d-flex justify-content-center">
                                         <i class="feature-icon flaticon-race-track"></i>
                                     </div>
-                                    <h3 class="text-center">Applicant Tracking</h3>
+                                    <h3 class="text-center">Easy to Share</h3>
                                     <div class="d-flex justify-content-center">
                                         <p>
-                                            Track applicants as they move through your hiring process. Add applications
-                                            you received from other websites.
+                                            We provide you with a branded link to share with your guests.
                                         </p>
                                     </div>
                                 </div>
@@ -122,12 +122,10 @@
                                     <div class="d-flex justify-content-center">
                                         <i class="feature-icon text-center flaticon-resume-file ml-3"></i>
                                     </div>
-                                    <h3 class="text-center">Schedule Interviews</h3>
+                                    <h3 class="text-center">Contactless</h3>
                                     <div class="d-flex justify-content-center">
                                         <p>
-                                            A single place for all of your company’s interviews. Applicants are
-                                            automatically notified of interview changes and cancellations. Share notes
-                                            with your team once the interview is complete.
+                                            Guests are provided with a confirmation code to show they submitted their information.
                                         </p>
                                     </div>
                                 </div>
@@ -141,11 +139,10 @@
                                     <div class="d-flex justify-content-center">
                                         <i class="feature-icon flaticon-tools-and-utensils"></i>
                                     </div>
-                                    <h3 class="text-center">Notes & To-Dos</h3>
+                                    <h3 class="text-center">Quick Setup</h3>
                                     <div class="d-flex justify-content-center">
                                         <p>
-                                            Add internal notes and tasks to an applicant. Know what’s been done and
-                                            what needs to be done next.
+                                             Cross this off your reopening to-do list. You'll be ready to go in less than 10 minutes.
                                         </p>
                                     </div>
                                 </div>
@@ -175,21 +172,21 @@
                     <li>
                         <div class="row mr-0">
                             <div class="col-3 d-flex justify-content-center">
-                                <i class="phone-icon flaticon-resume-file"></i>
+                                <i class="phone-icon flaticon-no-phone"></i>
                             </div>
                             <div class="col-9 mt-3">
-                                <h2>Better Than A Resume</h2>
+                                <h2>No Accounts. No Apps.</h2>
                                 <p class="phone-text-lg">
-                                    All the information you need and more. See what cocktails a bartender has created or
-                                    how connected they are with the industry.
+                                    Guests don't need to download an app or create an account to share their
+                                    information with you.
                                 </p>
                             </div>
                         </div>
                         <div class="row mr-0 phone-text-sm">
                             <div class="col-12">
                                 <p>
-                                    All the information you need and more. See what cocktails a bartender has created or
-                                    how connected they are with the industry.
+                                   Guests don't need to download an app or create an account to share their
+                                    information with you.
                                 </p>
                             </div>
                         </div>
@@ -197,21 +194,21 @@
                     <li class="mt-auto">
                         <div class="row mr-0">
                             <div class="col-3 d-flex justify-content-center">
-                                <i class="phone-icon flaticon-conversation"></i>
+                                <i class="phone-icon flaticon-painter-palette"></i>
                             </div>
                             <div class="col-9 mt-3">
-                                <h2>Streamlined Communication</h2>
+                                <h2>Represent Your Brand</h2>
                                 <p class="phone-text-lg">
-                                    Your entire team can communicate directly with applicants through our messaging
-                                    system.
+                                    Your branded profile page lets guests know that you care about their well being and
+                                    the well being of our community.
                                 </p>
                             </div>
                         </div>
                         <div class="row mr-0 phone-text-sm">
                             <div class="col-12">
                                 <p>
-                                    Your entire team can communicate directly with applicants through our messaging
-                                    system.
+                                    Your branded profile page lets guests know that you care about their well being and
+                                    the well being of our community.
                                 </p>
                             </div>
                         </div>
@@ -225,19 +222,21 @@
                     <li class="w-100">
                         <div class="row mr-0">
                             <div class="col-3 d-flex justify-content-center">
-                                <i class="phone-icon flaticon-megaphone"></i>
+                                <i class="phone-icon flaticon-safe"></i>
                             </div>
                             <div class="col-9 mt-3">
-                                <h2>Build A Following</h2>
+                                <h2>Easy Entry</h2>
                                 <p class="phone-text-lg">
-                                    Users can follow your company to get notified when you post a new job.
+                                    Guests receive a confirmation code that they can share when they arrive. Quickly
+                                    verify their code from your company dashboard.
                                 </p>
                             </div>
                         </div>
                         <div class="row mr-0 phone-text-sm">
                             <div class="col-12">
                                 <p>
-                                    Users can follow your company to get notified when you post a new job.
+                                     Guests receive a confirmation code that they can share when they arrive. Quickly
+                                    verify their code from your company dashboard.
                                 </p>
                             </div>
                         </div>
@@ -245,21 +244,21 @@
                     <li class="mt-auto">
                         <div class="row mr-0">
                             <div class="col-3 d-flex justify-content-center">
-                                <i class="phone-icon flaticon-painter-palette"></i>
+                                <i class="phone-icon flaticon-online-shopping"></i>
                             </div>
                             <div class="col-9 mt-3">
-                                <h2>Represent Your Brand</h2>
+                                <h2>Reservation Friendly</h2>
                                 <p class="phone-text-lg">
-                                    Customize your company profile and job pages to give applicants a better
-                                    understanding of why they need to apply.
+                                    Add the link to your reservation confirmation process. Guests can fill out their
+                                    information before they arrive.
                                 </p>
                             </div>
                         </div>
                         <div class="row mr-0 phone-text-sm">
                             <div class="col-12">
                                 <p>
-                                    Customize your company profile and job pages to give applicants a better
-                                    understanding of why they need to apply.
+                                    Add the link to your reservation confirmation process. Guests can fill out their
+                                    information before they arrive.
                                 </p>
                             </div>
                         </div>
@@ -288,7 +287,7 @@
                 <div class="demo-form-container">
                     <h1>Request a Demo</h1>
                     <p>
-                        Want to learn more about how NdustryLink works? Someone from our team would be happy to walk you
+                        Want to learn more about how Servstry works? Someone from our team would be happy to walk you
                         through the website and give you tips on how to improve your hiring process.
                     </p>
                 </div>

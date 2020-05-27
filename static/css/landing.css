@@ -120,7 +120,6 @@
 }
 
 .navbar .navbar-brand img {
-    width: 15vw;
     object-fit: scale;
 }
 
@@ -570,10 +569,6 @@
 
 
 @media (max-width: 1024px) {
-    .navbar .navbar-brand img {
-        width: 20vw;
-        object-fit: scale;
-    }
     .title h1 {
         font-size: 1.75rem;
     }
@@ -665,17 +660,7 @@
         padding-left: 3rem;
     }
 }
-@media (max-width: 992px) {
-    .navbar .navbar-brand img {
-        width: 30vw;
-        object-fit: scale;
-    }
-}
 @media (max-width: 768px) {
-    .navbar .navbar-brand img {
-        width: 35vw;
-        object-fit: scale;
-    }
     .user-landing .title {
          margin-top: 3vh;
          height: 75vh
@@ -839,10 +824,6 @@
     }
 }
 @media (max-width: 576px) {
-    .navbar .navbar-brand img {
-        width: 40vw;
-        object-fit: scale;
-    }
     .user-landing .title {
          margin-top: 3vh;
          height: 50vh

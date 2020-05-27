@@ -95,19 +95,8 @@ def home(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
-        submit = False
-        if request.method == 'POST':
-            form = WaitListForm(request.POST)
-            if form.is_valid():
-                form.save()
-                submit = True
-        else:
-            form = WaitListForm()
-
-        return render(request, 'wait_list_landing.html', {
-            'form': form,
-            'submit': submit,
-            'nav': False,
+        return render(request, 'landing.html', {
+            'landing': True,
         })
 
 
@@ -116,7 +105,7 @@ Error Page Views - industry/urls.py
 '''
 
 
-def handler400(request, exception, template_name="/errors/400.html"):
+def handler400(request, exception, template_name="errors/400.html"):
     response = render(
         None,
         template_name,
@@ -128,7 +117,7 @@ def handler400(request, exception, template_name="/errors/400.html"):
     return response
 
 
-def handler403(request, exception, template_name="/errors/403.html"):
+def handler403(request, exception, template_name="errors/403.html"):
     response = render(
         None,
         template_name,
@@ -140,7 +129,7 @@ def handler403(request, exception, template_name="/errors/403.html"):
     return response
 
 
-def handler404(request, exception, template_name="/errors/404.html"):
+def handler404(request, exception, template_name="errors/404.html"):
     response = render(
         None,
         template_name,
@@ -155,7 +144,7 @@ def handler404(request, exception, template_name="/errors/404.html"):
 def handler500(request):
     response = render(
         None,
-        "/errors/500.html",
+        "errors/500.html",
         context={
             'request': request,
         }
@@ -211,7 +200,7 @@ def contact_us(request):
         else:
             contact_us_form = ContactUsForm()
 
-    return render(request, '/info-pages/contact_us.html', {
+    return render(request, 'info-pages/contact_us.html', {
         'contact_us_form': contact_us_form,
         'form_message': form_message,
         'overflow_y': True,
