@@ -47,7 +47,8 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     '127.0.0.1',
     'servstry.herokuapp.com',
-    'servstry.com'
+    'servstry.com',
+    'www.servstry.com'
 ]
 
 
