@@ -263,6 +263,8 @@ def dashboard(request):
     companies = Company.objects.filter(admins=request.user).order_by('-created')
     if companies:
         return redirect('company_dashboard', slug=companies[0].slug)
+    elif not request.user.first_name or not request.user.last_name:
+        return redirect('user-contact-info')
     else:
         return redirect('account_logout')
 

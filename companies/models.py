@@ -277,17 +277,20 @@ class Company(models.Model):
             input_type='textquery',
             fields=['name','geometry','place_id']
         )
+        '''
         place_data = None
-
+    
         if len(place_q['candidates']) > 1:
             for result in place_q['candidates']:
                 if self.name == result['name']:
                     place_data = result
         else:
-            try:
-                place_data = place_q['candidates'][0]
-            except:
-                place_data = None
+        '''
+
+        try:
+            place_data = place_q['candidates'][0]
+        except:
+            place_data = None
 
         if place_data == None:
             return "Error pulling new google maps data. Make sure the company name and address are correct."

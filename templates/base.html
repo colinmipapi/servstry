@@ -144,7 +144,7 @@
                 function changeCompany(sel) {
                     var valueSelected = sel.value;
                     if (valueSelected === 'new_company') {
-                      var url = '/dashboard/new-company/';
+                      var url = '{% url 'create_company_name_address' %}';
                     } else {
                       var base_url = '/dashboard/';
                       var url = base_url.concat(valueSelected,'/');
