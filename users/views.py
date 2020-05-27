@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.core.mail import mail_admins
 
 from companies.forms import WaitListForm
 from users.models import (
@@ -9,7 +11,8 @@ from users.models import (
 from users.forms import (
     UserContactInfoForm,
     RequestDemoForm,
-    InvitationSignupForm
+    InvitationSignupForm,
+    ContactUsForm
 )
 
 from allauth.account.models import EmailAddress
@@ -159,3 +162,57 @@ def handler500(request):
     )
     response.status_code = 500
     return response
+
+
+'''
+Info Pages
+'''
+
+
+def contact_us(request):
+    form_message = None
+
+    if request.method == 'POST':
+
+        contact_us_form = ContactUsForm(request.POST)
+
+        if contact_us_form.is_valid():
+            email_2 = contact_us_form.cleaned_data['email_2']
+            if email_2 != '':
+                return HttpResponse(status=403)
+            full_name = contact_us_form.cleaned_data['full_name']
+            email = contact_us_form.cleaned_data['email_address']
+            user_message = contact_us_form.cleaned_data['message']
+            subject = "New Contact Us Form Submission - %s" % (full_name)
+            email_text = "New Contact Us Form Submission \r\n Name: %s \r\n Email: %s \r\n Message: %s" % (
+            full_name, email, user_message)
+            email_html = '<h2 style="color:#597DC6"><b>New Contact Us Form Submission</b></h2><p><b>Name:</b> %s</p><p><b>Email:</b> %s</p><p><b>Message:</b>\r\n%s</p>' % (
+            full_name, email, user_message)
+            mail_admins(
+                subject,
+                email_text,
+                'Admin Notifications <admin-notifications@servstry.com>',
+                html_message=email_html
+            )
+            contact_us_form = ContactUsForm()
+            form_message = "Message Sent! We'll try to get back to you in the next 48 hours."
+        else:
+            print(contact_us_form.errors)
+            return HttpResponse(status=403)
+
+    else:
+
+        if request.user.is_authenticated:
+
+            contact_us_form = ContactUsForm(initial={
+                'full_name': request.user.get_full_name,
+                'email_address': request.user.email,
+            })
+        else:
+            contact_us_form = ContactUsForm()
+
+    return render(request, '/info-pages/contact_us.html', {
+        'contact_us_form': contact_us_form,
+        'form_message': form_message,
+        'overflow_y': True,
+    })

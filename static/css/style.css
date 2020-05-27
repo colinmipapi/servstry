@@ -510,6 +510,15 @@
     min-width: 300px;
 }
 
+@media (max-width: 600px) {
+    .confirmation-message-container {
+        width: 85%;
+    }
+   .confirmation-message-container h1 {
+        font-size: 2.25rem;
+    }
+}
+
 .confirmation-message-container h1 {
     color: var(--blue);
     margin-bottom: 3rem;
@@ -527,18 +536,17 @@
 }
 
 .confirmation-code-container {
-    background-color: var(--gray);
-    border: 1px solid #efefef;
-    padding: 10px;
-    width: 20%;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border-radius: 3px;
 }
 
 .confirmation-code-container h2 {
     margin-bottom: 0;
     color: var(--pink);
+    background-color: var(--gray);
+    border: 1px solid #efefef;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 /* Stripe Payment Form Styling */

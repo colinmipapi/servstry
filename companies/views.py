@@ -59,7 +59,7 @@ def create_company_name_address(request):
         form = NameAddressForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            company.status = 'SU'
+            company.status = 'SB'
             company.save()
             company.admins.add(request.user)
             form.save_m2m()
@@ -154,7 +154,7 @@ def company_profile(request, slug):
             gv.company = company
             gv.ip_address = get_client_ip(request)
             gv.save()
-            send_confirmation_code_email.apply_async(gv.id)
+            send_confirmation_code_email.apply_async([gv.id, ])
             return redirect('confirmation_page', code=gv.confirmation)
     else:
         company_user = company.is_company_user(request.user)
@@ -175,8 +175,8 @@ def company_profile(request, slug):
         else:
             nav = False
 
-        guest_vist_form = GuestVisitForm(initial={
-            'arrival': timezone.now()
+        guest_visit_form = GuestVisitForm(initial={
+            'arrival': timezone.now(),
         })
 
     return render(request, 'companies/profile.html', {
@@ -187,7 +187,7 @@ def company_profile(request, slug):
         'company_info_form': company_info_form,
         'edit': edit,
         'nav': nav,
-        'guest_visit_form': guest_vist_form,
+        'guest_visit_form': guest_visit_form,
     })
 
 

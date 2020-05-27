@@ -6,8 +6,10 @@
             <div class="confirmation-message-container text-center">
                 <h1>Thanks {{ guest_visit.first_name }}! We've Sent Your Information To {{ guest_visit.company.name }}.</h1>
                 <h3>Your Confirmation Code:</h3>
-                <div class="confirmation-code-container mx-auto">
-                    <h2>{{ guest_visit.confirmation }}</h2>
+                <div class="confirmation-code-container row">
+                    <div class="col-md-4 offset-md-4">
+                        <h2>{{ guest_visit.confirmation }}</h2>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <h5 class="text-muted">You will be asked for this code when you arrive. We'll also send you an email with your

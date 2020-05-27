@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Contact Us
+{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="signup-container">
+    <span class="signup-img-left contact-us-img"></span>
+    <span class="signup-form-right">
+        <h3 class="pt-3 font-pink font-title signup-form-title">Contact Us</h3>
+        <div class="signup-form-container mt-0 mb-2 account-page-text">
+            {% if form_message %}
+                <p class="text-center">{{ form_message }}</p>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{ contact_us_form|crispy }}
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-blue">Next</button>
+        </div>
+        </form>
+    </span>
+</div>
+{% endblock content %}

@@ -1,7 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 
-from users.views import landing, business_landing, home
+from users.views import (
+    landing,
+    business_landing,
+    home,
+    contact_us
+)
 
 urlpatterns = [
     path(
@@ -36,6 +42,26 @@ urlpatterns = [
     path(
         'accounts/',
         include('allauth.urls')
+    ),
+    path(
+        'help/',
+        TemplateView.as_view(template_name='help.html'),
+        name='help'
+    ),
+    path(
+        'privacy-policy/',
+        TemplateView.as_view(template_name='privacy_policy.html'),
+        name='privacy_policy'
+    ),
+    path(
+        'terms-and-conditions/',
+        TemplateView.as_view(template_name='terms_and_conditions.html'),
+        name='terms_and_conditions'
+    ),
+    path(
+        'contact-us/',
+        contact_us,
+        name='contact_us'
     ),
     path(
         'landing/',

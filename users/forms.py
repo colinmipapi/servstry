@@ -157,3 +157,24 @@ class InvitationSignupForm(UserContactInfoForm):
             if password1 != password2:
                 raise forms.ValidationError("Passwords must match")
             return password2
+
+
+class ContactUsForm(forms.Form):
+
+    full_name = forms.CharField(
+        max_length=150,
+        label='Full Name'
+    )
+    email_address = forms.EmailField(
+        label='E-mail Address'
+    )
+    email_2 = forms.CharField(
+        max_length=500,
+        label='',
+        widget=forms.TextInput(attrs={'class': 'dispnon'}),
+        required=False,
+    )
+    message = forms.CharField(
+        label='Message',
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 5})
+    )

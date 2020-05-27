@@ -49,14 +49,18 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item avatar dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{% static 'media/imgs/default-profile-img.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                        {% if company %}
+                            <img src="{{ company.logo_url }}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                        {% else %}
+                            <img src="{% static 'media/imgs/default-profile-img.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                        {% endif %}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
                         <a class="dropdown-item" href="{% url 'dashboard' %}">
                             <i class="flaticon-building mr-2"></i>
                             Dashboard
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{% url 'help' %}">
                             <i class="flaticon-lifebuoy mr-2"></i>
                             Help
                         </a>
