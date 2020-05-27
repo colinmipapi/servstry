@@ -5,6 +5,7 @@
     <form method="post" action="{% url 'account_login' %}" class="w-75">
         {% csrf_token %}
         {{ login_form|crispy }}
+        <input type="hidden" name="next" value="{% url 'dashboard' %}"/>
         <div class="form-row d-flex justify-content-center">
             <div class="form-col justify-content-start">
                 <button type="submit" class="btn btn-blue ml-3">Login</button>

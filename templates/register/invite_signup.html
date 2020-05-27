@@ -1,0 +1,43 @@
+{% extends 'base-content-right-page.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Profile Information{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+<h3 class="signup-form-title mb-0 font-blue">Profile Information</h3>
+<div class="signup-form-container account-page-text mt-5 mb-2">
+    <form method="post" runat="server" id="signUpForm">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-6">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                {{ form.phone|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-12">
+                {{ form.password1|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-12">
+                {{ form.password2|as_crispy_field }}
+            </div>
+        </div>
+        <input type="hidden" name="next" value="{% url 'dashboard' %}"/>
+        <hr>
+        <div class="d-flex justify-content-center pt-4 pb-4">
+            <button type="submit" class="btn btn-blue">Next</button>
+        </div>
+        {{ form.media }}
+    </form>
+</div>
+{% endblock %}
+{% block imgclass %}signup-img-contact{% endblock %}

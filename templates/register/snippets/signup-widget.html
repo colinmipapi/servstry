@@ -5,7 +5,7 @@
     <form method="post" action="/accounts/signup/" class="w-75">
         {% csrf_token %}
         {{ signup_form|crispy }}
-        <input type="hidden" name="next" value=""/>
+        <input type="hidden" name="next" value="{% url 'user-contact-info' %}"/>
         <div class="form-row d-flex justify-content-center">
             <div class="">
                 <button type="submit" class="btn btn-blue">Sign Up</button>
