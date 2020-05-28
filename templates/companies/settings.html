@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Settings{% endblock %}
-{% block header %}{% endblock %}
+{% block header %}
+{% endblock %}
 {% block content %}
 <div class="main" id="bizAdminMain">
     <div class="company-settings-container">
@@ -11,10 +13,14 @@
                    aria-controls="general" aria-selected="true">Personal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="company-tab" data-toggle="tab" href="#company" role="tab" aria-controls="admin"
+                <a class="nav-link" id="company-tab" data-toggle="tab" href="#company" role="tab" aria-controls="company"
                    aria-selected="true">Company</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="admins-tab" data-toggle="tab" href="#admins" role="tab" aria-controls="admins"
+                   aria-selected="true">Admins</a>
+            </li>
+            <!-- <li class="nav-item">
                 <a class="nav-link" id="reports-tab"
                    data-toggle="tab" href="#reports" role="tab" aria-controls="notifications"
                    aria-selected="true">Reports</a>
@@ -22,14 +28,15 @@
             <li class="nav-item">
                 <a class="nav-link" id="payments-tab" data-toggle="tab" href="#payments" role="tab"
                    aria-controls="templates" aria-selected="true">Payment</a>
-            </li>
+            </li> -->
         </ul>
         <div class="tab-content" id="settingTabContent">
             <div class="tab-pane fade show {% if tab == 'personal' %}active{% endif %}" id="personal" role="tabpanel">
                 <div class="d-flex justify-content-center">
                     <div class="w-75 pt-3 pb-5">
                         <h5 class="font-title font-blue mt-3 mb-3">Personal Information</h5>
-                        <form method="post" action="" class="font-small pl-5 pr-5 pt-2">
+                        <form id="editUserInfoForm" method="post" action="{% url 'edit_user_info_form_api' public_id=request.user.public_id %}" class="font-small pl-5 pr-5 pt-2">
+                            <div class="form-success-container"></div>
                             {% csrf_token %}
                             <div class="form-row d-flex justify-content-center">
                                 <div class="form-group col-md-6">
@@ -55,7 +62,7 @@
                             </div>
                         </form>
                         <h5 class="font-title font-blue mt-3 mb-3">Change Password</h5>
-                        <form method="post" action="" class="font-small pl-5 pr-5 pt-2">
+                        <form id="changePasswordForm" method="post" action="{% url 'change_password_form_api' public_id=request.user.public_id %}" class="font-small pl-5 pr-5 pt-2">
                             {% csrf_token %}
                             {{ change_password_form|crispy }}
                             <div class="pb-2"></div>
@@ -71,9 +78,10 @@
                  aria-labelledby="company-tab">
                 <div class="d-flex justify-content-center">
                     <div class="w-75 pt-3 pb-3">
-                        <form method="post" action="" enctype="multipart/form-data">
+                        <form id="companyInfoForm" method="post" action="{% url 'company_info_form_api' public_id=company.public_id %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <h5 class="font-title font-blue mt-3 mb-3">Company Information</h5>
+                            <div class="form-success-container"></div>
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     {{ company_info_form.name|as_crispy_field }}
@@ -116,10 +124,111 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade show {% if tab == 'admins' %}active{% endif %}" id="admins" role="tabpanel"
+                 aria-labelledby="admins-tab">
+                <div class="d-flex justify-content-center">
+                    <div class="w-75 pt-3 pb-3">
+                        <h5 class="font-title font-blue mt-3 mb-3">Current</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr class="font-title font-blue">
+                                    <th scope="col">Name</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for admin in company.admins.all %}
+                                    <tr class="font-small" id="adminRow{{ admin.public_id }}">
+                                        <th scope="row">{{ admin.first_name }} {{ admin.last_name }}</th>
+                                        <td>{{ admin.email }}</td>
+                                        <td class="float-right"><button type="button" class="btn btn-danger btn-sm" onclick="removeCompanyAdminSetting('{{ company.public_id}}', '{{ admin.public_id }}')"><i class="flaticon-cancel"></i></button></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="font-title font-blue mt-3 mb-3">Invite</h5>
+                        <form method="post" runat="server" action="{% url 'invite_company_admin_form_api' public_id=company.public_id %}" id="inviteUserForm">
+                            {% csrf_token %}
+                            <div class="form-row mt-5">
+                                <h5 class="font-blue font-large mb-3" style="display: none !important;" id="inviteConfirm">Invite Sent!</h5>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    {{ invite_admin_form.first_name|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ invite_admin_form.last_name|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    {{ invite_admin_form.email|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mb-5">
+                                <button id="userInviteSubmit" class="btn btn-blue">
+                                    <i class="fe fe-paper-plane"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $('#inviteUserForm').submit(function(e) {
+                        e.preventDefault();
+                        var formData = new FormData(this);
+                        var url = $(this).attr('action');
+                        $.ajax({
+                           type: "POST",
+                           url: url,
+                           data: formData, // serializes the form's elements.
+                           success: function(data){
+                                console.log('success');
+                                $('#inviteConfirm').attr('style', 'display: block;');
+                                $('#inviteUserForm').trigger('reset');
+                           },
+                           error: function(data, textStatus, xhr) {
+                                console.log('error');
+                                var formId = "#outsideApplicantForm";
+                                for (var name in data['responseJSON']) {
+                                    $('#id_' + name).after("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+                                }
+                            },
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                         });
+                    });
+                </script>
+            </div>
+            <div class="p-4 tab-pane fade {% if tab == 'reports' %}active{% endif %}" id="reports" role="tabpanel"
+                 aria-labelledby="reports-tab">
+
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
 {% block footer %}
+<script src="{% static 'js/company-settings.js' %}"></script>
+<script type="text/javascript">
+    $("form#editUserInfoForm").submit(function(e) {
+        e.preventDefault();
+        submitCompanySettingPageForm(this, "form#editUserInfoForm", false);
+    });
 
+    $("form#changePasswordForm").submit(function(e) {
+        e.preventDefault();
+        submitCompanySettingPageForm(this, "form#changePasswordForm", true);
+    });
+
+    $("form#companyInfoForm").submit(function(e) {
+        e.preventDefault();
+        submitCompanySettingPageForm(this, "form#companyInfoForm", false);
+    });
+</script>
 {% endblock %}

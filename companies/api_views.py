@@ -137,19 +137,17 @@ def company_info_form(request, public_id):
         raise Http404
 
     if company.is_company_user(request.user):
-        company
+        form = EditCompanyInfoForm(request.POST, instance=company)
+        if form.is_valid():
+            result = form.save()
+            if not result.place_id and result.address1:
+                result.update_gmaps_data()
+            serializer = CompanySerializer(result)
+            return Response(serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
-
-    form = EditCompanyInfoForm(request.POST, instance=company)
-    if form.is_valid():
-        result = form.save()
-        if not result.place_id and result.address1:
-            result.update_gmaps_data()
-        serializer = CompanySerializer(result)
-        return Response(serializer.data, status.HTTP_200_OK)
-    else:
-        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', ])
@@ -159,16 +157,37 @@ def export_contacts(request, public_id):
     except:
         raise Http404
 
-    form = GuestVisitExportForm(request.POST)
+    if company.is_company_user(request.user):
+        form = GuestVisitExportForm(request.POST)
+        if form.is_valid():
+            send_report_email.apply_async([
+                company.id,
+                request.user.id,
+                form.cleaned_data['file_type'],
+                form.cleaned_data['start'],
+                form.cleaned_data['end']
+            ])
+            return Response({'result': 'success', }, status.HTTP_200_OK)
+        else:
+            return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
-    if form.is_valid():
-        send_report_email.apply_async([
-            company.id,
-            request.user.id,
-            form.cleaned_data['file_type'],
-            form.cleaned_data['start'],
-            form.cleaned_data['end']
-        ])
+
+@api_view(['GET', ])
+def remove_admin(request, company_id, user_id):
+
+    try:
+        company = Company.objects.get(public_id=company_id)
+    except:
+        raise Http404
+
+    if company.is_company_user(request.user):
+        try:
+            admin_user = CustomUser.objects.get(public_id=user_id)
+        except:
+            raise Http404
+        company.admins.remove(admin_user)
         return Response({'result': 'success', }, status.HTTP_200_OK)
     else:
-        return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_403_FORBIDDEN)

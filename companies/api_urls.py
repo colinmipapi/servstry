@@ -32,5 +32,10 @@ urlpatterns = [
         'export-contacts/<uuid:public_id>/',
         views.export_contacts,
         name='export_contacts_api'
+    ),
+    path(
+        'remove-admin/<uuid:company_id>/<uuid:user_id>/',
+        views.remove_admin,
+        name='remove_admin_api'
     )
 ]

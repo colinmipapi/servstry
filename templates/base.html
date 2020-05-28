@@ -31,7 +31,10 @@
     {% if nav != False %}
     <nav class="navbar navbar-expand-lg {% if fixed_nav == True %}fixed-top {% endif %}navbar-light home-bar">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'media/imgs/form.png' %}" height="35px">
+            <div class="d-flex">
+                <img src="{% static 'media/imgs/form.png' %}" height="35px" class="mr-3">
+                <h2 class="font-pink">Servstry</h2>
+            </div>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,17 +60,17 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
                         <a class="dropdown-item" href="{% url 'dashboard' %}">
-                            <i class="flaticon-building mr-2"></i>
+                            <i class="flaticon-home mr-2"></i>
                             Dashboard
                         </a>
-                        <a class="dropdown-item" href="{% url 'help' %}">
+                        <!-- <a class="dropdown-item" href="{% url 'help' %}">
                             <i class="flaticon-lifebuoy mr-2"></i>
                             Help
                         </a>
                         <a class="dropdown-item" href="#">
                             <i class="flaticon-settings mr-2"></i>
                             Settings
-                        </a>
+                        </a> -->
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
                     </div>

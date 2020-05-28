@@ -1,3 +1,36 @@
+.footer {
+  background-color: var(--grey);
+  color: var(--grey);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.footer .row {
+  background-color: var(--grey);
+}
+
+.footer-item {
+  margin-top: 5pt;
+  margin-bottom: 5pt;
+  background-color: var(--grey);
+  font-family: var(--large);
+  font-weight: 300;
+}
+
+.footer-item  a {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 300;
+}
+
+.footer-item  a:hover {
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.footer .border-right {
+  border-color: var(--grey) !important;
+}
 /* user profile page */
 .profile {
     margin-bottom: 10%;

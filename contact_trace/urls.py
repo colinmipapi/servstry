@@ -45,17 +45,17 @@ urlpatterns = [
     ),
     path(
         'help/',
-        TemplateView.as_view(template_name='help.html'),
+        TemplateView.as_view(template_name='info-pages/help.html'),
         name='help'
     ),
     path(
         'privacy-policy/',
-        TemplateView.as_view(template_name='privacy_policy.html'),
+        TemplateView.as_view(template_name='info-pages/privacy_policy.html'),
         name='privacy_policy'
     ),
     path(
         'terms-and-conditions/',
-        TemplateView.as_view(template_name='terms_and_conditions.html'),
+        TemplateView.as_view(template_name='info-pages/terms_and_conditions.html'),
         name='terms_and_conditions'
     ),
     path(

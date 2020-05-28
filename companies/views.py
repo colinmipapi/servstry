@@ -199,14 +199,16 @@ def settings(request, slug):
 
     edit_user_info_form = EditUserForm(instance=request.user)
     company_info_form = EditCompanyInfoForm(instance=company)
-    change_password__form = PasswordChangeForm(request.user)
+    change_password_form = PasswordChangeForm(request.user)
+    invite_admin_form = InviteSingleUserForm()
 
     return render(request, 'companies/settings.html', {
         'companies': companies,
         'company': company,
         'company_info_form': company_info_form,
         'edit_user_info_form': edit_user_info_form,
-        'change_password_form': change_password__form,
+        'change_password_form': change_password_form,
+        'invite_admin_form': invite_admin_form,
         'company_admin': True,
         'tab': 'personal',
         'fixed_nav': True,

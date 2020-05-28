@@ -10,7 +10,7 @@
 {% block content %}
 <div class="employer-landing">
     <nav class="navbar navbar-expand-sm navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <div class="d-flex">
                 <img src="{% static 'media/imgs/form.png' %}" height="35px" class="mr-3">
                 <h2 class="font-pink">Servstry</h2>
@@ -35,7 +35,7 @@
         <div class="left">
             <h1>Helping You Reopen</h1>
             <p>
-                Contact Tracing Built for Bars and Restaurants. Ease of Use and Peace of Mind for your Guests and Staff.
+                Contact tracing built for bars and restaurants. Ease of use and peace of mind for your guests and staff.
             </p>
             <a href="#loginModal" onclick="toggleRegisterModal()" class="btn btn-lg btn-blue float-right mr-5">Get Started</a>
         </div>
@@ -288,7 +288,7 @@
                     <h1>Request a Demo</h1>
                     <p>
                         Want to learn more about how Servstry works? Someone from our team would be happy to walk you
-                        through the website and give you tips on how to improve your hiring process.
+                        through the website and explain the benefits of .
                     </p>
                 </div>
                 <div class="demo-form">

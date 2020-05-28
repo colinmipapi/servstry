@@ -15,3 +15,16 @@ class BasicCustomUserSerializer(serializers.ModelSerializer):
             'last_name',
             'username'
         )
+
+
+class CustomUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'public_id',
+            'first_name',
+            'last_name',
+            'phone',
+            'email'
+        )
