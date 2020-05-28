@@ -80,6 +80,7 @@ class Company(models.Model):
         ('DL', 'Delinquent'),
         ('SU', 'Signing Up'),
         ('SB', 'Subscribed'),
+        ('EX', 'Example')
     )
 
     public_id = models.UUIDField(

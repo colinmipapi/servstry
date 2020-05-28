@@ -6,7 +6,10 @@ from companies.views import (
     create_invite_admins,
     create_payment,
 )
-from users.views import user_contact_info
+from users.views import (
+    user_contact_info,
+    invitation_signup
+)
 
 urlpatterns = [
     path(
@@ -34,4 +37,9 @@ urlpatterns = [
         create_payment,
         name='create_payment'
     ),
+    path(
+        'invitation/<uuid:invitation_id>/',
+        invitation_signup,
+        name='invitation_signup'
+    )
 ]

@@ -43,8 +43,7 @@ class CompanySuggestView(APIView):
         results_list = []
         name = request.POST.get('search')
 
-        s = CompanyIndex.search().query('match', name=name)[:5]
-        print(s.to_queryset())
+        s = CompanyIndex.search().query('match', status='SB').query('match', name=name)[:5]
         for item in s:
             item_dict = {
                 'name': item.name,

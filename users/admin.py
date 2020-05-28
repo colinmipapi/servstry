@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from users.models import CustomUser
+from users.models import CustomUser, Invitation
 
 
 class CustomUserAdmin(UserAdmin):
@@ -16,4 +16,9 @@ class CustomUserAdmin(UserAdmin):
         )
 
 
+class InvitationAdmin(admin.ModelAdmin):
+    model = Invitation
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Invitation, InvitationAdmin)
