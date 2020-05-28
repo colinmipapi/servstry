@@ -19,10 +19,10 @@ def get_client_ip(request):
 def generate_confirmation_code_email(guest_visit):
 
     subject = "Entry Confirmation For %s" % guest_visit.company.name
-    html = render_to_string('track/emails/html/confirmation_code.html', {
+    html = render_to_string('track/emails/html/confirmation-code.html', {
         'guest_visit': guest_visit,
     })
-    text = render_to_string('track/emails/txt/confirmation_code.txt', {
+    text = render_to_string('track/emails/txt/confirmation-code.txt', {
         'guest_visit': guest_visit,
     })
     send_mail(
