@@ -45,7 +45,7 @@ def generate_user_invite_email(invitation):
             'name': invitation.inviter.name,
         },
         'to_user': {
-            'name': invitation.user.name,
+            'name': invitation.user.first_name,
         },
         'message': message,
         'accept_url': accept_url
