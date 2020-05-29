@@ -60,18 +60,6 @@ class InviteSingleUserForm(forms.Form):
         label='E-mail Address'
     )
 
-    def create_user(self):
-        first_name = self.cleaned_data['first_name']
-        last_name = self.cleaned_data['last_name']
-        user, new = CustomUser.objects.get_or_create(
-            email=self.cleaned_data['email'],
-        )
-        if new:
-            user.first_name = first_name,
-            user.last_name = last_name,
-            user.save()
-        return user
-
 
 class InviteUsersForm(forms.Form):
 

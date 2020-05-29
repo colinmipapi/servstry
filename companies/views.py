@@ -157,28 +157,28 @@ def company_profile(request, slug):
             gv.save()
             send_confirmation_code_email.apply_async([gv.id, ])
             return redirect('confirmation_page', code=gv.confirmation)
+
+    company_user = company.is_company_user(request.user)
+
+    if company_user:
+        logo_form = LogoForm(instance=company)
+        cover_img_form = CoverImgForm(instance=company)
+        edit = True
+        company_info_form = EditCompanyInfoForm(instance=company)
     else:
-        company_user = company.is_company_user(request.user)
+        logo_form = False
+        cover_img_form = False
+        company_info_form = False
+        edit = False
 
-        if company_user:
-            logo_form = LogoForm(instance=company)
-            cover_img_form = CoverImgForm(instance=company)
-            edit = True
-            company_info_form = EditCompanyInfoForm(instance=company)
-        else:
-            logo_form = False
-            cover_img_form = False
-            company_info_form = False
-            edit = False
+    if request.user.is_authenticated:
+        nav = True
+    else:
+        nav = False
 
-        if request.user.is_authenticated:
-            nav = True
-        else:
-            nav = False
-
-        guest_visit_form = GuestVisitForm(initial={
-            'arrival': timezone.now(),
-        })
+    guest_visit_form = GuestVisitForm(initial={
+        'arrival': timezone.now(),
+    })
 
     return render(request, 'companies/profile.html', {
         'company': company,

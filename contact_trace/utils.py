@@ -27,3 +27,20 @@ def rotate_image(file):
 
     except:
             return file
+
+
+def generate_unique_username(first_name, last_name):
+    from users.models import CustomUser
+    original = "%s%s" % (first_name, last_name)
+    original = original.replace(" ", "")
+    if CustomUser.objects.filter(username=original).exists():
+        count = 1
+        unique = False
+        while not unique:
+            original = "%s%i" % (original, count)
+            if CustomUser.objects.filter(username=original).exists():
+                count += 1
+            else:
+                return original
+    else:
+        return original

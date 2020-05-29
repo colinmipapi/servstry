@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from contact_trace.documents.company_document import CompanyIndex
+from contact_trace.utils import generate_unique_username
 
 from companies.models import Company
 from companies.forms import (
@@ -43,7 +44,7 @@ class CompanySuggestView(APIView):
         results_list = []
         name = request.POST.get('search')
 
-        s = CompanyIndex.search().query('match', status='SB').query('match', name=name)[:5]
+        s = CompanyIndex.search().query('match', name=name)[:5]
         for item in s:
             item_dict = {
                 'name': item.name,
@@ -108,7 +109,12 @@ def invite_page_admin(request, public_id):
             if existing_user:
                 user = existing_user[0]
             else:
-                user = form.create_user()
+                user = CustomUser.objects.create_user(
+                    username=generate_unique_username(form.cleaned_data['first_name'], form.cleaned_data['last_name']),
+                    email=form.cleaned_data['email'],
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name']
+                )
                 Invitation.objects.create(
                     email=form.cleaned_data['email'],
                     user=user,
