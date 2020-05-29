@@ -65,7 +65,7 @@ def invitation_signup(request, invitation_id):
             form = InvitationSignupForm(instance=invitation.user)
             login(request, invitation.user, backend='django.contrib.auth.backends.ModelBackend')
 
-        return render(request, 'registration/invite_signup.html', {
+        return render(request, 'register/invite_signup.html', {
             'invitation': invitation,
             'form': form,
             'page_title': page_title,
