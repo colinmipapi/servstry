@@ -233,7 +233,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 # SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
 
 SOCIALACCOUNT_FORMS = {
-    # 'signup': 'users.forms.CustomSocialSignupForm',
+    'signup': 'users.forms.CustomSocialSignupForm',
 }
 
 SOCIALACCOUNT_PROVIDERS = {

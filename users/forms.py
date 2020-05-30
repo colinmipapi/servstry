@@ -8,6 +8,7 @@ from users.models import CustomUser
 from phonenumber_field.formfields import PhoneNumberField
 
 from allauth.account.forms import SignupForm, LoginForm
+from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
 
 class EditUserForm(forms.ModelForm):
@@ -112,6 +113,19 @@ class CustomSignupForm(SignupForm):
         exclude = (
             'username',
         )
+
+
+class CustomSocialSignupForm(SocialSignupForm):
+    first_name = forms.CharField(max_length=100, label='First Name')
+    last_name = forms.CharField(max_length=100, label='Last Name')
+    phone = PhoneNumberField(required=False, label='Cell Phone')
+
+    def signup(self, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.phone = self.cleaned_data['phone']
+        user.save()
+        return user
 
 
 class InvitationSignupForm(UserContactInfoForm):
