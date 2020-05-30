@@ -9,7 +9,7 @@
     <form method="post" runat="server" id="signUpForm">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="hidden" name="next" value="{% url 'dashboard' %}"/>
+        <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'dashboard' %}"/>
         <hr>
         <div class="d-flex justify-content-center mt-3 mb-3">
             <button class="btn btn-blue">Next</button>

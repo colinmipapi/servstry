@@ -189,6 +189,11 @@
     color: #F2F3F5;
 }
 
+.btn-facebook:hover, .btn-facebook:focus, btn-facebook:active, btn-facebook.active {
+    color: var(--white) !important;
+    box-shadow: inset 0 0 0 20rem var(--darken-1);
+}
+
 .btn-instagram {
     color: var(--white);
     background-color: #833AB4;
