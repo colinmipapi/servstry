@@ -954,7 +954,7 @@ label.custom-file-label {
   right: 0;
 }
 
-.error-page {b
+.error-page {
     position: relative;
     z-index: 1;
     height: calc(100% - 72px);
@@ -964,7 +964,7 @@ label.custom-file-label {
 .error-content {
     border: 2px solid black;
     border-radius: 15px;
-    background-color: var(--grey);
+    background-color: var(--white);
     opacity: 1 !important;
     padding: 15px;
 }
