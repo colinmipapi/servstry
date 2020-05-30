@@ -44,6 +44,13 @@ urlpatterns = [
         include('allauth.urls')
     ),
     path(
+        'qr_code/',
+        include(
+            'qr_code.urls',
+            namespace="qr_code"
+        )
+    ),
+    path(
         'help/',
         TemplateView.as_view(template_name='info-pages/help.html'),
         name='help'

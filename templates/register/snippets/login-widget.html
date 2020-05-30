@@ -8,7 +8,6 @@
             {{ login_form|crispy }}
             <input type="hidden" name="next" value="{% url 'dashboard' %}"/>
         </div>
-        <hr>
         <div class="d-flex justify-content-center">
             <div class="form-col justify-content-start">
                 <button type="submit" class="btn btn-blue ml-3">Login</button>
@@ -22,9 +21,8 @@
     </form>
 </div>
 {% endwith %}
-{% if social_apps %}
 <hr>
-<!-- <div class="login-social-box">
+<div class="login-social-box">
     <div class="d-flex justify-content-center">
         <h5 class="text-center font-large">Or login with:</h5>
     </div>
@@ -44,13 +42,5 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-4 d-flex justify-content-center">
-            <a href="{% provider_login_url 'instagram' process='login' %}" class="btn btn-instagram btn-block">
-                <div class="d-flex align-items-center">
-                    <i class="fe fe-instagram"></i><b>Instagram</b>
-                </div>
-            </a>
-        </div>
     </div>
-</div> -->
-{% endif %}
+</div>
