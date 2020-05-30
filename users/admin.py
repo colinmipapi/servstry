@@ -6,14 +6,31 @@ from users.models import CustomUser, Invitation
 
 class CustomUserAdmin(UserAdmin):
 
-    class Meta:
-        model = CustomUser
-        fields = (
-            'first_name',
-            'last_name',
-            'email',
-            'phone'
-        )
+    model = CustomUser
+    fieldsets = (
+        (None, {
+            'fields': (
+                'first_name',
+                'last_name',
+                'email',
+                'phone',
+                'id',
+                'public_id'
+            )
+        }
+         ),
+    )
+    list_display = (
+        'email',
+        'first_name',
+        'last_name',
+        'date_joined',
+        'last_login'
+    )
+    readonly_fields = (
+        'id',
+        'public_id',
+    )
 
 
 class InvitationAdmin(admin.ModelAdmin):

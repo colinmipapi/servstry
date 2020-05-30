@@ -22,6 +22,11 @@ class CustomUser(AbstractUser):
         blank=True,
         region='US'
     )
+    username = models.CharField(
+        max_length=1024,
+        blank=True,
+        null=True
+    )
 
     @property
     def phone_pretty(self):
