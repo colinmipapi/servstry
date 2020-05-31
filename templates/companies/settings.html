@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
 {% load crispy_forms_tags %}
 {% block title %}Settings{% endblock %}
 {% block header %}
@@ -71,6 +72,55 @@
                                 <button type="submit" class="btn btn-blue">Change Password</button>
                             </div>
                         </form>
+                        <h5 class="font-title font-blue mt-3 mb-3">Social Accounts</h5>
+                        <div class="font-small pl-5 pr-5 pt-2">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h5 class="font-large text-center text-sm-left d-block">Facebook</h5>
+                                </div>
+                                {% providers_media_js %}
+                                {% if facebook != False %}
+                                     <div class="col-sm-5 ml-auto">
+                                         <div class="ml-auto">
+                                             <a href="{% url 'disconnect_social_account' account_id=facebook %}" class="btn btn-danger btn-block break-text">
+                                                Disconnect
+                                            </a>
+                                         </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-sm-5 ml-auto">
+                                         <div class="ml-auto">
+                                            <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-primary btn-block break-text">
+                                                Connect
+                                            </a>
+                                         </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h5 class="font-large text-center text-sm-left d-block">Google</h5>
+                                </div>
+                                {% if google != False %}
+                                    <div class="col-sm-5 ml-auto">
+                                        <div class="ml-auto">
+                                            <a href="{% url 'disconnect_social_account' account_id=google %}" class="btn btn-danger btn-block break-text">
+                                                Disconnect
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-sm-5 ml-auto">
+                                        <div class="ml-auto">
+                                            <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-primary btn-block break-text">
+                                                Connect
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +185,7 @@
                                 <tr class="font-title font-blue">
                                     <th scope="col">Name</th>
                                     <th scope="col">E-mail</th>
-                                    <th scope="col"></th>
+                                    <th scope="col" class="text-right">Remove?</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -143,7 +193,7 @@
                                     <tr class="font-small" id="adminRow{{ admin.public_id }}">
                                         <th scope="row">{{ admin.first_name }} {{ admin.last_name }}</th>
                                         <td>{{ admin.email }}</td>
-                                        <td class="float-right"><button type="button" class="btn btn-danger btn-sm" onclick="removeCompanyAdminSetting('{{ company.public_id}}', '{{ admin.public_id }}')"><i class="flaticon-cancel"></i></button></td>
+                                        <td class="text-right"><button type="button" class="btn btn-danger btn-sm" onclick="removeCompanyAdminSetting('{{ company.public_id}}', '{{ admin.public_id }}')"><i class="flaticon-cancel"></i></button></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

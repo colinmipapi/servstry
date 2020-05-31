@@ -2,14 +2,23 @@ from django import forms
 
 from track.models import GuestVisit
 
+from tempus_dominus.widgets import DateTimePicker
+
 
 class GuestVisitForm(forms.ModelForm):
+
     arrival = forms.DateTimeField(
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'type': 'datetime-local',
-            'placeholder': 'mm-dd-yyyy HH:MM PM',
-        })
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm a',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
     )
 
     class Meta:

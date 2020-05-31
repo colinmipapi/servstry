@@ -177,7 +177,7 @@ def company_profile(request, slug):
         nav = False
 
     guest_visit_form = GuestVisitForm(initial={
-        'arrival': timezone.now(),
+        'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
     })
 
     return render(request, 'companies/profile.html', {
@@ -202,6 +202,16 @@ def settings(request, slug):
     change_password_form = PasswordChangeForm(request.user)
     invite_admin_form = InviteSingleUserForm()
 
+    google = False
+    facebook = False
+
+    for account in request.user.socialaccount_set.all().iterator():
+
+        if account.provider == "google":
+            google = account.id
+        elif account.provider == "facebook":
+            facebook = account.id
+
     return render(request, 'companies/settings.html', {
         'companies': companies,
         'company': company,
@@ -209,6 +219,8 @@ def settings(request, slug):
         'edit_user_info_form': edit_user_info_form,
         'change_password_form': change_password_form,
         'invite_admin_form': invite_admin_form,
+        'google': google,
+        'facebook': facebook,
         'company_admin': True,
         'tab': 'personal',
         'fixed_nav': True,
@@ -268,7 +280,7 @@ def dashboard(request):
     companies = Company.objects.filter(admins=request.user).order_by('-created')
     if companies:
         return redirect('company_dashboard', slug=companies[0].slug)
-    elif not request.user.first_name or not request.user.last_name:
+    elif not request.user.first_name or not request.user.last_name or not request.user.email:
         return redirect('user-contact-info')
     else:
         return redirect('account_logout')

@@ -957,7 +957,7 @@ label.custom-file-label {
 .error-page {
     position: relative;
     z-index: 1;
-    height: calc(100% - 72px);
+    height: calc(100vh - 72px);
     overflow: hidden;
 }
 

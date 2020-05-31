@@ -367,7 +367,6 @@
 
 .account-page-text p {
     font-family: var(--small);
-    margin-top: 10%;
     padding-left: 5%;
     padding-right: 5%;
     white-space: normal !important;
@@ -611,4 +610,37 @@
     padding-bottom: 20px;
     padding-left: 3rem;
     padding-right: 3rem;
+}
+
+.progress-bar-warning {
+    background-color: yellow;
+}
+
+.progress-bar-danger {
+    background-color: red;
+}
+
+.progress-bar-success {
+    background-color: green;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.label-danger {
+    background-color: #d9534f;
+}
+
+.hidden {
+    display: none !important;
 }

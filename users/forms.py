@@ -10,6 +10,8 @@ from phonenumber_field.formfields import PhoneNumberField
 from allauth.account.forms import SignupForm, LoginForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
+from zxcvbn_password.fields import PasswordField, PasswordConfirmationField
+
 
 class EditUserForm(forms.ModelForm):
 
@@ -104,21 +106,36 @@ class RequestDemoForm(forms.Form):
 
 class CustomSignupForm(SignupForm):
 
+    password1 = PasswordField(
+        label='Password'
+    )
+    password2 = PasswordConfirmationField(
+        label='Confirm Password',
+        confirm_with='password1'
+    )
+
     class Meta(LoginForm):
         model = CustomUser
         fields = (
             'email',
-
-        )
-        exclude = (
-            'username',
         )
 
 
 class CustomSocialSignupForm(SocialSignupForm):
+
     first_name = forms.CharField(max_length=100, label='First Name')
     last_name = forms.CharField(max_length=100, label='Last Name')
+    email = forms.EmailField(
+        label='E-mail Address'
+    )
     phone = PhoneNumberField(required=False, label='Cell Phone')
+    password1 = PasswordField(
+        label='Password'
+    )
+    password2 = PasswordConfirmationField(
+        label='Confirm Password',
+        confirm_with='password1'
+    )
 
     def signup(self, user):
         user.first_name = self.cleaned_data['first_name']
@@ -135,13 +152,12 @@ class InvitationSignupForm(UserContactInfoForm):
         label='E-mail',
         required=True
     )
-    password1 = forms.CharField(
-        label='Password',
-        widget=forms.PasswordInput()
+    password1 = PasswordField(
+        label='Password'
     )
-    password2 = forms.CharField(
+    password2 = PasswordConfirmationField(
         label='Confirm Password',
-        widget=forms.PasswordInput()
+        confirm_with='password1'
     )
 
     class Meta:

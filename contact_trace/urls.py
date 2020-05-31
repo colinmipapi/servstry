@@ -35,7 +35,13 @@ urlpatterns = [
         include('track.urls')
     ),
     path(
-        'admin/',
+        'admin/', include(
+            'admin_honeypot.urls',
+            namespace='admin_honeypot'
+        )
+    ),
+    path(
+        'honey-pot/',
         admin.site.urls
     ),
     # Django Allauth Library (https://github.com/pennersr/django-allauth)
@@ -54,6 +60,11 @@ urlpatterns = [
         'help/',
         TemplateView.as_view(template_name='info-pages/help.html'),
         name='help'
+    ),
+    path(
+        'safety-policy/',
+        TemplateView.as_view(template_name='info-pages/safety_policy.html'),
+        name='safety_policy'
     ),
     path(
         'privacy-policy/',

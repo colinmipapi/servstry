@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'zxcvbn_password',
     'storages',
     'crispy_forms',
     'phonenumber_field',
@@ -81,6 +82,8 @@ INSTALLED_APPS = [
     'import_export',
     'django_celery_results',
     'qr_code',
+    'tempus_dominus',
+    'admin_honeypot'
 ]
 
 MIDDLEWARE = [
@@ -152,6 +155,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'zxcvbn_password.ZXCVBNValidator',
+        'OPTIONS': {
+            'min_score': 3,
+            'user_attributes': ('username', 'email', 'first_name', 'last_name')
+        }
+    }
 ]
 
 # Internationalization
@@ -232,6 +242,10 @@ ACCOUNT_USERNAME_BLACKLIST = []
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 # SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
 
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm',
+}
+
 SOCIALACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSocialSignupForm',
 }
@@ -296,6 +310,10 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Tempus Dominus Settings
+TEMPUS_DOMINUS_LOCALIZE = True
+
 
 if HEROKU:
     SECURE_SSL_REDIRECT = True
