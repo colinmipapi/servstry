@@ -39,4 +39,8 @@
             processData: false
         });
     });
+    $(document).on('show.bs.modal', '#exportFormModal', function (e) {
+        $('#id_start_export').val($('#id_start_filter').val());
+        $('#id_end_export').val($('#id_end_filter').val());
+    });
 </script>

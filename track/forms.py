@@ -8,6 +8,7 @@ from tempus_dominus.widgets import DateTimePicker
 class GuestVisitForm(forms.ModelForm):
 
     arrival = forms.DateTimeField(
+        input_formats=["%m/%d/%y %H:%M %p"],
         widget=DateTimePicker(
             options={
                 'useCurrent': True,
@@ -19,6 +20,12 @@ class GuestVisitForm(forms.ModelForm):
                 'icon_toggle': True,
             }
         ),
+    )
+    email_2 = forms.CharField(
+        max_length=500,
+        label='',
+        widget=forms.TextInput(attrs={'class': 'dispnon'}),
+        required=False,
     )
 
     class Meta:
@@ -35,23 +42,37 @@ class GuestVisitForm(forms.ModelForm):
 
 class GuestVisitFilterForm(forms.Form):
 
-    start = forms.DateTimeField(
-        required=False,
+    start_filter = forms.DateTimeField(
+        input_formats=["%m/%d/%y %H:%M %p"],
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm a',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
         label='',
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'type': 'datetime-local',
-            'placeholder': 'mm-dd-yyyy HH:MM PM',
-        })
+        required=False
     )
-    end = forms.DateTimeField(
-        required=False,
+    end_filter = forms.DateTimeField(
+        input_formats=["%m/%d/%y %H:%M %p"],
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm a',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
         label='',
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'type': 'datetime-local',
-            'placeholder': 'mm-dd-yyyy HH:MM PM',
-        })
+        required=False
     )
 
 
@@ -66,21 +87,35 @@ class GuestVisitExportForm(forms.Form):
         choices=FILE_TYPES,
         label='File Type'
     )
-    start = forms.DateTimeField(
-        required=False,
+    start_export = forms.DateTimeField(
+        input_formats=["%m/%d/%y %H:%M %p"],
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm a',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
         label='Start',
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'type': 'datetime-local',
-            'placeholder': 'mm-dd-yyyy HH:MM PM',
-        })
+        required=False
     )
-    end = forms.DateTimeField(
-        required=False,
+    end_export = forms.DateTimeField(
+        input_formats=["%m/%d/%y %H:%M %p"],
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm a',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
         label='End',
-        input_formats=['%Y-%m-%dT%H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'type': 'datetime-local',
-            'placeholder': 'mm-dd-yyyy HH:MM PM',
-        })
+        required=False
     )

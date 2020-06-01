@@ -169,8 +169,8 @@ def export_contacts(request, public_id):
                 company.id,
                 request.user.id,
                 form.cleaned_data['file_type'],
-                form.cleaned_data['start'],
-                form.cleaned_data['end']
+                form.cleaned_data['start_export'],
+                form.cleaned_data['end_export']
             ])
             return Response({'result': 'success', }, status.HTTP_200_OK)
         else:

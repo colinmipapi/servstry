@@ -8,7 +8,6 @@
     <script type="text/javascript" src="{% static 'js/companies.js' %}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <script type="text/javascript" src="{% static 'js/rotate-profile-img.js' %}"></script>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script>
         $(document).ready(function () {
@@ -89,6 +88,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-12">
                                             {{ guest_visit_form.email|as_crispy_field }}
+                                            {{ guest_visit_form.email_2 }}
                                         </div>
                                     </div>
                                     <div class="form-row">

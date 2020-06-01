@@ -1,0 +1,25 @@
+<div class="modal" id="cancelSubscriptionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel Your Subscription?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <h6>
+              Are you sure you want to cancel your subscription? You will still be able to access your data, but guests
+              will not be able to see your company profile or add their visits.
+          </h6>
+      </div>
+      <div class="modal-footer">
+            <a href="#cancelSubscription" class="btn btn-danger"
+               onclick="cancelSubscription('{{ subscription.stripe_id }}', '{{ company.public_id }}')">
+                Cancel
+            </a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

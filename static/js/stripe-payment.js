@@ -50,7 +50,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function createPaymentMethod(cardElement, customerId, priceId) {
+function createPaymentMethod(cardElement, customerId, priceId, couponId) {
   return stripe
     .createPaymentMethod({
       type: 'card',
@@ -65,12 +65,13 @@ function createPaymentMethod(cardElement, customerId, priceId) {
           customerId: customerId,
           paymentMethodId: result.paymentMethod.id,
           priceId: priceId,
+          couponId: couponId,
         });
       }
     });
 }
 
-function createSubscription(customerId, paymentMethodId, priceId) {
+function createSubscription(customerId, paymentMethodId, priceId, couponId) {
   return (
     fetch('/api/billing/create-subscription/', {
       method: 'POST',
@@ -84,6 +85,7 @@ function createSubscription(customerId, paymentMethodId, priceId) {
         customerId: customerId,
         paymentMethodId: paymentMethodId,
         priceId: priceId,
+        couponId: couponId,
       }),
     })
       .then((response) => {
@@ -261,8 +263,8 @@ function retryInvoiceWithNewPaymentMethod(
   );
 }
 
-function cancelSubscription(subscriptionId) {
-  return fetch('/api/billing/cancel-subscription/', {
+function cancelSubscription(subscriptionId, companyPublicId) {
+  return fetch('/api/billing/cancel-subscription/' + companyPublicId + '/', {
     method: 'POST',
     credentials: "same-origin",
     headers: {
@@ -279,5 +281,46 @@ function cancelSubscription(subscriptionId) {
     })
     .then(cancelSubscriptionResponse => {
       // Display to the user that the subscription has been cancelled.
+    });
+}
+
+function retrieveCustomerPaymentMethod(paymentMethodId) {
+  return fetch('/api/billing/retrieve-customer-payment-method/' + paymentMethodId + '/', {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      return response;
+    });
+}
+
+function applyCoupon() {
+    var coupon = $('#couponCode').val();
+    console.log(coupon);
+    $.ajax({
+        url : "/api/billing/check-coupon/", // the endpoint
+        type : "POST", // http method
+        data : { couponCode : coupon }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            var newPrice = $('#priceSpan').html() - json.discount;
+            $('#priceSpan').html(newPrice);
+            $('#couponCode').addClass('is-valid');
+            $('#couponCode').after('<div class="valid-feedback" id="couponFeedback">Discount Applied!</div>');
+            couponId = json.id;
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#couponFeedback').remove();
+            $('#couponCode').addClass('is-invalid');
+            $('#couponCode').after('<div class="invalid-feedback" id="couponFeedback">Not A Valid Coupon Code</div>')
+        }
     });
 }

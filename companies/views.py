@@ -1,5 +1,5 @@
 from django.utils import timezone
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -11,6 +11,12 @@ from contact_trace.settings import (
     STRIPE_TEST_PUBLIC_KEY,
     STRIPE_LIVE_SECRET_KEY,
     STRIPE_TEST_SECRET_KEY
+)
+
+from billing.models import (
+    Subscription,
+    PaymentMethod,
+    Invoice
 )
 
 from companies.models import Company
@@ -31,9 +37,6 @@ from track.forms import (
 )
 from track.backends import (
     get_client_ip,
-)
-from track.tasks import (
-    send_confirmation_code_email,
 )
 from users.forms import (
     InviteSingleUserForm,
@@ -144,21 +147,24 @@ def create_payment(request):
 def company_profile(request, slug):
 
     company = Company.objects.get(slug=slug)
+    company_user = company.is_company_user(request.user)
 
-    if company.status != 'SB':
+    if company.status != 'SB' and not company_user:
         raise Http404
 
     if request.method == 'POST':
         guest_visit_form = GuestVisitForm(request.POST)
         if guest_visit_form.is_valid():
+            email_2 = guest_visit_form.cleaned_data['email_2']
+            if email_2 != '':
+                return HttpResponse(status=403)
             gv = guest_visit_form.save(commit=False)
             gv.company = company
             gv.ip_address = get_client_ip(request)
             gv.save()
-            send_confirmation_code_email.apply_async([gv.id, ])
             return redirect('confirmation_page', code=gv.confirmation)
-
-    company_user = company.is_company_user(request.user)
+        else:
+            print(guest_visit_form.errors)
 
     if company_user:
         logo_form = LogoForm(instance=company)
@@ -202,6 +208,18 @@ def settings(request, slug):
     change_password_form = PasswordChangeForm(request.user)
     invite_admin_form = InviteSingleUserForm()
 
+    subscription = Subscription.objects.get(
+        company=company,
+        status__in=['active', 'past_due', 'unpaid']
+    )
+    payment_methods = PaymentMethod.objects.filter(
+        company=company
+    ).exclude(id=company.default_payment_method.id)
+    invoices = Invoice.objects.filter(
+        company=company,
+        status__in=['open', 'paid']
+    )
+
     google = False
     facebook = False
 
@@ -221,6 +239,9 @@ def settings(request, slug):
         'invite_admin_form': invite_admin_form,
         'google': google,
         'facebook': facebook,
+        'subscription': subscription,
+        'payment_methods': payment_methods,
+        'invoices': invoices,
         'company_admin': True,
         'tab': 'personal',
         'fixed_nav': True,
@@ -233,30 +254,53 @@ def company_dashboard(request, slug):
 
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
-    export_contacts_inital = {}
+    filter_contacts_initial = {}
+    export_contacts_initial = {}
 
     if request.method == 'POST':
         guest_filter_form = GuestVisitFilterForm(request.POST)
         if guest_filter_form.is_valid():
-            start = guest_filter_form.cleaned_data['start']
-            end = guest_filter_form.cleaned_data['end']
-            guests = GuestVisit.objects.filter(
-                company=company,
-            ).order_by('-arrival')
-            if start:
-                guests.filter(arrival__gte=start)
-                export_contacts_inital['start'] = start
-            if end:
-                guests.filter(arrival__lte=end)
-                export_contacts_inital['end'] = end
+            start = guest_filter_form.cleaned_data['start_filter']
+            end = guest_filter_form.cleaned_data['end_filter']
+            if start and end:
+                guests = GuestVisit.objects.filter(
+                    company=company,
+                    arrival__range=(start, end)
+                ).order_by('-arrival')
+                filter_contacts_initial['start_filter'] = start
+                filter_contacts_initial['end_filter'] = end
+                export_contacts_initial['start_export'] = start
+                export_contacts_initial['end_export'] = end
+            elif start:
+                guests = GuestVisit.objects.filter(
+                    company=company,
+                    arrival__gte=start
+                ).order_by('-arrival')
+                filter_contacts_initial['start_filter'] = start
+                export_contacts_initial['start_export'] = start
+            elif end:
+                guests = GuestVisit.objects.filter(
+                    company=company,
+                    arrival__lte=end
+                ).order_by('-arrival')
+                filter_contacts_initial['end_filter'] = end
+                export_contacts_initial['end_export'] = end
+            else:
+                guests = GuestVisit.objects.filter(
+                    company=company,
+                ).order_by('-arrival')
         else:
             guests = GuestVisit.objects.none()
             print(guest_filter_form.errors)
     else:
-        guest_filter_form = GuestVisitFilterForm()
         guests = GuestVisit.objects.filter(company=company).order_by('-arrival')
 
-    export_contacts_form = GuestVisitExportForm(initial=export_contacts_inital)
+    guest_filter_form = GuestVisitFilterForm(
+        initial=filter_contacts_initial
+    )
+    export_contacts_form = GuestVisitExportForm(
+        initial=export_contacts_initial
+    )
 
     paginator = Paginator(guests, 25)
 

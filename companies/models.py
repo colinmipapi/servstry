@@ -183,6 +183,13 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
+    default_payment_method = models.OneToOneField(
+        'billing.PaymentMethod',
+        on_delete=models.CASCADE,
+        related_name='company_default',
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.name
