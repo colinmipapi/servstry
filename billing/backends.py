@@ -108,7 +108,7 @@ def create_or_update_payment_method(payment_method, **kwargs):
         exp_year=payment_method['card']['exp_year'],
     )
 
-    if company.cards.all().exists():
+    if not company.cards.all().exists():
         company.default_payment_method = pm
         company.save()
 

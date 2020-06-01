@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.templatetags.static import static
 
@@ -14,6 +16,11 @@ class Subscription(models.Model):
         ('unpaid', 'Unpaid')
     )
 
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -66,6 +73,11 @@ class Plan(models.Model):
         ('year', 'Yearly')
     )
 
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -91,6 +103,11 @@ class Coupon(models.Model):
         ('forever', 'Forever')
     )
 
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -126,6 +143,11 @@ class PaymentMethod(models.Model):
         ('unknown', 'Unknown')
     )
 
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -172,6 +194,11 @@ class Invoice(models.Model):
         ('void', 'Void')
     )
 
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,

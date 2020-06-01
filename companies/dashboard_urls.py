@@ -4,6 +4,11 @@ from companies import views
 
 urlpatterns = [
     path(
+        '<str:slug>/settings/<str:tab>/',
+        views.settings,
+        name='company_settings_tab'
+    ),
+    path(
         '<str:slug>/settings/',
         views.settings,
         name='company_settings'

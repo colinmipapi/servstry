@@ -2,36 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/billing/backends.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/backup.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/license/license.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/amex.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/credit-card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/diners.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/discover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/jcb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/mastercard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icons/credit-cards/png/visa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/modals/confirm-cancel-subscription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/billing/snippets/payment-row-item.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billing/api_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/api_urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billing/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/api_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing/backends.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/backends.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billing/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/api_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/companies/dashboard_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/dashboard_urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/stripe-payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/stripe-payment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base-content-left-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base-content-left-page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base-content-right-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base-content-right-page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/company/register/create-payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/company/register/create-payment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/track/modals/export.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/track/modals/export.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/track/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/track/forms.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +23,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/base.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="522">
@@ -55,26 +35,15 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="262">
-                  <caret line="257" column="60" selection-start-line="257" selection-start-column="60" selection-end-line="257" selection-end-column="60" />
+                <state relative-caret-position="496">
+                  <caret line="317" column="42" selection-start-line="317" selection-start-column="42" selection-end-line="317" selection-end-column="42" />
                   <folding>
+                    <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+                    <element signature="e#7415#10322#0" />
+                    <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" />
+                    <element signature="e#16087#16109#0" expanded="true" />
+                    <element signature="e#16241#16263#0" expanded="true" />
                     <element signature="e#18130#18149#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/companies/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="251">
-                  <caret line="216" column="50" selection-start-line="216" selection-start-column="50" selection-end-line="216" selection-end-column="50" />
-                  <folding>
-                    <element signature="e#0#33#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -83,30 +52,35 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/billing/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="252">
-                  <caret line="188" column="22" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="22" />
+                <state relative-caret-position="2985">
+                  <caret line="199" column="19" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="19" />
                   <folding>
-                    <element signature="e#0#28#0" expanded="true" />
+                    <element signature="e#0#6#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/billing/admin.py">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/billing/migrations/0004_add_uuid_field.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret column="32" selection-start-column="32" selection-end-column="32" />
+                <state relative-caret-position="525">
+                  <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
                 </state>
               </provider>
             </entry>
           </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/companies/admin.py">
+            <entry file="file://$PROJECT_DIR$/companies/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-845">
+                <state relative-caret-position="484">
+                  <caret line="249" column="47" selection-start-line="249" selection-start-column="47" selection-end-line="249" selection-end-column="47" />
                   <folding>
-                    <element signature="e#0#32#0" expanded="true" />
+                    <element signature="e#0#33#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -115,8 +89,32 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/static/js/stripe-payment.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-253">
-                  <caret line="268" column="22" selection-start-line="268" selection-start-column="22" selection-end-line="268" selection-end-column="22" />
+                <state relative-caret-position="347">
+                  <caret line="97" column="45" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/billing/migrations/0006_remove_uuid_null.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="540">
+                  <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
+                  <folding>
+                    <element signature="e#49#89#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/billing/migrations/0005_populate_uuid_values.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="330">
+                  <caret line="22" column="79" selection-start-line="22" selection-start-column="79" selection-end-line="22" selection-end-column="79" />
+                  <folding>
+                    <element signature="e#49#81#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -124,8 +122,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/billing/backends.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="138" selection-start-line="138" selection-end-line="138" />
+                <state relative-caret-position="340">
+                  <caret line="110" column="11" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="11" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -134,19 +132,10 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/companies/models.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3918">
-                  <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="45" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/billing/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2">
-                  <caret line="131" selection-start-line="131" selection-end-line="131" />
+                <state relative-caret-position="492">
+                  <caret line="162" column="68" selection-start-line="162" selection-start-column="68" selection-end-line="162" selection-end-column="68" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -157,8 +146,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/billing/api_urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+                <state relative-caret-position="570">
+                  <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -223,11 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/users/api_views.py" />
-        <option value="$PROJECT_DIR$/users/api_urls.py" />
-        <option value="$PROJECT_DIR$/templates/allauth/account/email_confirm.html" />
-        <option value="$PROJECT_DIR$/templates/allauth/account/logout.html" />
-        <option value="$PROJECT_DIR$/templates/business_landing.html" />
         <option value="$PROJECT_DIR$/templates/info-pages/contact_us.html" />
         <option value="$PROJECT_DIR$/companies/api_urls.py" />
         <option value="$PROJECT_DIR$/static/js/company-settings.js" />
@@ -243,7 +227,6 @@
         <option value="$PROJECT_DIR$/users/backends.py" />
         <option value="$PROJECT_DIR$/templates/track/confirmation_page.html" />
         <option value="$PROJECT_DIR$/users/admin.py" />
-        <option value="$PROJECT_DIR$/users/models.py" />
         <option value="$PROJECT_DIR$/templates/allauth/socialaccount/signup.html" />
         <option value="$PROJECT_DIR$/static/css/old-style.css" />
         <option value="$PROJECT_DIR$/templates/register/snippets/login-widget.html" />
@@ -260,20 +243,26 @@
         <option value="$PROJECT_DIR$/templates/companies/dashboard.html" />
         <option value="$PROJECT_DIR$/templates/companies/company/register/create-payment.html" />
         <option value="$PROJECT_DIR$/contact_trace/settings.py" />
-        <option value="$PROJECT_DIR$/static/js/stripe-payment.js" />
-        <option value="$PROJECT_DIR$/billing/api_urls.py" />
         <option value="$PROJECT_DIR$/templates/billing/modals/confirm-cancel-subscription.html" />
         <option value="$PROJECT_DIR$/companies/models.py" />
         <option value="$PROJECT_DIR$/billing/admin.py" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/billing/api_views.py" />
-        <option value="$PROJECT_DIR$/billing/backends.py" />
-        <option value="$PROJECT_DIR$/billing/models.py" />
-        <option value="$PROJECT_DIR$/companies/views.py" />
-        <option value="$PROJECT_DIR$/templates/companies/settings.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/base-content-left-page.html" />
         <option value="$PROJECT_DIR$/templates/base-content-right-page.html" />
+        <option value="$PROJECT_DIR$/users/models.py" />
+        <option value="$PROJECT_DIR$/companies/dashboard_urls.py" />
+        <option value="$PROJECT_DIR$/companies/views.py" />
+        <option value="$PROJECT_DIR$/templates/companies/settings.html" />
+        <option value="$PROJECT_DIR$/static/js/stripe-payment.js" />
+        <option value="$PROJECT_DIR$/billing/api_urls.py" />
+        <option value="$PROJECT_DIR$/billing/backends.py" />
+        <option value="$PROJECT_DIR$/templates/billing/snippets/payment-row-item.html" />
+        <option value="$PROJECT_DIR$/billing/api_views.py" />
+        <option value="$PROJECT_DIR$/billing/models.py" />
+        <option value="$PROJECT_DIR$/billing/migrations/0004_add_uuid_field.py" />
+        <option value="$PROJECT_DIR$/billing/migrations/0006_remove_uuid_null.py" />
+        <option value="$PROJECT_DIR$/billing/migrations/0005_populate_uuid_values.py" />
       </list>
     </option>
   </component>
@@ -300,6 +289,12 @@
               <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
               <item name="contact_trace" type="462c0819:PsiDirectoryNode" />
               <item name="billing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contact_trace" type="462c0819:PsiDirectoryNode" />
+              <item name="billing" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
@@ -396,6 +391,13 @@
               <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
               <item name="contact_trace" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="billing" type="462c0819:PsiDirectoryNode" />
+              <item name="snippets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contact_trace" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="companies" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -420,6 +422,14 @@
               <item name="companies" type="462c0819:PsiDirectoryNode" />
               <item name="company" type="462c0819:PsiDirectoryNode" />
               <item name="modals" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contact_trace" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="companies" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="contact_trace" type="b2602c69:ProjectViewProjectNode" />
@@ -573,52 +583,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/contact_trace/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="102" selection-start-line="40" selection-start-column="102" selection-end-line="40" selection-end-column="102" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/track/confirmation_page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/track/backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/track/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contact_trace/signup_urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -650,16 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="18" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -815,13 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/companies/company/register/create-payment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/companies/company/modals/share.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -843,13 +790,6 @@
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="32" selection-start-column="32" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -879,80 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billing/api_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/companies/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3918">
-          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/stripe-payment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="268" column="22" selection-start-line="268" selection-start-column="22" selection-end-line="268" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/api_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/billing/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="188" column="22" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/companies/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="216" column="50" selection-start-line="216" selection-start-column="50" selection-end-line="216" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="257" column="60" selection-start-line="257" selection-start-column="60" selection-end-line="257" selection-end-column="60" />
-          <folding>
-            <element signature="e#18130#18149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base-content-right-page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -967,10 +833,160 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/companies/dashboard_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="32" selection-start-column="32" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/api_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/companies/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3918">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/companies/company/register/create-payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="56" column="6" lean-forward="true" selection-start-line="53" selection-start-column="4" selection-end-line="56" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/companies/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="249" column="47" selection-start-line="249" selection-start-column="47" selection-end-line="249" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/backends.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="110" column="11" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/billing/snippets/payment-row-item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#a#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="317" column="42" selection-start-line="317" selection-start-column="42" selection-end-line="317" selection-end-column="42" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="e#7415#10322#0" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="e#16087#16109#0" expanded="true" />
+            <element signature="e#16241#16263#0" expanded="true" />
+            <element signature="e#18130#18149#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/api_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="162" column="68" selection-start-line="162" selection-start-column="68" selection-end-line="162" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="18" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/stripe-payment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="97" column="45" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2985">
+          <caret line="199" column="19" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/migrations/0004_add_uuid_field.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/migrations/0006_remove_uuid_null.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
+          <folding>
+            <element signature="e#49#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billing/migrations/0005_populate_uuid_values.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="79" selection-start-line="22" selection-start-column="79" selection-end-line="22" selection-end-column="79" />
+          <folding>
+            <element signature="e#49#81#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

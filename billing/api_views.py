@@ -1,5 +1,7 @@
 import json
 
+from django.template.loader import render_to_string
+
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -141,6 +143,25 @@ def cancel_subscription(request, company_id):
         create_or_update_subscription(subscription)
 
         return Response({'status': 'success'}, status=status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['POST', ])
+def attach_payment_method(request):
+
+    company = Company.objects.get(customer_id=request.data['customerId'])
+    if company.is_company_user(request.user):
+        payment_method = stripe.PaymentMethod.attach(
+            request.data['paymentMethodId'],
+            customer=request.data['customerId']
+        )
+        pm = create_or_update_payment_method(payment_method, company=company)
+        context = {
+            'payment': pm,
+        }
+        result = render_to_string('billing/snippets/payment-row-item.html', request=request, context=context)
+        return Response(result, status=status.HTTP_201_CREATED)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
 

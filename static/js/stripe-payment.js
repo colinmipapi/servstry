@@ -71,6 +71,41 @@ function createPaymentMethod(cardElement, customerId, priceId, couponId) {
     });
 }
 
+function addNewPaymentMethod(cardElement, customerId) {
+    return stripe
+        .createPaymentMethod({
+          type: 'card',
+          card: cardElement,
+        })
+        .then((result) => {
+            if (result.error) {
+                displayError(error);
+            } else {
+                attachNewPaymentMethod({
+                    customerId: customerId,
+                    paymentMethodId: result.paymentMethod.id,
+                })
+            }
+        });
+}
+
+function attachNewPaymentMethod(customerId, paymentMethodId) {
+    $.ajax({
+        url : "/api/billing/attach-payment-method/", // the endpoint
+        type : "POST", // http method
+        data : {
+            customerId: customerId,
+            paymentMethodId: paymentMethodId,
+        },
+        // handle a successful response
+        success : function(json) {
+        },
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+        }
+    });
+}
+
 function createSubscription(customerId, paymentMethodId, priceId, couponId) {
   return (
     fetch('/api/billing/create-subscription/', {

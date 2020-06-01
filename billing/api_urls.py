@@ -32,5 +32,10 @@ urlpatterns = [
         'cancel-subscription/<uuid:company_id>/',
         views.cancel_subscription,
         name='cancel-subscription'
+    ),
+    path(
+        'attach-payment-method/',
+        views.attach_payment_method,
+        name='attach-payment-method'
     )
 ]

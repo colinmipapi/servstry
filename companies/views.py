@@ -199,7 +199,7 @@ def company_profile(request, slug):
 
 
 @login_required
-def settings(request, slug):
+def settings(request, slug, **kwargs):
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
 
@@ -230,6 +230,11 @@ def settings(request, slug):
         elif account.provider == "facebook":
             facebook = account.id
 
+    if 'tab' in kwargs:
+        tab = kwargs['tab']
+    else:
+        tab = 'personal'
+
     return render(request, 'companies/settings.html', {
         'companies': companies,
         'company': company,
@@ -242,8 +247,9 @@ def settings(request, slug):
         'subscription': subscription,
         'payment_methods': payment_methods,
         'invoices': invoices,
+        'stripe_public_key': stripe_public_key,
         'company_admin': True,
-        'tab': 'personal',
+        'tab': tab,
         'fixed_nav': True,
     })
 
