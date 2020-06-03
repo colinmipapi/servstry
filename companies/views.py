@@ -215,9 +215,12 @@ def settings(request, slug, **kwargs):
         )
     except:
         subscription = None
-    payment_methods = PaymentMethod.objects.filter(
-        company=company
-    ).exclude(id=company.default_payment_method.id)
+    if company.default_payment_method:
+        payment_methods = PaymentMethod.objects.filter(
+            company=company
+        ).exclude(id=company.default_payment_method.id)
+    else:
+        payment_methods = None
     invoices = Invoice.objects.filter(
         company=company,
         status__in=['open', 'paid']
