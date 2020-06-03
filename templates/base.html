@@ -37,6 +37,7 @@
     {% block header %}{% endblock header %}
 </head>
 <body>
+    {% block alert %}{% endblock %}
     {% if nav != False %}
     <nav class="navbar navbar-expand-lg {% if fixed_nav == True %}fixed-top {% endif %}navbar-light home-bar">
         <a class="navbar-brand" href="{% url 'home' %}">

@@ -269,7 +269,7 @@
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="row w-100 add-new-payment-method mt-4" id="addPaymentMethod" style="display: none;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-8 offset-2">
                                         <form id="addPaymentMethodForm" class="mb-5">
                                             {% csrf_token %}
                                             <div id="card-element" class="MyCardElement">
@@ -296,45 +296,44 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                             <input class="form-check-input mt-0" type="radio" name="defaultPaymentRadio"
-                                                   id="defaultPaymentRadio" value="optionDefault" checked>
+                                                   id="PaymentRadio{{ company.default_payment_method.public_id }}" value="optionDefault" checked>
                                     </div>
                                 </div>
                             </div>
-                            {% for payment in payment_methods %}
-                                <div class="row">
-                                    <div class="col-md-8 offset-2 d-flex align-items-center justify-content-between p-3">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ payment.get_icon_path }}" height="40"
-                                                 class="mr-4">
-                                            <h5 class="mb-0">{{ payment.get_brand_display }} card ending in {{ payment.last4 }}</h5>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <input class="form-check-input mt-0" type="radio"
-                                                   id="PaymentRadio{{ forloop.counter }}" value="option{{ forloop.counter }}">
-                                            <a href="#removePaymentMethod">
-                                                <i class="flaticon-cancel" style="color: red;"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                            <div id="otherPaymentMethods">
+                                {% for payment in payment_methods %}
+                                   {% include 'billing/snippets/payment-row-item.html' %}
+                                {% endfor %}
+                            </div>
                         </div>
                         <div class="subscription-container mt-5">
                             <div class="d-flex justify-content-between align-items-end mb-4">
                                 <h5 class="font-title font-blue mb-0">Subscription</h5>
-                                <a href="#cancelSubscriptionModal" data-toggle="modal">
-                                    <small class="text-danger">Cancel</small>
-                                </a>
+                                {% if subscription.active %}
+                                    <a href="#cancelSubscriptionModal" id="cancelSubscriptionBtn" data-toggle="modal">
+                                        <small class="text-danger">Cancel</small>
+                                    </a>
+                                {% else %}
+                                    <a href="#newSubscription" id="newSubscriptionBtn">
+                                        <small>
+                                            <i class="fe fe-plus mr-1"></i>
+                                            New
+                                        </small>
+                                    </a>
+                                {% endif %}
                             </div>
-                            <div class="row d-flex-justify-content-center pl-4 pr-4 mt-4">
-                                <div class="col-md-8 offset-2">
-                                    <h5>
-                                        {{ subscription.real_price }} per {{ subscription.plan.interval }}
-                                        {% if subscription.next_pending_invoice %}next billed on
-                                        {{ subscription.next_pending_invoice }}{% endif %}
-                                    </h5>
+                            {% if subscription %}
+                                <div class="row d-flex-justify-content-center pl-4 pr-4 mt-4">
+                                    <div class="col-md-8 offset-2">
+                                        <h5>
+                                            {{ subscription.real_price }} per {{ subscription.plan.interval }}
+                                            {% if subscription.cancel_at %}expires on {{ subscription.cancel_at|date:"n/j/y" }}
+                                            {% elif subscription.next_pending_invoice %}
+                                            next billed on {{ subscription.next_pending_invoice|date:"n/j/y" }}{% endif %}
+                                        </h5>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </div>
                         <div class="invoice-container mt-5 mb-5">
                             <h5 class="font-title font-blue mb-4">Invoices</h5>
@@ -348,12 +347,18 @@
                                     </div>
                                     <div class="col-sm-3 d-flex align-items-center">
                                         {% if invoice.paid_at %}
-                                            <h5 class="mb-0">{{ invoice.paid_at}}</h5>
+                                            <h5 class="mb-0">{{ invoice.paid_at|date:"n/j/y" }}</h5>
+                                        {% elif subscription.next_pending_invoice %}
+                                            <h5 class="mb-0">{{ subscription.next_pending_invoice|date:"n/j/y" }}</h5>
                                         {% endif %}
                                     </div>
                                     <div class="col-sm-3 offset-1 d-flex align-items-center">
-                                        <a href="{{ invoice.hosted_invoice_url }}" class="btn btn-blue btn-sm mr-2">View</a>
-                                        <a href="{{ invoice.pdf_url }}" class="btn btn-blue btn-sm">Download</a>
+                                        <a href="{{ invoice.hosted_invoice_url }}" class="btn btn-blue btn-sm mr-2">
+                                            View
+                                        </a>
+                                        <a href="{{ invoice.pdf_url }}" class="btn btn-blue btn-sm">
+                                            <i class="fe fe-download"></i>
+                                        </a>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -391,14 +396,21 @@
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#companyInfoForm", false);
     });
-    $('#subscription-form').submit(function(e) {
+    $('#addPaymentMethodForm').submit(function(e) {
         e.preventDefault();
-        addNewPaymentMethod(cardElement, customerId);
-    })
-    function toggleAddPaymentMethod() {
-        $('#addPaymentMethod').toggle();
-        $('#addPaymentMethodLabel').toggle();
-        $('#hidePaymentMethodLabel').toggle();
-    }
+        var deferred = addNewPaymentMethod(cardElement, customerId);
+        $.when(deferred).done(function() {
+            toggleAddPaymentMethod();
+            cardElement.clear();
+        });
+    });
+    $('#otherPaymentMethods input:radio').click(function() {
+        var moveOn = confirm('Are you sure you want to make this your default payment method?');
+        if ( moveOn === true) {
+            changeCustomerDefaultPaymentMethod($(this).val());
+        } else {
+            $(this).prop('checked', false);
+        }
+    });
 </script>
 {% endblock %}

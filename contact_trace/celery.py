@@ -1,7 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 import os
 
+from django.conf import settings
+
 from celery import Celery
+
+from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'contact_trace.settings')
@@ -18,7 +22,26 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-
+    'update-subscription': {
+        'task': 'update_subscriptions',
+        'schedule': crontab(minute=0, hour=0),
+    },
+    'update-plan': {
+        'task': 'update_plan',
+        'schedule': crontab(minute=30, hour=0),
+    },
+    'update-coupon': {
+        'task': 'update_subscriptions',
+        'schedule': crontab(minute=45, hour=0),
+    },
+    'update-payment-method': {
+        'task': 'update_payment_methods',
+        'schedule': crontab(minute=0, hour=1),
+    },
+    'update-invoice': {
+        'task': 'update_invoices',
+        'schedule': crontab(minute=0, hour=2),
+    },
 }
 
 

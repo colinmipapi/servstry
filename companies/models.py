@@ -77,9 +77,11 @@ STATES = (
 class Company(models.Model):
 
     STATUSES = (
-        ('DL', 'Delinquent'),
         ('SU', 'Signing Up'),
         ('SB', 'Subscribed'),
+        ('DL', 'Delinquent'),
+        ('EP', 'Expiring'),
+        ('CL', 'Canceled'),
         ('EX', 'Example')
     )
 

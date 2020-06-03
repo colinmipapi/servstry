@@ -6,7 +6,6 @@ from companies.models import WaitList
 from companies.backends import generate_waitlist_email
 
 
-
 @app.task
 def send_waitlist_email(waitlist_id):
     waitlist = WaitList.objects.get(id=waitlist_id)

@@ -6,6 +6,10 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.response import Response
 from rest_framework import status
 
+from billing.models import (
+    PaymentMethod,
+    Subscription
+)
 from companies.models import (
     Company,
 )
@@ -93,6 +97,28 @@ def create_subscription(request):
 
 
 @api_view(['POST', ])
+def cancel_subscription(request, company_id):
+
+    company = Company.objects.get(public_id=company_id)
+
+    if company.is_company_user(request.user):
+        data = request.data
+        subscription_obj = Subscription.objects.get(stripe_id=data['subscriptionId'])
+        try:
+            subscription = stripe.Subscription.update(
+                data['subscriptionId'],
+                cancel_at_period_end=True
+            )
+        except Exception as e:
+            subscription = stripe.Subscription.retrieve(data['subscriptionId'])
+            create_or_update_payment_method(subscription, subscription_obj=subscription_obj)
+
+        return Response({'status': 'success', 'subscription': subscription}, status=status.HTTP_200_OK)
+    else:
+        return Response({'status': 'error'}, status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['POST', ])
 def retry_invoice(request):
     data = request.data
     try:
@@ -119,37 +145,24 @@ def retry_invoice(request):
 
 @api_view(['POST', ])
 def get_payment_method(request, payment_id):
-    try:
-        payment_method = stripe.PaymentMethod.retrieve(
-            payment_id,
-        )
-        result = {
-            'brand': payment_method['card']['brand'],
-            'last4': payment_method['card']['last4']
-        }
-        return Response(result, status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response({'message': str(e)}, status=status.HTTP_403_FORBIDDEN)
-
-
-@api_view(['POST', ])
-def cancel_subscription(request, company_id):
-
-    company = Company.objects.get(public_id=company_id)
-
-    if company.is_company_user(request.user):
-        data = request.data
-        subscription = stripe.Subscription.delete(data['subscriptionId'])
-        create_or_update_subscription(subscription)
-
-        return Response({'status': 'success'}, status=status.HTTP_200_OK)
-    else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+    pass
+    '''
+        try:
+            payment_method = stripe.PaymentMethod.retrieve(
+                payment_id,
+            )
+            result = {
+                'brand': payment_method['card']['brand'],
+                'last4': payment_method['card']['last4']
+            }
+            return Response(result, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': str(e)}, status=status.HTTP_403_FORBIDDEN)
+    '''
 
 
 @api_view(['POST', ])
 def attach_payment_method(request):
-
     company = Company.objects.get(customer_id=request.data['customerId'])
     if company.is_company_user(request.user):
         payment_method = stripe.PaymentMethod.attach(
@@ -162,6 +175,42 @@ def attach_payment_method(request):
         }
         result = render_to_string('billing/snippets/payment-row-item.html', request=request, context=context)
         return Response(result, status=status.HTTP_201_CREATED)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['PUT', ])
+def change_default_payment_method(request, public_id):
+
+    payment_method = PaymentMethod.objects.get(public_id=public_id)
+    company = payment_method.company
+    if company.is_company_user(request.user):
+        stripe.Customer.modify(
+            company.customer_id,
+            invoice_settings={
+                "default_payment_method": payment_method.stripe_id
+            },
+        )
+        company.default_payment_method = payment_method
+        company.save()
+        return Response({'status': 'success'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'status': 'error'}, status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['DELETE', ])
+def delete_payment_method(request, public_id):
+
+    payment_method = PaymentMethod.objects.get(public_id=public_id)
+    if payment_method.company.is_company_user(request.user):
+        try:
+            stripe.PaymentMethod.detach(
+                payment_method.stripe_id,
+            )
+        except Exception as e:
+            print('Delete Payment Method Error: %s' % str(e))
+        payment_method.delete()
+        return Response({'status': 'success'}, status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
@@ -196,8 +245,15 @@ def stripe_webhook_recieved(request):
         create_or_update_subscription(data['object'], company=Company.objects.get(id=7))
 
     if event_type == 'customer.subscription.deleted':
-        create_or_update_subscription(data['object'])
-
+        subscription = Subscription.objects.get(stripe_id=data['object']['id'])
+        create_or_update_subscription(data['object'], subscription_obj=subscription)
+        active_subscription = Subscription.objects.filter(
+            company=subscription.company,
+            status__in=['active', 'past_due', 'trailing', 'unpaid']
+        )
+        if not active_subscription:
+            subscription.company.status = 'CL'
+            subscription.company.save()
     if event_type == 'payment_method.attached':
         create_or_update_payment_method(data['object'])
 

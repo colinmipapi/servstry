@@ -19,6 +19,11 @@ urlpatterns = [
         name='create-subscription'
     ),
     path(
+        'cancel-subscription/<uuid:company_id>/',
+        views.cancel_subscription,
+        name='cancel-subscription'
+    ),
+    path(
         'retry-invoice/',
         views.retry_invoice,
         name='retry-invoice'
@@ -29,13 +34,18 @@ urlpatterns = [
         name='get-payment-method'
     ),
     path(
-        'cancel-subscription/<uuid:company_id>/',
-        views.cancel_subscription,
-        name='cancel-subscription'
-    ),
-    path(
         'attach-payment-method/',
         views.attach_payment_method,
         name='attach-payment-method'
-    )
+    ),
+    path(
+        'change-default-payment-method/<uuid:public_id>/',
+        views.change_default_payment_method,
+        name='change-default-payment-method'
+    ),
+    path(
+        'delete-payment-method/<uuid:public_id>/',
+        views.delete_payment_method,
+        name='delete-payment-method'
+    ),
 ]

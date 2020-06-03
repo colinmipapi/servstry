@@ -6,7 +6,7 @@ run:
   web: daphne contact_trace.asgi:application --port $PORT --bind 0.0.0.0 -v2
   worker:
     command:
-      - celery -A contact_trace worker -l info --concurrency=4
+      - celery -A contact_trace worker --beat --scheduler django --loglevel=info
     image: worker
 release:
   image: web

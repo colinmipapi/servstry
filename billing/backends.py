@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.utils import timezone
 from django.utils.timezone import make_aware
 
 from billing.models import (
@@ -32,13 +33,6 @@ else:
     stripe.api_key = STRIPE_LIVE_SECRET_KEY
 
 
-def subscription_lookup(subscription_id):
-
-    sub = stripe.Subscription.retrieve("sub_HNUFr4y5Y6cRFo")
-
-    return sub
-
-
 def create_or_update_plan(plan, **kwargs):
 
     plan_obj, new = Plan.objects.update_or_create(
@@ -46,21 +40,23 @@ def create_or_update_plan(plan, **kwargs):
         created=make_aware(datetime.fromtimestamp(plan['created'])),
         active=plan['active'],
         price=plan['amount'],
-        interval=plan['interval']
+        interval=plan['interval'],
+        last_updated=timezone.now()
     )
 
     return plan_obj
 
 
+def retrieve_plan(plan_stripe_id):
+    return stripe.Plan.retrieve(plan_stripe_id)
+
+
 def create_or_update_subscription(subscription, **kwargs):
-    print(subscription['customer'])
+
     if 'company' in kwargs:
         company = kwargs['company']
     else:
-        try:
-            company = Company.objects.get(customer_id=subscription['customer'])
-        except:
-            company = Company.objects.get(id=7)
+        company = Company.objects.get(customer_id=subscription['customer'])
 
     try:
         plan = Plan.objects.get(stripe_id=subscription['items']['data'][0]['plan']['id'])
@@ -75,17 +71,50 @@ def create_or_update_subscription(subscription, **kwargs):
     else:
         discount = None
 
-    sub, new = Subscription.objects.update_or_create(
-        stripe_id=subscription['id'],
-        created=make_aware(datetime.fromtimestamp(subscription['created'])),
-        status=subscription['status'],
-        company=company,
-        plan=plan,
-        discount=discount,
-        next_pending_invoice=subscription['next_pending_invoice_item_invoice']
-    )
+    if subscription['next_pending_invoice_item_invoice']:
+        next_pending_invoice = make_aware(datetime.fromtimestamp(subscription['next_pending_invoice_item_invoice']))
+    else:
+        next_pending_invoice = None
+
+    if subscription['canceled_at']:
+        canceled_at = make_aware(datetime.fromtimestamp(subscription['canceled_at']))
+    else:
+        canceled_at = None
+
+    if subscription['cancel_at']:
+        cancel_at = make_aware(datetime.fromtimestamp(subscription['cancel_at']))
+    else:
+        cancel_at = None
+
+    if 'subscription_obj' in kwargs:
+        sub = kwargs['subscription_obj']
+        sub.status = subscription['status']
+        sub.current_period_end = make_aware(datetime.fromtimestamp(subscription['current_period_end']))
+        sub.next_pending_invoice = next_pending_invoice
+        sub.canceled_at = canceled_at
+        sub.cancel_at = cancel_at
+        sub.last_updated = timezone.now()
+        sub.save()
+    else:
+        sub, new = Subscription.objects.update_or_create(
+            stripe_id=subscription['id'],
+            created=make_aware(datetime.fromtimestamp(subscription['created'])),
+            status=subscription['status'],
+            company=company,
+            plan=plan,
+            discount=discount,
+            current_period_end=make_aware(datetime.fromtimestamp(subscription['current_period_end'])),
+            next_pending_invoice=next_pending_invoice,
+            canceled_at=canceled_at,
+            cancel_at=cancel_at,
+            last_updated=timezone.now()
+        )
 
     return sub
+
+
+def retrieve_subscription(sub_stripe_id):
+    return stripe.Subscription.retrieve(sub_stripe_id)
 
 
 def create_or_update_payment_method(payment_method, **kwargs):
@@ -93,10 +122,7 @@ def create_or_update_payment_method(payment_method, **kwargs):
     if 'company' in kwargs:
         company = kwargs['company']
     else:
-        try:
-            company = Company.objects.get(customer_id=payment_method['customer'])
-        except:
-            company = Company.objects.get(id=7)
+        company = Company.objects.get(customer_id=payment_method['customer'])
 
     pm, new = PaymentMethod.objects.update_or_create(
         stripe_id=payment_method['id'],
@@ -106,6 +132,7 @@ def create_or_update_payment_method(payment_method, **kwargs):
         last4=payment_method['card']['last4'],
         exp_month=payment_method['card']['exp_month'],
         exp_year=payment_method['card']['exp_year'],
+        last_updated=timezone.now()
     )
 
     if not company.cards.all().exists():
@@ -115,14 +142,15 @@ def create_or_update_payment_method(payment_method, **kwargs):
     return pm
 
 
+def retrieve_payment_method(payment_method_stripe_id):
+    return stripe.PaymentMethod.retrieve(payment_method_stripe_id)
+
+
 def create_or_update_invoice(invoice, **kwargs):
     if 'company' in kwargs:
         company = kwargs['company']
     else:
-        try:
-            company = Company.objects.get(customer_id=invoice['customer'])
-        except:
-            company = Company.objects.get(id=7)
+        company = Company.objects.get(customer_id=invoice['customer'])
 
     if 'subscription' in kwargs:
         subscription = kwargs['subscription']
@@ -130,7 +158,7 @@ def create_or_update_invoice(invoice, **kwargs):
         try:
             subscription = Subscription.objects.get(stripe_id=invoice['subscription'])
         except:
-            subscription = subscription_lookup(invoice['subscription'])
+            subscription = retrieve_subscription(invoice['subscription'])
 
     if invoice['status_transitions']['paid_at']:
         paid_at = make_aware(datetime.fromtimestamp(invoice['status_transitions']['paid_at']))
@@ -149,10 +177,15 @@ def create_or_update_invoice(invoice, **kwargs):
         period_end=make_aware(datetime.fromtimestamp(invoice['period_end'])),
         amount_due=invoice['amount_due'],
         amount_paid=invoice['amount_paid'],
-        paid_at=paid_at
+        paid_at=paid_at,
+        last_updated=timezone.now()
     )
 
     return inv
+
+
+def retrieve_invoice(invoice_stripe_id):
+    return stripe.Invoice.retrieve(invoice_stripe_id)
 
 
 def create_or_update_coupon(coupon, **kwargs):
@@ -162,7 +195,12 @@ def create_or_update_coupon(coupon, **kwargs):
         created=make_aware(datetime.fromtimestamp(coupon['created'])),
         discount=coupon['amount_off'],
         duration=coupon['duration'],
-        duration_in_months=coupon['duration_in_months']
+        duration_in_months=coupon['duration_in_months'],
+        last_updated=timezone.now()
     )
 
     return coupon
+
+
+def retrieve_coupon(coupon_stripe_id):
+    return stripe.Coupon.retrieve(coupon_stripe_id)

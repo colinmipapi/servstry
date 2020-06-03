@@ -62,7 +62,7 @@ def create_company_name_address(request):
         form = NameAddressForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            company.status = 'SB'
+            company.status = 'SU'
             company.save()
             company.admins.add(request.user)
             form.save_m2m()
@@ -208,10 +208,13 @@ def settings(request, slug, **kwargs):
     change_password_form = PasswordChangeForm(request.user)
     invite_admin_form = InviteSingleUserForm()
 
-    subscription = Subscription.objects.get(
-        company=company,
-        status__in=['active', 'past_due', 'unpaid']
-    )
+    try:
+        subscription = Subscription.objects.get(
+            company=company,
+            status__in=['active', 'past_due', 'unpaid', 'trailing']
+        )
+    except:
+        subscription = None
     payment_methods = PaymentMethod.objects.filter(
         company=company
     ).exclude(id=company.default_payment_method.id)

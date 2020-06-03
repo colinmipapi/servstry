@@ -73,6 +73,7 @@
 }
 
 .btn-blue:hover {
+    color: var(--white);
     font-weight: 800;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -643,4 +644,10 @@
 
 .hidden {
     display: none !important;
+}
+
+.icon-link:focus, .icon-link:hover {
+    text-decoration: none !important;
+    font-weight: 900;
+    font-size: 1.25em;
 }

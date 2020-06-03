@@ -34,7 +34,7 @@ services:
         - db
   celery:
     build: .
-    command: celery -A contact_trace worker -l info --concurrency=4
+    command: celery -A contact_trace worker --beat --scheduler django --loglevel=info
     volumes:
       - .:/code
     depends_on:

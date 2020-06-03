@@ -71,6 +71,12 @@ function createPaymentMethod(cardElement, customerId, priceId, couponId) {
     });
 }
 
+function toggleAddPaymentMethod() {
+    $('#addPaymentMethod').toggle();
+    $('#addPaymentMethodLabel').toggle();
+    $('#hidePaymentMethodLabel').toggle();
+}
+
 function addNewPaymentMethod(cardElement, customerId) {
     return stripe
         .createPaymentMethod({
@@ -81,10 +87,7 @@ function addNewPaymentMethod(cardElement, customerId) {
             if (result.error) {
                 displayError(error);
             } else {
-                attachNewPaymentMethod({
-                    customerId: customerId,
-                    paymentMethodId: result.paymentMethod.id,
-                })
+                attachNewPaymentMethod(customerId, result.paymentMethod.id)
             }
         });
 }
@@ -93,15 +96,47 @@ function attachNewPaymentMethod(customerId, paymentMethodId) {
     $.ajax({
         url : "/api/billing/attach-payment-method/", // the endpoint
         type : "POST", // http method
-        data : {
+        credentials: "same-origin",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          "Accept": "application/json",
+          'Content-Type': 'application/json',
+        },
+        data : JSON.stringify({
             customerId: customerId,
             paymentMethodId: paymentMethodId,
-        },
+        }),
         // handle a successful response
-        success : function(json) {
+        success : function(html) {
+            $('#otherPaymentMethods').append(html);
         },
         // handle a non-successful response
         error : function(xhr,errmsg,err) {
+            console.log(xhr);
+            console.log(errmsg);
+        }
+    });
+}
+
+function deletePaymentMethod(publicId) {
+    confirm("Are you sure you want to remove this card?")
+    $.ajax({
+        url : "/api/billing/delete-payment-method/" + publicId + "/", // the endpoint
+        type : "DELETE", // http method
+        credentials: "same-origin",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          "Accept": "application/json",
+          'Content-Type': 'application/json',
+        },
+        // handle a successful response
+        success : function(json) {
+            $('#paymentRowItem' + publicId).remove();
+        },
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            console.log(xhr);
+            console.log(errmsg);
         }
     });
 }
@@ -298,6 +333,28 @@ function retryInvoiceWithNewPaymentMethod(
   );
 }
 
+function changeCustomerDefaultPaymentMethod(publicId) {
+    $.ajax({
+        url : "/api/billing/change-default-payment-method/" + publicId + "/", // the endpoint
+        type : "PUT", // http method
+        credentials: "same-origin",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          "Accept": "application/json",
+          'Content-Type': 'application/json',
+        },
+        // handle a successful response
+        success : function(json) {
+            location.reload();
+        },
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            console.log(xhr);
+            console.log(errmsg);
+        }
+    });
+}
+
 function cancelSubscription(subscriptionId, companyPublicId) {
   return fetch('/api/billing/cancel-subscription/' + companyPublicId + '/', {
     method: 'POST',
@@ -315,7 +372,9 @@ function cancelSubscription(subscriptionId, companyPublicId) {
       return response.json();
     })
     .then(cancelSubscriptionResponse => {
-      // Display to the user that the subscription has been cancelled.
+        console.log(cancelSubscriptionResponse);
+        $('#cancelSubscriptionBtn').hide();
+        $('#cancelSubscriptionModal').modal('hide');
     });
 }
 
@@ -340,6 +399,12 @@ function applyCoupon() {
     $.ajax({
         url : "/api/billing/check-coupon/", // the endpoint
         type : "POST", // http method
+        credentials: "same-origin",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          "Accept": "application/json",
+          'Content-Type': 'application/json',
+        },
         data : { couponCode : coupon }, // data sent with the post request
 
         // handle a successful response

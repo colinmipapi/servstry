@@ -21,6 +21,11 @@ class Subscription(models.Model):
         editable=False,
         unique=True
     )
+    # Last time data was pulled from Stripe API
+    last_updated = models.DateTimeField(
+        null=True,
+        blank=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -48,6 +53,18 @@ class Subscription(models.Model):
         blank=True,
         null=True
     )
+    current_period_end = models.DateTimeField(
+        blank=True,
+        null=True
+    )
+    canceled_at = models.DateTimeField(
+        blank=True,
+        null=True
+    )
+    cancel_at = models.DateTimeField(
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.company.name
@@ -63,6 +80,14 @@ class Subscription(models.Model):
 
         return real_price
 
+    @property
+    def active(self):
+        status_list = ['trailing', 'active', 'past_due', 'unpaid']
+        if self.status in status_list:
+            return True
+        else:
+            return False
+
 
 class Plan(models.Model):
 
@@ -77,6 +102,11 @@ class Plan(models.Model):
         default=uuid.uuid4,
         editable=False,
         unique=True
+    )
+    # Last time data was pulled from Stripe API
+    last_updated = models.DateTimeField(
+        null=True,
+        blank=True
     )
     stripe_id = models.CharField(
         max_length=150,
@@ -107,6 +137,11 @@ class Coupon(models.Model):
         default=uuid.uuid4,
         editable=False,
         unique=True
+    )
+    # Last time data was pulled from Stripe API
+    last_updated = models.DateTimeField(
+        null=True,
+        blank=True
     )
     stripe_id = models.CharField(
         max_length=150,
@@ -148,6 +183,11 @@ class PaymentMethod(models.Model):
         editable=False,
         unique=True
     )
+    # Last time data was pulled from Stripe API
+    last_updated = models.DateTimeField(
+        null=True,
+        blank=True
+    )
     stripe_id = models.CharField(
         max_length=150,
         unique=True,
@@ -188,7 +228,7 @@ class Invoice(models.Model):
 
     STATUSES = (
         ('draft', 'Draft'),
-        ('open', 'Open'),
+        ('open', 'Pending'),
         ('paid', 'Paid'),
         ('uncollectible', 'Uncollectible'),
         ('void', 'Void')
@@ -198,6 +238,11 @@ class Invoice(models.Model):
         default=uuid.uuid4,
         editable=False,
         unique=True
+    )
+    # Last time data was pulled from Stripe API
+    last_updated = models.DateTimeField(
+        null=True,
+        blank=True
     )
     stripe_id = models.CharField(
         max_length=150,

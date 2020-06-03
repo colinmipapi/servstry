@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'import_export',
+    'django_celery_beat',
     'django_celery_results',
     'qr_code',
     'tempus_dominus',
