@@ -2,37 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/billing/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/html/payment-failure-account-suspended-warning.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/html/payment-failure-account-suspended.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/html/payment-failure.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/html/payment-success.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/html/trial-ending.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/txt/payment-failure-account-suspended-warning.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/txt/payment-failure-account-suspended.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/txt/payment-failure.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/txt/payment-success.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/billing/emails/txt/trial-ending.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing/api_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/api_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/api_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing/backends.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/backends.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/billing/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/heroku.yml" beforeDir="false" afterPath="$PROJECT_DIR$/heroku.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/stripe-payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/stripe-payment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/billing/modals/confirm-cancel-subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/billing/modals/confirm-cancel-subscription.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/billing/snippets/payment-row-item.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/billing/snippets/payment-row-item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/company/register/create-invite-admins.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/company/register/create-invite-admins.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,8 +70,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/companies/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="960">
-                  <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+                <state relative-caret-position="293">
+                  <caret line="223" column="36" selection-start-line="223" selection-start-column="36" selection-end-line="223" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#33#0" expanded="true" />
                   </folding>
@@ -296,8 +266,8 @@
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/contact_trace/celery.py" />
         <option value="$PROJECT_DIR$/billing/api_views.py" />
-        <option value="$PROJECT_DIR$/companies/views.py" />
         <option value="$PROJECT_DIR$/templates/companies/company/register/create-invite-admins.html" />
+        <option value="$PROJECT_DIR$/companies/views.py" />
       </list>
     </option>
   </component>
@@ -965,8 +935,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/companies/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+        <state relative-caret-position="293">
+          <caret line="223" column="36" selection-start-line="223" selection-start-column="36" selection-end-line="223" selection-end-column="36" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
