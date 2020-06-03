@@ -30,7 +30,7 @@ from billing.backends import (
 
 @app.task
 def update_subscriptions():
-    time_range = timezone.now() - timedelta(days=7)
+    time_range = timezone.now() - timedelta(days=3)
     subscriptions = Subscription.objects.filter(
         Q(last_updated__isnull=True) | Q(last_updated__lte=time_range)
     ).filter(status__in=['active', 'trailing', 'past_due', 'unpaid'])
@@ -41,7 +41,7 @@ def update_subscriptions():
 
 @app.task
 def update_plans():
-    time_range = timezone.now() - timedelta(days=7)
+    time_range = timezone.now() - timedelta(days=3)
     plans = Plan.objects.filter(
         Q(last_updated__isnull=True) | Q(last_updated__lte=time_range)
     ).filter(active=True)
@@ -52,7 +52,7 @@ def update_plans():
 
 @app.task
 def update_coupons():
-    time_range = timezone.now() - timedelta(days=7)
+    time_range = timezone.now() - timedelta(days=3)
     coupons = Coupon.objects.filter(
         Q(last_updated__isnull=True) | Q(last_updated__lte=time_range)
     )
@@ -63,7 +63,7 @@ def update_coupons():
 
 @app.task
 def update_payment_methods():
-    time_range = timezone.now() - timedelta(days=7)
+    time_range = timezone.now() - timedelta(days=3)
     payment_methods = PaymentMethod.objects.filter(
         Q(last_updated__isnull=True) | Q(last_updated__lte=time_range)
     )
@@ -74,7 +74,7 @@ def update_payment_methods():
 
 @app.task
 def update_invoices():
-    time_range = timezone.now() - timedelta(days=7)
+    time_range = timezone.now() - timedelta(days=3)
     invoices = Invoice.objects.filter(
         Q(last_updated__isnull=True) | Q(last_updated__lte=time_range)
     ).exclude(status__in=['paid', 'void'])

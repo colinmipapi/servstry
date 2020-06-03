@@ -651,3 +651,8 @@
     font-weight: 900;
     font-size: 1.25em;
 }
+
+.safety-policy-list li {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
