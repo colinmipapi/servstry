@@ -4,7 +4,7 @@
 {% block title %}Invite Team{% endblock %}
 {% block head %}{% endblock %}
 {% block content %}
-<h3 class="font-title font-pink signup-form-title">Invite Team</h3>
+<h3 class="font-title font-pink signup-form-title mt-3 mb-4">Invite Team</h3>
 <div class="signup-form-container account-page-text mt-2 mb-2">
     <form method="post" runat="server" action="{% url 'invite_company_admin_form_api' public_id=company.public_id %}" id="inviteUserForm">
         {% csrf_token %}

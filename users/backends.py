@@ -37,8 +37,8 @@ def generate_user_invite_email(invitation):
     request = None
     accept_url = ''.join(['https://www.', get_current_site(request).domain, invitation.get_absolute_url()])
 
-    w_subject = "%s added you as an admin on Servstry" % invitation.inviter.name
-    message = '%s added you as an admin on Servstry. Create a profile to view and manage guest visits.' % invitation.inviter.name
+    w_subject = "%s added you as an Admin on Servstry" % invitation.inviter.name
+    message = ''
 
     message_dict = {
         'sender': {

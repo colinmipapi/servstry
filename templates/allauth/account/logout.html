@@ -4,7 +4,7 @@
 {% block title %}Logout{% endblock %}
 {% block head %}{% endblock %}
 {% block content %}
-<h3 class="signup-form-title font-pink">Logout?</h3>
+<h3 class="signup-form-title font-pink mt-3 mb-4">Logout?</h3>
 <p>Are you sure you want to logout?</p>
 <div class="signup-form-container account-page-text mt-2 mb-2">
     <form method="post" action="{% url 'account_logout' %}">
@@ -13,7 +13,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
         <div class="d-flex justify-content-center mt-5">
-            <a href="#" class="btn btn-blue mr-4">Home</a>
+            <a href="{% url 'home' %}" class="btn btn-blue mr-4">Home</a>
             <button type="submit" class="btn btn-danger">Logout</button>
         </div>
     </form>

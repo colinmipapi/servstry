@@ -35,7 +35,7 @@
         <div class="tab-content" id="settingTabContent">
             <div class="tab-pane fade {% if tab == 'personal' %}show active{% endif %}" id="personal" role="tabpanel">
                 <div class="d-flex justify-content-center">
-                    <div class="w-75 pt-3 pb-5">
+                    <div class="pt-3 pb-5 pl-3 pr-3 pl-lg-5 pr-lg-5">
                         <h5 class="font-title font-blue mt-3 mb-3">Personal Information</h5>
                         <form id="editUserInfoForm" method="post" action="{% url 'edit_user_info_form_api' public_id=request.user.public_id %}" class="font-small pl-5 pr-5 pt-2">
                             <div class="form-success-container"></div>
@@ -74,7 +74,7 @@
                             </div>
                         </form>
                         <h5 class="font-title font-blue mt-3 mb-3">Social Accounts</h5>
-                        <div class="font-small pl-5 pr-5 pt-2">
+                        <div class="font-small pl-lg-5 pr-lg-5 pt-2">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <h5 class="font-large text-center text-sm-left d-block">Facebook</h5>
@@ -128,7 +128,7 @@
             <div class="p-4 tab-pane fade {% if tab == 'company' %}show active{% endif %}" id="company" role="tabpanel"
                  aria-labelledby="company-tab">
                 <div class="d-flex justify-content-center">
-                    <div class="w-75 pt-3 pb-3">
+                    <div class="pt-3 pb-3 pl-lg-5 pr-lg-5">
                         <form id="companyInfoForm" method="post" action="{% url 'company_info_form_api' public_id=company.public_id %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <h5 class="font-title font-blue mt-3 mb-3">Company Information</h5>
@@ -178,7 +178,7 @@
             <div class="tab-pane fade show {% if tab == 'admins' %}show active{% endif %}" id="admins" role="tabpanel"
                  aria-labelledby="admins-tab">
                 <div class="d-flex justify-content-center">
-                    <div class="w-75 pt-3 pb-3">
+                    <div class="pt-3 pb-3 pl-lg-5 pr-lg-5">
                         <h5 class="font-title font-blue mt-3 mb-3">Current</h5>
                         <div class="table-responsive">
                             <table class="table">

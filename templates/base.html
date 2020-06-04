@@ -71,8 +71,10 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item avatar dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {% if company %}
-                            <img src="{{ company.logo_url }}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                        {% if request.user in company.admins.all %}
+                            <img src="{{ company.logo_url }}" class="rounded-circle z-depth-0" alt="avatar image company" height="35" width="35">
+                        {% elif request.user.default_company %}
+                            <img src="{{ request.user.default_company.logo_url }}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
                         {% else %}
                             <img src="{% static 'media/imgs/default-profile-img.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
                         {% endif %}

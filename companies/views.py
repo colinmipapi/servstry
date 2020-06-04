@@ -77,6 +77,7 @@ def create_company_name_address(request):
             form = NameAddressForm()
     return render(request, 'companies/company/register/create-name-address.html', {
         'form': form,
+        'logo_white': True,
     })
 
 
@@ -137,7 +138,7 @@ def create_payment(request):
         company.save()
 
     return render(request, 'companies/company/register/create-payment.html', {
-        'logo_blue': True,
+        'logo_white': True,
         'company': company,
         'stripe_public_key': stripe_public_key,
         'price_id': price_id,

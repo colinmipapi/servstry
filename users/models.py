@@ -7,6 +7,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+from companies.models import Company
+
 from phonenumber_field.modelfields import PhoneNumberField
 
 import phonenumbers
@@ -40,6 +42,15 @@ class CustomUser(AbstractUser):
         else:
             p = None
         return p
+
+    @property
+    def default_company(self):
+        companies = Company.objects.filter(admins__id__exact=self.id).order_by('-created')
+        if companies:
+            company = companies[0]
+        else:
+            company = None
+        return company
 
 
 class Invitation(models.Model):
