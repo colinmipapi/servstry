@@ -37,5 +37,15 @@ urlpatterns = [
         'remove-admin/<uuid:company_id>/<uuid:user_id>/',
         views.remove_admin,
         name='remove_admin_api'
+    ),
+    path(
+        'generate-company-flyer/<uuid:company_id>/',
+        views.generate_info_flyer,
+        name='generate_company_flyer_api'
+    ),
+    path(
+        'download-company-flyer/<uuid:company_id>/',
+        views.download_flyer,
+        name='download_company_flyer_api'
     )
 ]

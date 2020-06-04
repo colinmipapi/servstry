@@ -72,7 +72,7 @@ class Subscription(models.Model):
     @property
     def real_price(self):
         if self.discount:
-            final_price = (self.plan.price - self.discount) / 100
+            final_price = (self.plan.price - self.discount.discount) / 100
         else:
             final_price = self.plan.price / 100
 
@@ -162,7 +162,7 @@ class Coupon(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.stripe_id
 
 
 class PaymentMethod(models.Model):

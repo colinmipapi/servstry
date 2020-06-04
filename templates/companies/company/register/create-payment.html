@@ -12,7 +12,9 @@
             <h3>$<span id="priceSpan">65</span> <small>per mo.</small></h3>
         </div>
     </div>
-    <p class="mt-0 mb-5 text-center">You will only be charged after your 7 day free trial.</p>
+    {% if company.trial_period %}
+        <p class="mt-0 mb-5 text-center">You will only be charged after your 7 day free trial.</p>
+    {% endif %}
     <form id="subscription-form" class="mb-5">
         {% csrf_token %}
         <div id="card-element" class="MyCardElement">
@@ -59,7 +61,11 @@
       // Payment was successful.
       if (result.subscription.status === 'active') {
         console.log('payment success');
-        window.location.href = "/dashboard/";
+        {% if company.trial %}
+            window.location.href = "/dashboard/";
+        {% else %}
+            window.location.href = "/dashboard/{{ company.slug }}/settings/payment/";
+        {% endif %}
       }
     }
 </script>

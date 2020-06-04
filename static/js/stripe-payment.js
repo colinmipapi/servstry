@@ -395,7 +395,6 @@ function retrieveCustomerPaymentMethod(paymentMethodId) {
 
 function applyCoupon() {
     var coupon = $('#couponCode').val();
-    console.log(coupon);
     $.ajax({
         url : "/api/billing/check-coupon/", // the endpoint
         type : "POST", // http method
@@ -405,7 +404,7 @@ function applyCoupon() {
           "Accept": "application/json",
           'Content-Type': 'application/json',
         },
-        data : { couponCode : coupon }, // data sent with the post request
+        data : JSON.stringify({ couponCode : coupon }), // data sent with the post request
 
         // handle a successful response
         success : function(json) {

@@ -261,6 +261,26 @@ def settings(request, slug, **kwargs):
 
 
 @login_required
+def new_subscription(request, slug):
+
+    company = Company.objects.get(slug=slug)
+
+    if not company.customer_id:
+        customer = stripe.Customer.create(
+            email=request.user.email,
+        )
+        company.customer_id = customer.id
+        company.save()
+
+    return render(request, 'companies/company/register/create-payment.html', {
+        'logo_blue': True,
+        'company': company,
+        'stripe_public_key': stripe_public_key,
+        'price_id': price_id,
+    })
+
+
+@login_required
 def company_dashboard(request, slug):
     request.session['company_id'] = None
 
@@ -339,7 +359,7 @@ def dashboard(request):
     elif not request.user.first_name or not request.user.last_name or not request.user.email:
         return redirect('user-contact-info')
     else:
-        return redirect('account_logout')
+        return redirect('create_company_name_address')
 
 
 class CompanyAutocomplete(autocomplete.Select2QuerySetView):

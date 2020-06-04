@@ -14,6 +14,11 @@ urlpatterns = [
         name='company_settings'
     ),
     path(
+        '<str:slug>/new-subscription',
+        views.new_subscription,
+        name="new_subscription"
+    ),
+    path(
         '<str:slug>/',
         views.company_dashboard,
         name="company_dashboard"

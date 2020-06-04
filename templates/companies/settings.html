@@ -6,6 +6,13 @@
 {% block header %}{% endblock %}
 {% block content %}
 <div class="main" id="bizAdminMain">
+    {% if company.status == 'EP' %}
+        <div class="alert alert-danger mt-1" role="alert">
+            <div class="form-inline">
+                <p>Your last payment failed. Fix your <a href="{% url 'company_settings' slug=company.slug %}payment/">billing information</a> to prevent your account from being suspended</p>
+            </div>
+        </div>
+    {% endif %}
     <div class="company-settings-container">
         <ul class="nav nav-tabs" id="settingsTab">
             <li class="nav-item">
@@ -311,12 +318,14 @@
                         <div class="subscription-container mt-5">
                             <div class="d-flex justify-content-between align-items-end mb-4">
                                 <h5 class="font-title font-blue mb-0">Subscription</h5>
-                                {% if subscription.active %}
+                                {% if subscription.cancel_at %}
+
+                                {% elif subscription.active %}
                                     <a href="#cancelSubscriptionModal" id="cancelSubscriptionBtn" data-toggle="modal">
                                         <small class="text-danger">Cancel</small>
                                     </a>
                                 {% else %}
-                                    <a href="#newSubscription" id="newSubscriptionBtn">
+                                    <a href="{% url 'new_subscription' slug=company.slug %}" id="newSubscriptionBtn">
                                         <small>
                                             <i class="fe fe-plus mr-1"></i>
                                             New

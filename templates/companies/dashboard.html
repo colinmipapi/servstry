@@ -5,6 +5,13 @@
 {% endblock %}
 {% block content %}
 <div class="main biz-dashboard" id="bizAdminMain">
+    {% if company.status == 'EP' %}
+        <div class="alert alert-danger mt-1" role="alert">
+            <div class="form-inline">
+                <p>Your last payment failed. Fix your <a href="{% url 'company_settings' slug=company.slug %}payment/">billing information</a> to prevent your account from being suspended</p>
+            </div>
+        </div>
+    {% endif %}
     <div class="pl-5 pr-5 pt-4">
         <form method="post" id="guestFilterForm" class="pt-2 pb-3 mb-3 pl-2 pr-2">
             {% csrf_token %}

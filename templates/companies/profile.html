@@ -17,10 +17,23 @@
     {{ guest_visit_form.media }}
 {% endblock %}
 {% block alert %}
+    {% if company.status == 'EP' %}
+        <div class="alert alert-danger mb-0" role="alert">
+            <div class="form-inline">
+                <p>Your last payment failed. Fix your <a href="{% url 'company_settings' slug=company.slug %}payment/">billing information</a> to prevent your account from being suspended</p>
+            </div>
+        </div>
+    {% endif %}
     {% if company_user %}
         <div class="alert alert-secondary mb-0" role="alert">
             <div class="form-inline">
-                 <a href="#" class="btn btn-blue btn-sm ml-auto ">Dashboard</a>
+                 <a href="{% url 'company_dashboard' slug=company.slug %}" class="btn btn-blue btn-sm ml-auto ">
+                     <i class="flaticon-home"></i>
+                 </a>
+                <button type="button" class="btn btn-blue btn-sm ml-3" data-toggle="modal" data-target="#companyQRModal">
+                    <i class="flaticon-qr-code"></i>
+                </button>
+                <!-- <button type="button" class="btn btn-blue btn-sm ml-3" data-toggle="modal" data-target="#infoFlyerModal">Flyer</button> -->
                 <button type="button" class="btn btn-blue btn-sm ml-3" onclick="previewCompanyProfile(this)">Preview</button>
             </div>
         </div>
@@ -126,7 +139,7 @@
                                         </iframe>
                                     </div>
                                     <div class="pl-5 pr-5 pt-3 pb-3">
-                                        <div class="row" {% if not company.address1 %}style="display: none !important;" {% endif %}>
+                                        <div class="row mb-3" {% if not company.address1 %}style="display: none !important;" {% endif %}>
                                             <div class="col-xs-2">
                                                 <div class="d-flex align-items-center h-100">
                                                     <i class="flaticon-location-pin mr-3"></i>
@@ -146,7 +159,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="row" {% if not company.phone %}style="display: none !important;" {% endif %}>
+                                        <div class="row mb-3" {% if not company.phone %}style="display: none !important;" {% endif %}>
                                             <div class="col-xs-2">
                                                 <div class="d-flex align-items-center">
                                                     <i class="flaticon-phone mr-3"></i>
@@ -156,7 +169,7 @@
                                                 <a href="tel:{{company.phone}}" {% if edit %} id="companyPhone"{% endif %}>{{ company.phone_pretty }}</a>
                                             </div>
                                         </div>
-                                        <div class="row" {% if not company.website %}style="display: none !important;" {% endif %}>
+                                        <div class="row mb-3" {% if not company.website %}style="display: none !important;" {% endif %}>
                                             <div class="col-xs-2">
                                                 <div class="d-flex align-items-center">
                                                     <i class="flaticon-worldwide mr-3"></i>
@@ -180,6 +193,8 @@
     <!-- Include Assets Here (Modals, Forms, Etc.)-->
     {% include 'companies/company/modals/share.html' %}
     {% if company_user %}
+        {% include 'companies/company/modals/flyer-preview.html' %}
+        {% include 'companies/company/modals/qr_code.html' %}
         {% include 'companies/company/modals/profile_img.html' %}
         {% include 'companies/company/modals/cover_img.html' %}
     {% endif %}

@@ -1,0 +1,25 @@
+{% load qr_code %}
+<div class="modal" id="companyQRModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-title font-blue">QR Code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p class="text-center mb-3">This QR code directs guests to your profile page</p>
+          <div class="d-flex justify-content-center">
+              <img src="{% qr_url_from_text company.get_full_url size=3 version=10 image_format='png' %}">
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="{% qr_url_from_text company.get_full_url size=3 version=10 image_format='png' %}" download="{{ company.slug }}-qr-code.png" class="btn btn-blue">
+              <i class="fe fe-download"></i>
+          </a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

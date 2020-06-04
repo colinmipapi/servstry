@@ -656,3 +656,8 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.fixed-top-alert {
+    position: absolute !important;
+    top:0px;
+}

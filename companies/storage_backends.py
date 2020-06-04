@@ -9,3 +9,8 @@ class ProfileImageMediaStorage(S3Boto3Storage):
 class CoverImageMediaStorage(S3Boto3Storage):
     location = 'media/company/cover-images'
     file_overwrite = False
+
+
+class FlyerMediaStorage(S3Boto3Storage):
+    location = 'media/company/flyers'
+    file_overwrite = True

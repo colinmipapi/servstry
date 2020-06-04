@@ -1,5 +1,4 @@
-from django.http import Http404
-from django.http import JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.contrib.contenttypes.models import ContentType
 
 from rest_framework.decorators import api_view
@@ -15,6 +14,9 @@ from companies.forms import (
     LogoForm,
     CoverImgForm,
     EditCompanyInfoForm,
+)
+from companies.backends import (
+    generate_info_flyer_pdf,
 )
 
 from companies.serializer import (
@@ -194,5 +196,41 @@ def remove_admin(request, company_id, user_id):
             raise Http404
         company.admins.remove(admin_user)
         return Response({'result': 'success', }, status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['GET', ])
+def generate_info_flyer(request, company_id):
+
+    try:
+        company = Company.objects.get(public_id=company_id)
+    except:
+        raise Http404
+
+    if company.is_company_user(request.user):
+        data = generate_info_flyer_pdf(company)
+
+        return Response(data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['GET', ])
+def download_flyer(request, company_id):
+    try:
+        company = Company.objects.get(public_id=company_id)
+    except:
+        raise Http404
+
+    if company.is_company_user(request.user):
+        if not company.flyer:
+            generate_info_flyer_pdf(company)
+
+        response = HttpResponse(company.flyer, content_type='application/pdf')
+        response['Filename'] = company.flyer.name
+        response['Content-Disposition'] = 'attachment; filename=%s' % company.flyer.name
+
+        return response
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)

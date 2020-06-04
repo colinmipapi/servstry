@@ -41,8 +41,10 @@ def create_or_update_plan(plan, **kwargs):
         active=plan['active'],
         price=plan['amount'],
         interval=plan['interval'],
-        last_updated=timezone.now()
     )
+
+    plan_obj.last_updated=timezone.now()
+    plan_obj.save()
 
     return plan_obj
 
@@ -94,7 +96,7 @@ def create_or_update_subscription(subscription, **kwargs):
         sub.canceled_at = canceled_at
         sub.cancel_at = cancel_at
         sub.last_updated = timezone.now()
-        sub.save()
+
     else:
         sub, new = Subscription.objects.update_or_create(
             stripe_id=subscription['id'],
@@ -107,8 +109,10 @@ def create_or_update_subscription(subscription, **kwargs):
             next_pending_invoice=next_pending_invoice,
             canceled_at=canceled_at,
             cancel_at=cancel_at,
-            last_updated=timezone.now()
         )
+
+    sub.last_updated = timezone.now()
+    sub.save()
 
     return sub
 
@@ -132,8 +136,10 @@ def create_or_update_payment_method(payment_method, **kwargs):
         last4=payment_method['card']['last4'],
         exp_month=payment_method['card']['exp_month'],
         exp_year=payment_method['card']['exp_year'],
-        last_updated=timezone.now()
     )
+
+    pm.last_updated = timezone.now()
+    pm.save()
 
     if not company.cards.all().exists():
         company.default_payment_method = pm
@@ -178,8 +184,10 @@ def create_or_update_invoice(invoice, **kwargs):
         amount_due=invoice['amount_due'],
         amount_paid=invoice['amount_paid'],
         paid_at=paid_at,
-        last_updated=timezone.now()
+
     )
+    inv.last_updated = timezone.now()
+    inv.save()
 
     return inv
 
@@ -190,16 +198,18 @@ def retrieve_invoice(invoice_stripe_id):
 
 def create_or_update_coupon(coupon, **kwargs):
 
-    coupon, new = Coupon.objects.update_or_create(
+    coupon_obj, new = Coupon.objects.update_or_create(
         stripe_id=coupon['id'],
         created=make_aware(datetime.fromtimestamp(coupon['created'])),
         discount=coupon['amount_off'],
         duration=coupon['duration'],
         duration_in_months=coupon['duration_in_months'],
-        last_updated=timezone.now()
     )
 
-    return coupon
+    coupon_obj.name = coupon['name']
+    coupon_obj.last_updated = timezone.now()
+    coupon_obj.save()
+    return coupon_obj
 
 
 def retrieve_coupon(coupon_stripe_id):

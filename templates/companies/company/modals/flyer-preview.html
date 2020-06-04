@@ -1,0 +1,48 @@
+{% load static %}
+<div class="modal fade" id="infoFlyerModal" tabindex="-1" role="dialog" aria-labelledby="infoFlyerModal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-title font-blue">Printable Flyer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="flyerDisplayContainer" class="row justify-content-center mt-3 mb-3" {% if not company.flyer %}
+                     style="display: none;" {% endif %}>
+                    <iframe id="flyerInp" src="{{ company.get_flyer_preview_url }}" width="100%" height="450"></iframe>
+                </div>
+                <div class="modal-footer mt-4">
+                    <a href="{% url 'download_company_flyer_api' company_id=company.public_id %}" class="btn btn-blue"
+                       id="downloadFlyerBtn" {% if not company.flyer %}style="display: none;" {% endif %}>
+                        <i class="flaticon-download"></i>
+                    </a>
+                    <a href="#generateCompanyFlyer" class="btn btn-primary"
+                       onclick="generateCompanyFlyer('{{ company.public_id }}')">Generate</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function generateCompanyFlyer(companyId) {
+        $.ajax({
+            url: '{% url 'generate_company_flyer_api' company_id=company.public_id %}',
+            type: 'GET',
+            success: function (data) {
+                $('#flyerInp').attr('src', data['resumeUrl']);
+                $('#flyerDisplayContainer').attr('style', 'display: flex;');
+                $('#downloadFlyerBtn').attr('style', 'display: block;');
+            },
+            error : function(data, textStatus, xhr) {
+
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+</script>

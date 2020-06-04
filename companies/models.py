@@ -179,11 +179,19 @@ class Company(models.Model):
         blank=True,
         null=True,
     )
+    flyer = models.FileField(
+        storage=storage_backends.FlyerMediaStorage(),
+        blank=True,
+        null=True,
+    )
     # Stripe
     customer_id = models.CharField(
         max_length=150,
         blank=True,
         null=True,
+    )
+    trial_period = models.BooleanField(
+        default=True
     )
     default_payment_method = models.OneToOneField(
         'billing.PaymentMethod',
@@ -228,6 +236,14 @@ class Company(models.Model):
             return self.cover_img.url
         else:
             return static('media/imgs/company-background.jpg')
+
+    @property
+    def get_flyer_preview_url(self):
+        if self.flyer:
+            url = "https://docs.google.com/gview?url=%s&embedded=true" % (self.flyer.url)
+        else:
+            url = ""
+        return url
 
     @property
     def get_full_address(self):

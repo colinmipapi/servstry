@@ -16,7 +16,8 @@ from companies.models import (
 from billing.backends import (
     create_or_update_subscription,
     create_or_update_payment_method,
-    create_or_update_invoice
+    create_or_update_invoice,
+    create_or_update_coupon
 )
 
 from contact_trace.settings import (
@@ -43,9 +44,9 @@ else:
 @authentication_classes([])
 @permission_classes([])
 def check_coupon(request):
-
     try:
-        data = stripe.Coupon.retrieve(request.POST.get('couponCode'))
+        data = stripe.Coupon.retrieve(request.data['couponCode'])
+        create_or_update_coupon(data)
         discount = data['amount_off'] / 100
         result = {
             'id': data['id'],
@@ -53,7 +54,7 @@ def check_coupon(request):
         }
         return Response(result, status=status.HTTP_200_OK)
     except:
-        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['POST', ])
@@ -65,7 +66,7 @@ def create_subscription(request):
             data['customerId']['paymentMethodId'],
             customer=data['customerId']['customerId'],
         )
-        create_or_update_payment_method(payment_method, company=company)
+        pm = create_or_update_payment_method(payment_method, company=company)
         # Set the default payment method on the customer
         stripe.Customer.modify(
             data['customerId']['customerId'],
@@ -73,6 +74,12 @@ def create_subscription(request):
                 'default_payment_method': data['customerId']['paymentMethodId'],
             },
         )
+        company.default_payment_method = pm
+
+        if company.trial_period:
+            trial_period = 7
+        else:
+            trial_period = None
 
         # Create the subscription
         subscription = stripe.Subscription.create(
@@ -83,11 +90,13 @@ def create_subscription(request):
                 }
             ],
             expand=['latest_invoice.payment_intent'],
-            coupon=data['customerId']['couponId']
+            coupon=data['customerId']['couponId'],
+            trial_period_days=trial_period
         )
 
         create_or_update_subscription(subscription, company=company)
 
+        company.trial_period = False
         company.status = 'SB'
         company.save()
         return Response(subscription, status=status.HTTP_201_CREATED)
@@ -105,13 +114,14 @@ def cancel_subscription(request, company_id):
         data = request.data
         subscription_obj = Subscription.objects.get(stripe_id=data['subscriptionId'])
         try:
-            subscription = stripe.Subscription.update(
+            subscription = stripe.Subscription.modify(
                 data['subscriptionId'],
                 cancel_at_period_end=True
             )
         except Exception as e:
             subscription = stripe.Subscription.retrieve(data['subscriptionId'])
-            create_or_update_payment_method(subscription, subscription_obj=subscription_obj)
+
+        create_or_update_subscription(subscription, company=company, subscription_obj=subscription_obj)
 
         return Response({'status': 'success', 'subscription': subscription}, status=status.HTTP_200_OK)
     else:
@@ -237,16 +247,21 @@ def stripe_webhook_recieved(request):
 
     if event_type == 'invoice.payment_succeeded':
         create_or_update_invoice(data['object'])
+        company = Company.objects.get(customer_id=data['object']['customer'])
+        company.status = 'SB'
+        company.save()
 
     if event_type == 'invoice.payment_failed':
         create_or_update_invoice(data['object'])
+        company = Company.objects.get(customer_id=data['object']['customer'])
+        company.status = 'DL'
+        company.save()
 
     if event_type == 'customer.subscription.created':
         create_or_update_subscription(data['object'], company=Company.objects.get(id=7))
 
     if event_type == 'customer.subscription.deleted':
         subscription = Subscription.objects.get(stripe_id=data['object']['id'])
-        create_or_update_subscription(data['object'], subscription_obj=subscription)
         active_subscription = Subscription.objects.filter(
             company=subscription.company,
             status__in=['active', 'past_due', 'trailing', 'unpaid']
@@ -254,6 +269,7 @@ def stripe_webhook_recieved(request):
         if not active_subscription:
             subscription.company.status = 'CL'
             subscription.company.save()
+        subscription.delete()
     if event_type == 'payment_method.attached':
         create_or_update_payment_method(data['object'])
 
