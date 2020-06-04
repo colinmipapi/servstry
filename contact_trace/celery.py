@@ -23,23 +23,23 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'update-subscription': {
-        'task': 'update_subscriptions',
+        'task': 'billing.tasks.update_subscriptions',
         'schedule': crontab(minute=0, hour=0),
     },
     'update-plan': {
-        'task': 'update_plan',
+        'task': 'billing.tasks.update_plan',
         'schedule': crontab(minute=30, hour=0),
     },
     'update-coupon': {
-        'task': 'update_subscriptions',
+        'task': 'billing.tasks.update_subscriptions',
         'schedule': crontab(minute=45, hour=0),
     },
     'update-payment-method': {
-        'task': 'update_payment_methods',
+        'task': 'billing.tasks.update_payment_methods',
         'schedule': crontab(minute=0, hour=1),
     },
     'update-invoice': {
-        'task': 'update_invoices',
+        'task': 'billing.tasks.update_invoices',
         'schedule': crontab(minute=0, hour=2),
     },
 }
