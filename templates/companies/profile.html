@@ -192,6 +192,7 @@
     </div>
     <!-- Include Assets Here (Modals, Forms, Etc.)-->
     {% include 'companies/company/modals/share.html' %}
+    {% include 'track/modals/safety-policy.html' %}
     {% if company_user %}
         {% include 'companies/company/modals/flyer-preview.html' %}
         {% include 'companies/company/modals/qr_code.html' %}
@@ -206,5 +207,11 @@
     $("#logoInp").change(function(){
         readURL(this,'logoSampleImg','image');
     });
+    {% if not company_user %}
+        $(document).ready(function () {
+            $('#safetyPolicyModal').modal({backdrop: 'static', keyboard: false});
+            $('#safetyPolicyModal').modal('show');
+        })
+    {% endif %}
 </script>
 {% endblock %}

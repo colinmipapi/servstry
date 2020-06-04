@@ -1,5 +1,7 @@
 function previewCompanyProfile(elem) {
     if ($(elem).html().trim() === 'Preview') {
+        $('#safetyPolicyModal').modal({backdrop: 'static', keyboard: false});
+        $('#safetyPolicyModal').modal('show');
         $('.biz-profile-preview').attr('style', 'display: none;');
         $(elem).html('Exit');
     } else if ($(elem).html().trim() === 'Exit') {
