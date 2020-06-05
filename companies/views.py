@@ -13,6 +13,8 @@ from contact_trace.settings import (
     STRIPE_TEST_SECRET_KEY
 )
 
+from contact_trace.documents.guest_visit_documents import GuestVisitIndex
+
 from billing.models import (
     Subscription,
     PaymentMethod,
@@ -27,6 +29,7 @@ from companies.forms import (
     CoverImgForm,
     EditCompanyInfoForm,
 )
+from companies.decorators import user_is_company_admin
 from track.models import (
     GuestVisit,
 )
@@ -86,7 +89,12 @@ def create_contact_info(request):
     if 'company_id' in request.session:
         company = Company.objects.get(public_id=request.session['company_id'])
     else:
-        return redirect('create_company_name_address')
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
+        if companies:
+            company = companies[0]
+        else:
+            return redirect('create_company_name_address')
+
     if request.method == 'POST':
         form = ContactInfoForm(request.POST, instance=company)
         if form.is_valid():
@@ -105,7 +113,11 @@ def create_invite_admins(request):
     if 'company_id' in request.session:
         company = Company.objects.get(public_id=request.session['company_id'])
     else:
-        return redirect('create_company_name_address')
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
+        if companies:
+            company = companies[0]
+        else:
+            return redirect('create_company_name_address')
 
     if request.method == 'POST':
         form = InviteSingleUserForm(request.POST)
@@ -128,7 +140,11 @@ def create_payment(request):
     if 'company_id' in request.session:
         company = Company.objects.get(public_id=request.session['company_id'])
     else:
-        return redirect('create_company_name_address')
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
+        if companies:
+            company = companies[0]
+        else:
+            return redirect('create_company_name_address')
 
     if not company.customer_id:
         customer = stripe.Customer.create(
@@ -200,6 +216,7 @@ def company_profile(request, slug):
 
 
 @login_required
+@user_is_company_admin
 def settings(request, slug, **kwargs):
     company = Company.objects.get(slug=slug)
     companies = Company.objects.filter(admins=request.user).order_by('-created')
@@ -262,10 +279,10 @@ def settings(request, slug, **kwargs):
 
 
 @login_required
+@user_is_company_admin
 def new_subscription(request, slug):
 
     company = Company.objects.get(slug=slug)
-
     if not company.customer_id:
         customer = stripe.Customer.create(
             email=request.user.email,
@@ -282,6 +299,45 @@ def new_subscription(request, slug):
 
 
 @login_required
+@user_is_company_admin
+def company_dashboard_guest_card_search(request, slug):
+    company = Company.objects.get(slug=slug)
+    companies = Company.objects.filter(admins=request.user).order_by('-created')
+    q = request.POST.get('search')
+
+    s = GuestVisitIndex.search().filter("match", company__id=company.id)
+    guests = s.filter("match", confirmation=q).to_queryset()
+    if not guests:
+        id_list = []
+        guests = s.suggest('name_suggestions', q, completion={'field': 'name.suggest'})
+        suggestions = guests.execute()
+        suggestions = suggestions.suggest.name_suggestions[0]['options']
+        for suggestion in suggestions:
+            id_list.append(suggestion['_id'])
+        guests = GuestVisit.objects.filter(id__in=id_list)
+
+    guest_filter_form = GuestVisitFilterForm()
+    export_contacts_form = GuestVisitExportForm()
+
+    paginator = Paginator(guests, 25)
+
+    page = request.GET.get('page')
+    guests_page = paginator.get_page(page)
+
+    return render(request, 'companies/dashboard.html', {
+        'companies': companies,
+        'company': company,
+        'company_admin': True,
+        'guests_page': guests_page,
+        'guest_filter_form': guest_filter_form,
+        'export_contacts_form': export_contacts_form,
+        'search_value': q,
+        'fixed_nav': True,
+    })
+
+
+@login_required
+@user_is_company_admin
 def company_dashboard(request, slug):
     request.session['company_id'] = None
 

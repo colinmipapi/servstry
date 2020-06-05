@@ -19,6 +19,11 @@ urlpatterns = [
         name="new_subscription"
     ),
     path(
+        '<str:slug>/search/',
+        views.company_dashboard_guest_card_search,
+        name="company_dashboard_guest_card_search"
+    ),
+    path(
         '<str:slug>/',
         views.company_dashboard,
         name="company_dashboard"

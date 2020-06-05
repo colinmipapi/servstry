@@ -13,23 +13,40 @@
         </div>
     {% endif %}
     <div class="pl-5 pr-5 pt-4">
-        <form method="post" id="guestFilterForm" class="pt-2 pb-3 mb-3 pl-2 pr-2">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-md-5">
-                    <small class="text-muted font-blue font-title">Start</small>
-                    {{ guest_filter_form.start_filter|as_crispy_field }}
+        <div class="guest-form-container mb-4">
+            <form method="post" id="guestSearchForm" class="pt-3 pb-1 pl-2 pr-2" action="{% url 'company_dashboard_guest_card_search' slug=company.slug %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-10 form-group mb-0">
+                        <small class="text-muted font-blue font-title">Search</small>
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" value="{{ search_value }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center pt-4">
+                        <button class="btn btn-blue btn-sm">Search</button>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <small class="text-muted font-blue font-title">End</small>
-                    {{ guest_filter_form.end_filter|as_crispy_field }}
+            </form>
+            <hr>
+            <form method="post" id="guestFilterForm" class="pb-3 pb-1 pl-2 pr-2">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <small class="text-muted font-blue font-title">Start</small>
+                        {{ guest_filter_form.start_filter|as_crispy_field }}
+                    </div>
+                    <div class="col-md-5">
+                        <small class="text-muted font-blue font-title">End</small>
+                        {{ guest_filter_form.end_filter|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center pt-4">
+                        <button class="btn btn-blue btn-sm">Filter</button>
+                        <button type="button" data-target="#exportFormModal" class="btn btn-blue btn-sm ml-2" data-toggle="modal">Export</button>
+                    </div>
                 </div>
-                <div class="col-md-2 d-flex justify-content-center pt-4">
-                    <button class="btn btn-blue btn-sm">Filter</button>
-                    <button type="button" data-target="#exportFormModal" class="btn btn-blue btn-sm ml-2" data-toggle="modal">Export</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
@@ -44,18 +61,21 @@
                 </thead>
                 <tbody>
                 {% for guest in guests_page %}
-                    <tr class="text-center font-small">
-                        <th scope="row">{{ guest.arrival_pretty }}</th>
-                        <td>{{ guest.first_name }}</td>
-                        <td>{{ guest.last_name }}</td>
-                        <td>{{ guest.email }}</td>
-                        <td>{{ guest.phone_pretty }}</td>
-                        <td>{{ guest.confirmation }}</td>
-                    </tr>
+                <tr class="text-center font-small">
+                    <th scope="row">{{ guest.arrival_pretty }}</th>
+                    <td>{{ guest.first_name }}</td>
+                    <td>{{ guest.last_name }}</td>
+                    <td>{{ guest.email }}</td>
+                    <td>{{ guest.phone_pretty }}</td>
+                    <td>{{ guest.confirmation }}</td>
+                </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% if search_value %}
+            <h5 class="font-blue font-title pl-3 pt-3">No Results! Try searching again.</h5>
+        {% endif %}
         {% if guests_page %}
             <div class="pagination d-flex justify-content-center  mt-3 mb-3" id="pageSelect">
                 <span class="step-links">

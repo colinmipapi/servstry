@@ -1,0 +1,17 @@
+.cover-img-top, .cover-img-bottom {
+    width: 100%;
+    position: absolute;
+    overflow: hidden !important;
+}
+
+.cover-img-top {
+    height: 25%;
+}
+
+.content-container {
+    height: 50%;
+}
+
+.cover-img-bottom {
+    height: 25%;
+}

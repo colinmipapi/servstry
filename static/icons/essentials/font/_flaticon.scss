@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 04/06/2020 13:16
+    Creation date: 04/06/2020 18:49
     */
 
     @font-face {
@@ -154,6 +154,7 @@
 .flaticon-race-track:before { content: "\f172"; }
 .flaticon-qr-code:before { content: "\f173"; }
 .flaticon-download:before { content: "\f174"; }
+.flaticon-location-pin:before { content: "\f175"; }
     
     $font-Flaticon-user-interface-menu: "\f100";
     $font-Flaticon-user-interface-cloud: "\f101";
@@ -272,3 +273,4 @@
     $font-Flaticon-race-track: "\f172";
     $font-Flaticon-qr-code: "\f173";
     $font-Flaticon-download: "\f174";
+    $font-Flaticon-location-pin: "\f175";

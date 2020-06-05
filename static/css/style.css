@@ -504,10 +504,14 @@
     z-index: -3;
 }
 
-#guestFilterForm {
+.guest-form-container {
     background-color: var(--background);
     border-radius: 5px;
     border: 1px solid #efefef;
+}
+
+#guestFilterForm {
+
 }
 
 #guestFilterForm .form-group {

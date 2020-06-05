@@ -8,11 +8,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" value="{{ company.get_full_url }}" class="form-control">
+        <div id="copySuccessContainer"></div>
+        <input type="text" value="{{ company.get_full_url }}" class="form-control" id="companyShareLink">
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-blue mr-3" onclick="copyLinkToClipboard()">Copy</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function copyLinkToClipboard() {
+  /* Get the text field */
+  var copyText = document.getElementById("companyShareLink");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+  $('#copySuccessContainer').empty();
+  $('#copySuccessContainer').append('<p class="font-blue">Copied!</p>');
+}
+</script>

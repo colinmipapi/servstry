@@ -2,15 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="{% static 'css/info-flyer.css' %}">
 	<style>
 	@page {
         size: A4; /* Change from the default size of A4 */
         margin: 0mm; /* Set margin on each page */
       }
-
 	</style>
 </head>
 <body>
-
+<img src="{{ company.get_cover_img_url }}" class="cover-img-top" />
+<div class="content-container">
+</div>
+<img src="{{ company.get_cover_img_url }}" class="cover-img-bottom" />
 </body>
 </html>
