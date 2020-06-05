@@ -164,6 +164,21 @@
 
 .companyautosuggest {
     background-color: var(--white);
+    padding-inline-start: 20px;
+}
+
+.companyautosuggest li:first-child {
+    padding-top: .25rem;
+}
+
+.companyautosuggest li:last-child {
+    padding-bottom: .25rem;
+}
+
+.companyautosuggest li {
+    list-style: none;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
 }
 
 /* Social Auth Buttons */
@@ -665,3 +680,4 @@
     position: absolute !important;
     top:0px;
 }
+

@@ -28,7 +28,7 @@ function autosuggest(value){
   var div = '';
   data.forEach(function(suggestion){
    if(!names[suggestion.name.toLowerCase()]){
-    div += ('<a class="suggestions pt-3 pb-3 pl-3" href="'+ suggestion.link + '">' + suggestion.name + '</li>');
+    div += ('<li class="text-left"><a class="suggestions" href="'+ suggestion.link + '">' + suggestion.name + '</li>');
    };
   });
   $('.companyautosuggest').html(div);

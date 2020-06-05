@@ -11,11 +11,13 @@ class CompanyIndex(Document):
         settings = {'number_of_shards': 1,
                     'number_of_replicas': 0}
 
+    name = fields.TextField(
+        attr='name',
+        fields={
+            'suggest': fields.Completion(),
+        }
+    )
     get_absolute_url = fields.TextField(attr="get_absolute_url")
 
     class Django:
         model = Company
-
-        fields = (
-            'name',
-        )

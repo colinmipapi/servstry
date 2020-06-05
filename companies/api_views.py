@@ -44,15 +44,24 @@ class CompanySuggestView(APIView):
 
     def post(self, request):
         results_list = []
-        name = request.POST.get('search')
+        q = request.POST.get('search')
+        if len(q) > 2:
+            id_list = []
+            s = CompanyIndex.search()
+            s = s.suggest('name_suggestions', q, completion={'field': 'name.suggest'})[:5]
+            suggestions = s.execute()
+            suggestions = suggestions.suggest.name_suggestions[0]['options']
+            for item in suggestions:
+                id_list.append(item['_id'])
 
-        s = CompanyIndex.search().query('match', name=name)[:5]
-        for item in s:
-            item_dict = {
-                'name': item.name,
-                'link': item.get_absolute_url
-            }
-            results_list.append(item_dict)
+            companies = Company.objects.filter(id__in=id_list)
+            for c in companies:
+                item_dict = {
+                    'name': c.name,
+                    'link': c.get_absolute_url()
+                }
+                results_list.append(item_dict)
+            print(results_list)
 
         return JsonResponse(results_list, safe=False)
 
