@@ -218,7 +218,7 @@ def generate_info_flyer(request, company_id):
         raise Http404
 
     if company.is_company_user(request.user):
-        data = generate_info_flyer_pdf(company)
+        data = generate_info_flyer_pdf(request, company)
 
         return Response(data, status=status.HTTP_201_CREATED)
     else:
@@ -234,7 +234,7 @@ def download_flyer(request, company_id):
 
     if company.is_company_user(request.user):
         if not company.flyer:
-            generate_info_flyer_pdf(company)
+            generate_info_flyer_pdf(request, company)
 
         response = HttpResponse(company.flyer, content_type='application/pdf')
         response['Filename'] = company.flyer.name

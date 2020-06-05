@@ -8,12 +8,12 @@ from tempus_dominus.widgets import DateTimePicker
 class GuestVisitForm(forms.ModelForm):
 
     arrival = forms.DateTimeField(
-        input_formats=["%m/%d/%y %H:%M %p"],
+        input_formats=["%m/%d/%y %I:%M %p"],
         widget=DateTimePicker(
             options={
                 'useCurrent': True,
                 'collapse': True,
-                'format': 'M/D/YY h:mm a',
+                'format': 'M/D/YY h:mm A',
             },
             attrs={
                 'append': 'fa fa-calendar',

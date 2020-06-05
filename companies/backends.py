@@ -24,17 +24,17 @@ def generate_waitlist_email(waitlist):
     )
 
 
-def generate_info_flyer_pdf(company):
+def generate_info_flyer_pdf(request, company):
 
     data = {
         'company': company,
     }
-    html_string = render_to_string('companies/company/pdf/info-flyer.html', request=None, context=data)
+    html_string = render_to_string('companies/company/pdf/info-flyer.html', request=request, context=data)
     css_string = render_to_string('companies/company/pdf/info-flyer.txt')
 
     pdf_title = "%s-flyer.pdf" % company.slug
     font_config = FontConfiguration()
-    html = HTML(string=html_string)
+    html = HTML(string=html_string, base_url=request.build_absolute_uri('/'))
     css = CSS(string=css_string, font_config=font_config)
     flyer_file = html.write_pdf(stylesheets=[css], font_config=font_config)
     pdf_file = ContentFile(flyer_file)

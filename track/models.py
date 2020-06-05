@@ -72,7 +72,8 @@ class GuestVisit(models.Model):
 
     @property
     def arrival_pretty(self):
-        return self.arrival.strftime("%m/%d/%y %I:%M %p")
+        arrival = timezone.localtime(self.arrival)
+        return arrival.strftime("%m/%d/%y %I:%M %p")
 
     @property
     def arrival_date_pretty(self):

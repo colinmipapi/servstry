@@ -1,4 +1,5 @@
 {% load static %}
+{% load qr_code %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +8,38 @@
         size: A4; /* Change from the default size of A4 */
         margin: 0mm; /* Set margin on each page */
       }
+	.cover-img-top, .cover-img-bottom {
+		background-image: url('{{ company.get_cover_img_url }}');
+		margin: 0mm;
+	}
+	{% if company.logo_background_color %}
+		.logo-container {
+			background-color: {{ company.logo_background_color }};
+			border: 1px solid #efefef;
+		}
+	{% else %}
+		.logo-container {
+			background-color: #FAFAFA;
+			border: 1px solid #efefef;
+		}
+	{% endif %}
 	</style>
 </head>
 <body>
-<img src="{{ company.get_cover_img_url }}" class="cover-img-top" />
-<div class="content-container">
+<div class="cover-img-top"></div>
+<div class="logo-container">
+	<div class="logo-box">
+		<img src="{{ company.logo_url }}">
+	</div>
 </div>
-<img src="{{ company.get_cover_img_url }}" class="cover-img-bottom" />
+<div class="content-container">
+	<h1>{{ company.name }}</h1>
+	<h4>Use the QR code or visit the URL below to enter your contact information and view our safety policy</h4>
+	<div class="qr-container">
+		<img src="{% qr_url_from_text company.get_full_url size=5 version=10 image_format='png' %}">
+	</div>
+	<h3>{{ company.get_simple_url }}</h3>
+</div>
+<div class="cover-img-bottom"></div>
 </body>
 </html>

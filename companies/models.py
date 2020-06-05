@@ -217,6 +217,10 @@ class Company(models.Model):
         url = reverse('company_profile', args=[self.slug])
         return url
 
+    def get_simple_url(self):
+        request = None
+        return "".join([get_current_site(request).domain, self.get_absolute_url()])
+
     @property
     def get_full_url(self):
         request = None
