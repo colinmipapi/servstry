@@ -63,7 +63,8 @@ class GuestVisit(models.Model):
         'companies.Company',
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name='guest_visits'
     )
 
     def __str__(self):

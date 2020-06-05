@@ -45,4 +45,4 @@ class GuestVisitIndex(Document):
 
     def get_instances_from_related(self, related_instance):
         if isinstance(related_instance, Company):
-            return related_instance.guest_visit_set.all()
+            return related_instance.guest_visits.all()
