@@ -23,6 +23,7 @@ diff-match-patch==20181111
 dj-database-url==0.5.0
 Django==3.0.6
 django-admin-honeypot==1.1.0
+django-admin-rangefilter==0.6.1
 django-allauth==0.41.0
 django-autocomplete-light==3.5.1
 django-celery-beat==2.0.0
@@ -30,12 +31,16 @@ django-celery-results==1.2.1
 django-crispy-forms==1.9.1
 django-elasticsearch-dsl==7.1.1
 django-environ==0.4.5
+django-formtools==2.2
 django-import-export==2.1.0
-django-phonenumber-field==4.0.0
+django-otp==0.9.1
+django-phonenumber-field==3.0.1
 django-qr-code==1.2.0
 django-storages==1.9.1
 django-tempus-dominus==5.1.2.13
 django-timezone-field==4.0
+django-tinymce==3.0.2
+django-twilio==0.13.0.post1
 django-zxcvbn-password==2.1.0
 djangorestframework==3.11.0
 docutils==0.15.2
@@ -64,6 +69,7 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
 PyHamcrest==2.0.2
+PyJWT==1.7.1
 pyOpenSSL==19.1.0
 Pyphen==0.9.5
 python-crontab==2.5.1
@@ -83,6 +89,7 @@ sqlparse==0.3.1
 stripe==2.48.0
 tablib==2.0.0
 tinycss2==1.0.2
+twilio==6.41.0
 Twisted==20.3.0
 txaio==20.4.1
 urllib3==1.25.9

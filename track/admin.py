@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from track.models import GuestVisit
+from track.models import (
+    GuestVisit,
+    CustomSafetyPolicy
+)
+
+from rangefilter.filter import DateRangeFilter
 
 
 class GuestVisitAdmin(admin.ModelAdmin):
@@ -40,6 +45,7 @@ class GuestVisitAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'company',
+        ('arrival', DateRangeFilter),
     )
     search_fields = (
         'first_name',
@@ -57,4 +63,30 @@ class GuestVisitAdmin(admin.ModelAdmin):
     )
 
 
+class CustomSafetyPolicyAdmin(admin.ModelAdmin):
+
+    model = CustomSafetyPolicy
+
+    fields = (
+        'public_id',
+        'created',
+        'company',
+        'policy_text'
+    )
+    list_display = (
+        'company',
+        'created',
+        'public_id'
+    )
+    search_fields = (
+        'company',
+    )
+    readonly_fields = (
+        'public_id',
+        'created',
+        'company',
+    )
+
+
 admin.site.register(GuestVisit, GuestVisitAdmin)
+admin.site.register(CustomSafetyPolicy, CustomSafetyPolicyAdmin)

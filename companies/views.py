@@ -1,9 +1,10 @@
+import json
+
 from django.utils import timezone
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.contrib.auth.forms import PasswordChangeForm
 
 from contact_trace.settings import (
     DEBUG,
@@ -21,22 +22,28 @@ from billing.models import (
     Invoice
 )
 
-from companies.models import Company
+from companies.models import (
+    Company,
+    SAFETY_POLICY_HELP_TEXT
+)
 from companies.forms import (
     NameAddressForm,
     ContactInfoForm,
     LogoForm,
     CoverImgForm,
     EditCompanyInfoForm,
+    BrandSettingsForm
 )
 from companies.decorators import user_is_company_admin
 from track.models import (
     GuestVisit,
+    CustomSafetyPolicy
 )
 from track.forms import (
     GuestVisitForm,
     GuestVisitFilterForm,
-    GuestVisitExportForm
+    GuestVisitExportForm,
+    CustomSafetyPolicyForm
 )
 from track.backends import (
     get_client_ip,
@@ -44,6 +51,7 @@ from track.backends import (
 from users.forms import (
     InviteSingleUserForm,
     EditUserForm,
+    CustomPasswordChangeForm
 )
 
 from dal import autocomplete
@@ -199,8 +207,14 @@ def company_profile(request, slug):
     else:
         nav = False
 
+    if company.safety_policy_setting == 'B':
+        safety_initial = True
+    else:
+        safety_initial = False
+
     guest_visit_form = GuestVisitForm(initial={
         'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
+        'safety_policy_accept': safety_initial
     })
 
     return render(request, 'companies/profile.html', {
@@ -211,7 +225,7 @@ def company_profile(request, slug):
         'company_info_form': company_info_form,
         'edit': edit,
         'nav': nav,
-        'guest_visit_form': guest_visit_form,
+        'guest_visit_form': guest_visit_form
     })
 
 
@@ -219,11 +233,15 @@ def company_profile(request, slug):
 @user_is_company_admin
 def settings(request, slug, **kwargs):
     company = Company.objects.get(slug=slug)
-    companies = Company.objects.filter(admins=request.user).order_by('-created')
+    if request.user.is_superuser:
+        companies = Company.objects.all()
+    else:
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
 
     edit_user_info_form = EditUserForm(instance=request.user)
     company_info_form = EditCompanyInfoForm(instance=company)
-    change_password_form = PasswordChangeForm(request.user)
+    change_password_form = CustomPasswordChangeForm(request.user)
+    brand_settings_form = BrandSettingsForm(instance=company)
     invite_admin_form = InviteSingleUserForm()
 
     try:
@@ -259,12 +277,19 @@ def settings(request, slug, **kwargs):
     else:
         tab = 'personal'
 
+    safety_policy = CustomSafetyPolicy.objects.filter(company=company).exists()
+    if safety_policy:
+        custom_safety_policy_form = CustomSafetyPolicyForm(instance=company.safety_policy)
+    else:
+        custom_safety_policy_form = CustomSafetyPolicyForm()
+
     return render(request, 'companies/settings.html', {
         'companies': companies,
         'company': company,
         'company_info_form': company_info_form,
         'edit_user_info_form': edit_user_info_form,
         'change_password_form': change_password_form,
+        'brand_settings_form': brand_settings_form,
         'invite_admin_form': invite_admin_form,
         'google': google,
         'facebook': facebook,
@@ -272,6 +297,8 @@ def settings(request, slug, **kwargs):
         'payment_methods': payment_methods,
         'invoices': invoices,
         'stripe_public_key': stripe_public_key,
+        'safety_policy_help_json': json.dumps(SAFETY_POLICY_HELP_TEXT),
+        'custom_safety_policy_form': custom_safety_policy_form,
         'company_admin': True,
         'tab': tab,
         'fixed_nav': True,
@@ -302,7 +329,10 @@ def new_subscription(request, slug):
 @user_is_company_admin
 def company_dashboard_guest_card_search(request, slug):
     company = Company.objects.get(slug=slug)
-    companies = Company.objects.filter(admins=request.user).order_by('-created')
+    if request.user.is_superuser:
+        companies = Company.objects.all()
+    else:
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
     q = request.POST.get('search')
 
     s = GuestVisitIndex.search().filter("match", company__id=company.id)
@@ -342,7 +372,10 @@ def company_dashboard(request, slug):
     request.session['company_id'] = None
 
     company = Company.objects.get(slug=slug)
-    companies = Company.objects.filter(admins=request.user).order_by('-created')
+    if request.user.is_superuser:
+        companies = Company.objects.all()
+    else:
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
     filter_contacts_initial = {}
     export_contacts_initial = {}
 
@@ -409,14 +442,34 @@ def company_dashboard(request, slug):
 
 @login_required
 def dashboard(request):
-
-    companies = Company.objects.filter(admins=request.user).order_by('-created')
+    if request.user.is_superuser:
+        companies = Company.objects.all()
+    else:
+        companies = Company.objects.filter(admins=request.user).order_by('-created')
     if companies:
         return redirect('company_dashboard', slug=companies[0].slug)
     elif not request.user.first_name or not request.user.last_name or not request.user.email:
         return redirect('user-contact-info')
     else:
         return redirect('create_company_name_address')
+
+
+def custom_safety_policy(request, slug):
+    try:
+        company = Company.objects.get(slug=slug)
+        safety_policy = company.safety_policy
+    except:
+        raise Http404
+
+    company_user = company.is_company_user(request.user)
+    custom_safety_policy_form = CustomSafetyPolicyForm(instance=safety_policy)
+
+    return render(request, 'track/custom_safety_policy.html', {
+        'company': company,
+        'safety_policy': safety_policy,
+        'company_user': company_user,
+        'custom_safety_policy_form': custom_safety_policy_form
+    })
 
 
 class CompanyAutocomplete(autocomplete.Select2QuerySetView):

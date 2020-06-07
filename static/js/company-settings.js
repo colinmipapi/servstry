@@ -6,7 +6,7 @@ function submitCompanySettingPageForm(formObj, formId, clearForm) {
         type: 'POST',
         data: formData,
         success: function (data) {
-            $(formId + " .form-success-container").empty();
+            $(".form-success-container").empty();
             setTimeout(function(){
               $(formId + " .form-success-container").append('<p class="font-pink font-title mb-3 ml-2"><b>Changes Saved</b></p>');
                 if (clearForm === true) {

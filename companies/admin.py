@@ -1,6 +1,17 @@
 from django.contrib import admin
 
-from companies.models import Company, WaitList
+from companies.models import Company
+from track.models import CustomSafetyPolicy
+
+
+class AdminsInline(admin.TabularInline):
+    model = Company.admins.through
+    extra = 0
+
+
+class CustomSafetyPolicyInline(admin.TabularInline):
+    model = CustomSafetyPolicy
+    extra = 0
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -18,8 +29,7 @@ class CompanyAdmin(admin.ModelAdmin):
                 'slug',
 
             )
-        }
-         ),
+        }),
         ('Location', {
             'fields': (
                 'address1',
@@ -31,28 +41,19 @@ class CompanyAdmin(admin.ModelAdmin):
                 'lng',
                 'place_id',
             )
-        }
-         ),
+        }),
         ('Brand', {
             'fields': (
                 'logo',
                 'logo_background_color',
                 'cover_img',
             )
-        }
-         ),
-        ('Admins', {
-            'fields': (
-                'admins',
-            )
-        }
-         ),
+        }),
         ('Stripe', {
             'fields': (
                 'customer_id',
             )
-        }
-         ),
+        }),
     )
     list_display = (
         'name',
@@ -66,6 +67,10 @@ class CompanyAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'public_id',
+    )
+    inlines = (
+        AdminsInline,
+        CustomSafetyPolicyInline
     )
 
 
@@ -92,4 +97,3 @@ class WaitlistAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Company, CompanyAdmin)
-admin.site.register(WaitList, WaitlistAdmin)

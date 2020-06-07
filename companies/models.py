@@ -73,6 +73,15 @@ STATES = (
         ('WY', 'Wyoming')
     )
 
+SAFETY_POLICY_HELP_TEXT = {
+    'B': 'A link to the safety policy is included below the guest contact information form. The guest agrees to the safety policy by submitting the form.',
+    'CB': 'A link to your custom safety policy is included below the guest contact information form. The guest agrees to the safety policy by submitting the form.',
+    'F': 'A checkbox is added to the guest contact information form with the text <b><i>"I have read and agree to the <a href="/safety-policy/">Safety Policy</a>"</i></b>. The guest is unable to submit the form until they check the box.',
+    'CF': 'The same functionality as the standard form checkbox, except the safety policy links to your custom safety policy.',
+    'P': 'A popup is displayed with the full text of the safety policy when the guest visits your profile. The guest must click the <b><i>"Agree"</i></b> button to interact with your profile and submit the form. If the guest clicks the <b><i>"Disagree"</i></b> button, they are redirected to <a href="https://coronavirus.dc.gov/">DC Government Coronavirus Homepage</a>.',
+    'CP': 'The same functionality of the standard popup, but the Servstry Safety Policy is replaced by the text you provide.',
+}
+
 
 class Company(models.Model):
 
@@ -83,6 +92,14 @@ class Company(models.Model):
         ('EP', 'Expiring'),
         ('CL', 'Canceled'),
         ('EX', 'Example')
+    )
+    SAFETY = (
+        ('B', 'Basic'),
+        ('CB', 'Custom Basic'),
+        ('F', 'Form Checkbox'),
+        ('CF', 'Custom Form Checkbox'),
+        ('P', 'Popup'),
+        ('CP', 'Custom Pop Up')
     )
 
     public_id = models.UUIDField(
@@ -157,6 +174,12 @@ class Company(models.Model):
         null=True,
         blank=True,
         region='US'
+    )
+    safety_policy_setting = models.CharField(
+        max_length=2,
+        choices=SAFETY,
+        default='B',
+        verbose_name='Safety Policy Setting'
     )
     admins = models.ManyToManyField(
         'users.CustomUser',
@@ -332,7 +355,7 @@ class Company(models.Model):
         self.save()
 
     def is_company_user(self, user):
-        if user in self.admins.all():
+        if user in self.admins.all() or user.is_superuser:
             return True
         else:
             return False

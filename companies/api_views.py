@@ -14,6 +14,7 @@ from companies.forms import (
     LogoForm,
     CoverImgForm,
     EditCompanyInfoForm,
+    BrandSettingsForm
 )
 from companies.backends import (
     generate_info_flyer_pdf,
@@ -48,20 +49,19 @@ class CompanySuggestView(APIView):
         if len(q) > 2:
             id_list = []
             s = CompanyIndex.search()
-            s = s.suggest('name_suggestions', q, completion={'field': 'name.suggest'})[:5]
+            s = s.suggest('name_suggestions', q, completion={'field': 'name.suggest'})[:10]
             suggestions = s.execute()
             suggestions = suggestions.suggest.name_suggestions[0]['options']
             for item in suggestions:
                 id_list.append(item['_id'])
 
-            companies = Company.objects.filter(id__in=id_list)
+            companies = Company.objects.filter(id__in=id_list, status__in=['SB', 'DL', 'EP'])[:5]
             for c in companies:
                 item_dict = {
                     'name': c.name,
                     'link': c.get_absolute_url()
                 }
                 results_list.append(item_dict)
-            print(results_list)
 
         return JsonResponse(results_list, safe=False)
 
@@ -160,6 +160,24 @@ def company_info_form(request, public_id):
                 result.update_gmaps_data()
             serializer = CompanySerializer(result)
             return Response(serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['POST', ])
+def brand_settings_form(request, public_id):
+    try:
+        company = Company.objects.get(public_id=public_id)
+    except:
+        raise Http404
+
+    if company.is_company_user(request.user):
+        form = BrandSettingsForm(request.POST, instance=company)
+        if form.is_valid():
+            result = form.save()
+            return Response({}, status.HTTP_200_OK)
         else:
             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
     else:

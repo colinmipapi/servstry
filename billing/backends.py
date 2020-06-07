@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.utils import timezone
 from django.utils.timezone import make_aware
+from django.core.mail import mail_admins
 
 from billing.models import (
     Subscription,
@@ -214,3 +215,27 @@ def create_or_update_coupon(coupon, **kwargs):
 
 def retrieve_coupon(coupon_stripe_id):
     return stripe.Coupon.retrieve(coupon_stripe_id)
+
+
+def new_subscription_notify_superusers(company):
+    subject = "New Subscription - %s" % company.name
+    email_text = "New Subscription: \r\n Name: %s \r\n Profile: %s" % (company.name, company.get_full_url)
+    email_html = '<h2 style="color:#597DC6"><b>New Subscription</b></h2><p><b>Name:</b> %s</p><p><h3><a href="%s">Company Profile</a></h3>' % (company.name, company.get_full_url)
+    mail_admins(
+        subject,
+        email_text,
+        'Admin Notifications <admin-notifications@servstry.com>',
+        html_message=email_html
+    )
+
+
+def payment_failed_notify_superusers(company):
+    subject = "Payment Failed - %s" % company.name
+    email_text = "Payment Failed: \r\n Name: %s \r\n Profile: %s" % (company.name, company.get_full_url)
+    email_html = '<h2 style="color:#597DC6"><b>Payment Failed</b></h2><p><b>Name:</b> %s</p><p><h3><a href="%s">Company Profile</a></h3>' % (company.name, company.get_full_url)
+    mail_admins(
+        subject,
+        email_text,
+        'Admin Notifications <admin-notifications@servstry.com>',
+        html_message=email_html
+    )

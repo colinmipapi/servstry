@@ -1,0 +1,49 @@
+<div class="modal" id="editSafetyPolicyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-title font-blue" id="editSafetyPolicyModalLongTitle">Edit Custom Safety Policy</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editSafetyPolicyForm" method="post" action="{% url 'custom_safety_policy_form_html_api' company_id=company.public_id html='display' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{ custom_safety_policy_form.policy_text }}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-blue mr-2">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+     $("form#editSafetyPolicyForm").submit(function(e) {
+        e.preventDefault();
+        tinyMCE.triggerSave();
+        var formData = new FormData(this);
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $("#safetyPolicyContainer").empty();
+                $("#safetyPolicyContainer").append(data);
+                $("#editSafetyPolicyModal").modal('hide');
+            },
+            error : function(data, textStatus, xhr) {
+                for (var name in data['responseJSON']) {
+                    var $input = $(formId + " #id_" + name);
+                    $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+</script>

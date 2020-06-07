@@ -10,6 +10,10 @@ from billing.models import (
     PaymentMethod,
     Subscription
 )
+from billing.backends import (
+    new_subscription_notify_superusers,
+    payment_failed_notify_superusers
+)
 from companies.models import (
     Company,
 )
@@ -256,9 +260,12 @@ def stripe_webhook_recieved(request):
         company = Company.objects.get(customer_id=data['object']['customer'])
         company.status = 'DL'
         company.save()
+        payment_failed_notify_superusers(company)
 
     if event_type == 'customer.subscription.created':
-        create_or_update_subscription(data['object'], company=Company.objects.get(id=7))
+        company = Company.objects.get(customer_id=data['object']['customer'])
+        create_or_update_subscription(data['object'], company=company)
+        new_subscription_notify_superusers(company)
 
     if event_type == 'customer.subscription.deleted':
         subscription = Subscription.objects.get(stripe_id=data['object']['id'])

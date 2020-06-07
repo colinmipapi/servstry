@@ -1,5 +1,4 @@
 from django.http import Http404
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
 from users.backends import demo_request_email
@@ -9,6 +8,7 @@ from users.models import (
 from users.forms import (
     EditUserForm,
     RequestDemoForm,
+    CustomPasswordChangeForm
 )
 from users.serializers import (
     CustomUserSerializer,
@@ -64,7 +64,7 @@ def change_password_form(request, public_id):
         raise Http404
 
     if request.user == user:
-        form = PasswordChangeForm(user=request.user, data=request.POST or None)
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST or None)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)

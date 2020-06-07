@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.mail import mail_admins
 
-from companies.forms import WaitListForm
 from users.models import (
     Invitation,
 )
@@ -31,6 +30,22 @@ def user_contact_info(request):
 
     return render(request, 'register/user_contact_info.html', {
         'form': form,
+    })
+
+
+@login_required
+def user_settings(request):
+
+    return render(request, 'users/settings.html', {
+
+    })
+
+
+@login_required
+def user_home(request):
+
+    return render(request, 'users/home.html', {
+
     })
 
 

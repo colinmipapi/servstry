@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% block header %}{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row settings-box">
+        <div class="col-md-3 menu-box font-large">
+            <div class="list-group w-100" id="nav-tab" role="tab-list">
+                <a class="list-group-item list-group-item-action font-blue {% if tab == 'visits' %}active{% endif %}" id="nav-visits-tab" data-toggle="tab" href="#visits" aria-controls="nav-visits" aria-selected="true">
+                    <i class="flaticon-id-book menu-icon ml-2 mr-3"></i>
+                    Visits
+                </a>
+                <!-- <a class="list-group-item list-group-item-action {% if tab == 'password' %}active{% endif %}" id="nav-password-tab" data-toggle="tab"
+                   href="#password-settings" aria-controls="nav-password" aria-selected="true">
+                    <i class="flaticon-lock-closed menu-icon ml-2 mr-3"></i>
+                    Offers
+                </a> -->
+                <a class="list-group-item list-group-item-action font-blue" href="{% url 'user_settings' %}">
+                    <i class="flaticon-settings menu-icon ml-2 mr-3"></i>
+                    Settings
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show {% if tab == 'visits' %}active{% endif %}" id="visits" role="tabpanel">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

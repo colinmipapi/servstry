@@ -9,6 +9,11 @@ urlpatterns = [
         name='company-autocomplete'
     ),
     path(
+        '<str:slug>/safety-policy/',
+        views.custom_safety_policy,
+        name='custom_safety_policy'
+    ),
+    path(
         '<str:slug>/',
         views.company_profile,
         name="company_profile"

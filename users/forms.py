@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 
 from contact_trace.custom_form_fields import CommaSeparatedEmailField
 
@@ -7,7 +7,12 @@ from users.models import CustomUser
 
 from phonenumber_field.formfields import PhoneNumberField
 
-from allauth.account.forms import SignupForm, LoginForm
+from allauth.account.forms import (
+    SignupForm,
+    LoginForm,
+    SetPasswordForm,
+    ChangePasswordForm
+)
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
 from zxcvbn_password.fields import PasswordField, PasswordConfirmationField
@@ -119,6 +124,26 @@ class CustomSignupForm(SignupForm):
         fields = (
             'email',
         )
+
+
+class CustomPasswordChangeForm(ChangePasswordForm):
+    password1 = PasswordField(
+        label='Password'
+    )
+    password2 = PasswordConfirmationField(
+        label='Confirm Password',
+        confirm_with='password1'
+    )
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    password1 = PasswordField(
+        label='Password'
+    )
+    password2 = PasswordConfirmationField(
+        label='Confirm Password',
+        confirm_with='password1'
+    )
 
 
 class CustomSocialSignupForm(SocialSignupForm):

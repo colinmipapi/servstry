@@ -3,6 +3,12 @@ from django.contrib.auth.admin import UserAdmin
 
 from users.models import CustomUser, Invitation
 
+# Admin Site Settings
+
+admin.site.site_header = "Servstry"
+admin.site.site_title = "Servstry"
+admin.site.index_title = "Servstry"
+
 
 class CustomUserAdmin(UserAdmin):
 

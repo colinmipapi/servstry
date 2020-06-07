@@ -15,12 +15,12 @@ urlpatterns = [
         include('contact_trace.api_urls')
     ),
     path(
-        'profile/',
-        include('users.urls')
-    ),
-    path(
         'register/',
         include('contact_trace.signup_urls')
+    ),
+    path(
+        'profile/',
+        include('users.urls')
     ),
     path(
         'cm/',
@@ -40,8 +40,9 @@ urlpatterns = [
             namespace='admin_honeypot'
         )
     ),
+    # Django Admin Honeypot (https://django-admin-honeypot.readthedocs.io/en/latest/#)
     path(
-        'honey-pot/',
+        'foxdenlab/',
         admin.site.urls
     ),
     # Django Allauth Library (https://github.com/pennersr/django-allauth)
@@ -49,11 +50,19 @@ urlpatterns = [
         'accounts/',
         include('allauth.urls')
     ),
+    # Django QR Code (https://django-qr-code.readthedocs.io/en/latest/index.html)
     path(
         'qr_code/',
         include(
             'qr_code.urls',
             namespace="qr_code"
+        )
+    ),
+    # Django tinymce (https://django-tinymce.readthedocs.io/en/latest/installation.html)
+    path(
+        'tinymce/',
+        include(
+            'tinymce.urls',
         )
     ),
     path(

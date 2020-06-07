@@ -157,6 +157,23 @@
     font-size: 3.5rem;
 }
 
+.company-search-form-container {
+    width: 75%;
+}
+
+@media (max-width: 425px) {
+    .wait-list-form-box {
+        margin-top: 15%;
+    }
+    .user-landing .wait-list-form-box h1 {
+        font-size: 2.5rem;
+    }
+    .company-search-form-container {
+        width: 100%;
+    }
+}
+
+
 .user-landing .wait-list-form-box input {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -628,8 +645,40 @@
 .company-settings-container {
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+}
+
+.settings-tab-container {
+    width: 75%;
+}
+
+@media (max-width: 768px) {
+    .company-settings-container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .settings-tab-container {
+        width: 85%;
+    }
+    .payment-info-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 475px) {
+    .company-settings-container .nav-item {
+        font-size: .85rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .company-settings-container .nav-item {
+        font-size: .70rem;
+    }
+    .payment-info-text {
+        font-size: .85rem;
+    }
 }
 
 .progress-bar-warning {

@@ -4,6 +4,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.postgres.fields import JSONField
 
 from phonenumber_field.modelfields import PhoneNumberField
 import phonenumbers
@@ -97,3 +98,23 @@ class GuestVisit(models.Model):
     def get_full_name(self):
 
         return "%s %s" % (self.first_name, self.last_name)
+
+
+class CustomSafetyPolicy(models.Model):
+
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+    )
+    created = models.DateTimeField(
+        default=timezone.now,
+    )
+    company = models.OneToOneField(
+        'companies.Company',
+        on_delete=models.CASCADE,
+        related_name='safety_policy'
+    )
+    policy_text = models.TextField()
+
+    def __str__(self):
+        return "%s" % self.company.name

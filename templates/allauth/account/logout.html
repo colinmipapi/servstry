@@ -20,3 +20,8 @@
 </div>
 {% endblock %}
 {% block imgclass %}logout-img{% endblock %}
+{% block logo %}
+<a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+    <img src="{% static 'media/logos/Servstry_Logo_All_White.png' %}" width="225">
+</a>
+{% endblock %}

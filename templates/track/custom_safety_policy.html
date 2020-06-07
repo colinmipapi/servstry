@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {% if company %}{{ company.name }} - {% endif %}Safety Policy
+{% endblock %}
+{% block header %}
+    {% if company_user %}
+        {{ custom_safety_policy_form.media }}
+    {% endif %}
+{% endblock %}
+{% block alert %}
+    {% if company_user %}
+        <div class="alert alert-secondary mb-0" role="alert">
+            <div class="form-inline">
+                <button type="button" data-toggle="modal" data-target="#editSafetyPolicyModal" class="btn btn-blue btn-sm ml-auto">
+                    Edit
+                </button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center mb-5">
+        <div class="mt-3 ml-4 mr-4">
+            <h1 class="text-center font-blue mt-4 mb-5">Safety Policy</h1>
+            <div id="safetyPolicyContainer">
+                {{ safety_policy.policy_text|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% if company_user %}
+    {% include 'track/modals/edit-safety-policy.html' %}
+{% endif %}
+{% endblock %}
+{% block footer %}
+    {% if company_user %}
+        <script src="{% static 'js/company-settings.js' %}"></script>
+    {% endif %}
+{% endblock %}

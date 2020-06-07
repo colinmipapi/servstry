@@ -1,8 +1,12 @@
 from django import forms
 
-from track.models import GuestVisit
+from track.models import (
+    GuestVisit,
+    CustomSafetyPolicy
+)
 
 from tempus_dominus.widgets import DateTimePicker
+from tinymce.widgets import TinyMCE
 
 
 class GuestVisitForm(forms.ModelForm):
@@ -26,6 +30,9 @@ class GuestVisitForm(forms.ModelForm):
         label='',
         widget=forms.TextInput(attrs={'class': 'dispnon'}),
         required=False,
+    )
+    safety_policy_accept = forms.BooleanField(
+        required=True
     )
 
     class Meta:
@@ -119,3 +126,17 @@ class GuestVisitExportForm(forms.Form):
         label='End',
         required=False
     )
+
+
+class CustomSafetyPolicyForm(forms.ModelForm):
+
+    policy_text = forms.CharField(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 30})
+    )
+
+    class Meta:
+
+        model = CustomSafetyPolicy
+        fields = (
+            'policy_text',
+        )

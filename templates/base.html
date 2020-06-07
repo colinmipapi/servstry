@@ -34,7 +34,7 @@
 
       gtag('config', 'UA-168123630-1');
     </script>
-    {% block header %}{% endblock header %}
+    {% block header %}{% endblock %}
 </head>
 {% block alert %}
 {% if company.status == 'EP' %}
@@ -99,9 +99,9 @@
             </ul>
           {% else %}
             {% if landing %}
-                <ul class="navbar-nav ml-auto font-title">
+                <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a href="{% url 'business_landing' %}" class="nav-link">
+                    <a href="{% url 'business_landing' %}" class="nav-link font-large">
                       Business
                     </a>
                   </li>
@@ -137,7 +137,7 @@
                     <option value="new_company">Create New</option>
                 </select>
             </div>
-            <a href="{% url 'dashboard' %}">
+            <a href="{% url 'company_dashboard' slug=company.slug %}">
                 <i class="flaticon-home ml-1 mr-2"></i>
                 Dashboard
             </a>

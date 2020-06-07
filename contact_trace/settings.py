@@ -40,6 +40,8 @@ STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
 STRIPE_LIVE_PUBLIC_KEY = os.environ.get('STRIPE_LIVE_PUBLIC_KEY')
 STRIPE_LIVE_SECRET_KEY = os.environ.get('STRIPE_LIVE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
+TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 
 
 ALLOWED_HOSTS = [
@@ -51,6 +53,7 @@ ALLOWED_HOSTS = [
     'www.servstry.com'
 ]
 
+ADMINS = [('Colin', 'colin@servstry.com'), ]
 
 # Application definition
 
@@ -78,11 +81,14 @@ INSTALLED_APPS = [
     'storages',
     'crispy_forms',
     'phonenumber_field',
+    'tinymce',
     'rest_framework',
     'import_export',
+    'rangefilter',
     'django_celery_beat',
     'django_celery_results',
     'qr_code',
+    'django_twilio',
     'tempus_dominus',
     'admin_honeypot'
 ]
@@ -236,7 +242,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/dashboard/'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Servstry'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Servstry - '
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_USERNAME_BLACKLIST = []
 
@@ -245,6 +251,8 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSignupForm',
+    'change_password': 'users.forms.CustomChangePasswordForm',
+    'set_password': 'users.forms.CustomSetPasswordForm',
 }
 
 SOCIALACCOUNT_FORMS = {

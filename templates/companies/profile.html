@@ -114,12 +114,19 @@
                                             {{ guest_visit_form.arrival|as_crispy_field }}
                                         </div>
                                     </div>
+                                    <div class="form-row" {% if company.safety_policy_setting not in 'F,CF' %}style="display: none;"{% endif %}>
+                                        <div class="form-group col-12">
+                                            {{ guest_visit_form.safety_policy_accept.errors }}
+                                            <label for="{{ guest_visit_form.safety_policy_accept.id_for_label }}" class="pl-2">{{ guest_visit_form.safety_policy_accept }} <span class="ml-2">I have read and agree to the <a href="{% if company.safety_policy_setting == 'F' %}/safety-policy/{% elif company.safety_policy_setting == 'CF' %}{% url 'custom_safety_policy' slug=company.slug %}{% endif %}">Safety Policy</a></span></label>
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <button class="btn btn-blue ml-auto">Add Visit</button>
                                     </div>
                                     <div class="form-row pt-4">
-                                        <small class="text-muted">By clicking <b>"Add Visit"</b> you agree to the <a
-                                                href="{% url 'safety_policy' %}">Safety Policy</a>, <a
+                                        <small class="text-muted">By clicking <b>"Add Visit"</b> you agree to the {% if company.safety_policy_setting == 'B' %}<a
+                                                href="{% url 'safety_policy' %}">Safety Policy</a>, {% elif company.safety_policy_setting == 'CB' %}<a
+                                                href="{% url 'custom_safety_policy' slug=company.slug %}">Safety Policy</a>, {% endif %}<a
                                                 href="{% url 'terms_and_conditions' %}">Terms &
                                             Conditions</a> and <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
                                             of Servstry.com.
@@ -192,7 +199,9 @@
     </div>
     <!-- Include Assets Here (Modals, Forms, Etc.)-->
     {% include 'companies/company/modals/share.html' %}
-    {% include 'track/modals/safety-policy.html' %}
+    {% if company.safety_policy_setting in 'P,CP' %}
+        {% include 'track/modals/safety-policy.html' %}
+    {% endif %}
     {% if company_user %}
         {% include 'companies/company/modals/flyer-preview.html' %}
         {% include 'companies/company/modals/qr_code.html' %}
@@ -204,14 +213,19 @@
 {% endblock %}
 {% block footer %}
 <script type="text/javascript">
-    $("#logoInp").change(function(){
-        readURL(this,'logoSampleImg','image');
-    });
-    {% if not company_user %}
+    {% if company_user %}
+        $("#logoInp").change(function(){
+            readURL(this,'logoSampleImg','image');
+        });
+    {% endif %}
+    {% if company.safety_policy_setting in 'P,CP' %}
         $(document).ready(function () {
             $('#safetyPolicyModal').modal({backdrop: 'static', keyboard: false});
             $('#safetyPolicyModal').modal('show');
-        })
+        });
+        function acceptGuestVisitForm() {
+            $('#id_safety_policy_accept').attr("checked", true);
+        };
     {% endif %}
 </script>
 {% endblock %}

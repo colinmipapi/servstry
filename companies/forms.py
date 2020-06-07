@@ -219,3 +219,12 @@ class EditCompanyInfoForm(forms.ModelForm):
             'website',
             'phone'
         )
+
+
+class BrandSettingsForm(forms.ModelForm):
+
+    class Meta:
+        model = Company
+        fields = (
+            'safety_policy_setting',
+        )

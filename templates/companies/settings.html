@@ -3,7 +3,9 @@
 {% load socialaccount %}
 {% load crispy_forms_tags %}
 {% block title %}Settings{% endblock %}
-{% block header %}{% endblock %}
+{% block header %}
+    {{ custom_safety_policy_form.media }}
+{% endblock %}
 {% block content %}
 <div class="main" id="bizAdminMain">
     {% if company.status == 'EP' %}
@@ -24,6 +26,10 @@
                    aria-selected="true">Company</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {% if tab == 'brand' %}show active{% endif %}" id="brand-tab" data-toggle="tab" href="#brand" role="tab"
+                   aria-controls="brand-tab" aria-selected="true">Profile</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {% if tab == 'admins' %}show active{% endif %}" id="admins-tab" data-toggle="tab" href="#admins" role="tab" aria-controls="admins-tab"
                    aria-selected="true">Admins</a>
             </li>
@@ -35,9 +41,9 @@
         <div class="tab-content" id="settingTabContent">
             <div class="tab-pane fade {% if tab == 'personal' %}show active{% endif %}" id="personal" role="tabpanel">
                 <div class="d-flex justify-content-center">
-                    <div class="pt-3 pb-5 pl-3 pr-3 pl-lg-5 pr-lg-5">
-                        <h5 class="font-title font-blue mt-3 mb-3">Personal Information</h5>
-                        <form id="editUserInfoForm" method="post" action="{% url 'edit_user_info_form_api' public_id=request.user.public_id %}" class="font-small pl-5 pr-5 pt-2">
+                    <div class="pt-3 pb-5 settings-tab-container">
+                        <h5 class="font-title font-blue pt-3 mb-3">Personal Information</h5>
+                        <form id="editUserInfoForm" method="post" action="{% url 'edit_user_info_form_api' public_id=request.user.public_id %}" class="font-small pl-sm-5 pr-sm-5 pt-2">
                             <div class="form-success-container"></div>
                             {% csrf_token %}
                             <div class="form-row d-flex justify-content-center">
@@ -63,8 +69,11 @@
                                 </div>
                             </div>
                         </form>
-                        <h5 class="font-title font-blue mt-3 mb-3">Change Password</h5>
-                        <form id="changePasswordForm" method="post" action="{% url 'change_password_form_api' public_id=request.user.public_id %}" class="font-small pl-5 pr-5 pt-2">
+                        <h5 class="font-title font-blue pt-3 mb-3">Change Password</h5>
+                        <form id="changePasswordForm" method="post" action="{% url 'change_password_form_api' public_id=request.user.public_id %}" class="font-small pl-sm-5 pr-sm-5 pt-2 pb-3">
+                            <div class="form-success-container">
+                                <!-- Insert Form Saved Confirmation Element -->
+                            </div>
                             {% csrf_token %}
                             {{ change_password_form|crispy }}
                             <div class="pb-2"></div>
@@ -73,8 +82,9 @@
                                 <button type="submit" class="btn btn-blue">Change Password</button>
                             </div>
                         </form>
-                        <h5 class="font-title font-blue mt-3 mb-3">Social Accounts</h5>
-                        <div class="font-small pl-lg-5 pr-lg-5 pt-2">
+                        <h5 class="font-title font-blue pt-3 mb-0">Social Login</h5>
+                        <small class="text-muted pl-2">Use your Facebook or Google Account to login to Servstry</small>
+                        <div class="font-small pl-lg-5 pr-lg-5 pt-4">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <h5 class="font-large text-center text-sm-left d-block">Facebook</h5>
@@ -91,7 +101,7 @@
                                 {% else %}
                                     <div class="col-sm-5 ml-auto">
                                          <div class="ml-auto">
-                                            <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-primary btn-block break-text">
+                                            <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
                                                 Connect
                                             </a>
                                          </div>
@@ -114,7 +124,7 @@
                                 {% else %}
                                     <div class="col-sm-5 ml-auto">
                                         <div class="ml-auto">
-                                            <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-primary btn-block break-text">
+                                            <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
                                                 Connect
                                             </a>
                                         </div>
@@ -128,11 +138,13 @@
             <div class="p-4 tab-pane fade {% if tab == 'company' %}show active{% endif %}" id="company" role="tabpanel"
                  aria-labelledby="company-tab">
                 <div class="d-flex justify-content-center">
-                    <div class="pt-3 pb-3 pl-lg-5 pr-lg-5">
-                        <form id="companyInfoForm" method="post" action="{% url 'company_info_form_api' public_id=company.public_id %}" enctype="multipart/form-data">
+                    <div class="pt-3 pb-3 settings-tab-container">
+                        <h5 class="font-title font-blue mt-3 mb-3">Company Information</h5>
+                        <form id="companyInfoForm" method="post" action="{% url 'company_info_form_api' public_id=company.public_id %}">
+                            <div class="form-success-container">
+                                <!-- Insert Form Saved Confirmation Element -->
+                            </div>
                             {% csrf_token %}
-                            <h5 class="font-title font-blue mt-3 mb-3">Company Information</h5>
-                            <div class="form-success-container"></div>
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     {{ company_info_form.name|as_crispy_field }}
@@ -175,18 +187,56 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade show {% if tab == 'brand' %}show active{% endif %}" id="brand" role="tabpanel"
+                 aria-labelledby="brand-tab">
+                <div class="d-flex justify-content-center">
+                    <div class="pt-3 pb-3 settings-tab-container">
+                        <h5 class="font-title font-blue mt-3 mb-3">Profile & Brand Settings</h5>
+                        <form id="brandSettingForm" method="post" action="{% url 'brand_settings_form_api' public_id=company.public_id %}">
+                            <div class="form-success-container">
+                                <!-- Insert Form Saved Confirmation Element -->
+                            </div>
+                            {% csrf_token %}
+                            <div class="form-row d-flex justify-content-center">
+                                <div class="form-group col-md-12">
+                                    {{ brand_settings_form.safety_policy_setting|as_crispy_field}}
+                                    <div id="safetyPolicyHelpTextContainer">
+                                        <!-- This is where the safety policy info text goes -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="hideOnCustomSafetyPolicy" {% if company.safety_policy_setting in 'CB, CF, CP' %}style="display: none;"{% endif %}>
+                                <hr>
+                                <div class="d-flex justify-content-center mt-2">
+                                    <button type="submit" class="btn btn-blue">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="customSafetyPolicyContainer" {% if company.safety_policy_setting != 'CP' %}style="display: none;"{% endif %}>
+                            <h5 class="font-title font-blue mt-3 mb-3">Custom Safety Policy</h5>
+                            <form id="customSafetyPolicyForm" method="post" action="{% url 'custom_safety_policy_form_api' company_id=company.public_id %}" class="mt-3">
+                                {% csrf_token %}
+                                {{ custom_safety_policy_form.policy_text }}
+                                <div class="d-flex justify-content-center mt-2">
+                                    <button type="submit" class="btn btn-blue">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade show {% if tab == 'admins' %}show active{% endif %}" id="admins" role="tabpanel"
                  aria-labelledby="admins-tab">
                 <div class="d-flex justify-content-center">
-                    <div class="pt-3 pb-3 pl-lg-5 pr-lg-5">
-                        <h5 class="font-title font-blue mt-3 mb-3">Current</h5>
-                        <div class="table-responsive">
+                    <div class="pt-3 pb-3 settings-tab-container">
+                        <h5 class="font-title font-blue mt-3 mb-3">Active</h5>
+                        <div class="table-responsive mt-3">
                             <table class="table">
                                 <thead>
                                 <tr class="font-title font-blue">
                                     <th scope="col">Name</th>
                                     <th scope="col">E-mail</th>
-                                    <th scope="col" class="text-right">Remove?</th>
+                                    <th scope="col" class="text-right">Remove</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -201,9 +251,9 @@
                             </table>
                         </div>
                         <h5 class="font-title font-blue mt-3 mb-3">Invite</h5>
-                        <form method="post" runat="server" action="{% url 'invite_company_admin_form_api' public_id=company.public_id %}" id="inviteUserForm">
+                        <form method="post" runat="server" action="{% url 'invite_company_admin_form_api' public_id=company.public_id %}" id="inviteUserForm" class="mt-3">
                             {% csrf_token %}
-                            <div class="form-row mt-5">
+                            <div class="form-row">
                                 <h5 class="font-blue font-large mb-3" style="display: none !important;" id="inviteConfirm">Invite Sent!</h5>
                             </div>
                             <div class="form-row">
@@ -221,8 +271,8 @@
                             </div>
                             <div class="d-flex justify-content-center mb-5">
                                 <button id="userInviteSubmit" class="btn btn-blue">
-                                    <i class="fe fe-paper-plane"></i>
                                     Send
+                                    <i class="fe fe-paper-plane"></i>
                                 </button>
                             </div>
                         </form>
@@ -259,7 +309,7 @@
             <div class="p-4 tab-pane fade {% if tab == 'payment' %}show active{% endif %}" id="payment" role="tabpanel"
                  aria-labelledby="payment-tab">
                 <div class="d-flex justify-content-center">
-                    <div class="w-75 pt-3 pb-3">
+                    <div class="pt-3 pb-3 settings-tab-container">
                         <div class="payment-method-container">
                             <div class="d-flex justify-content-between align-items-end mb-4">
                                 <h5 class="font-title font-blue mb-0">Payment Method</h5>
@@ -294,13 +344,11 @@
                             </div>
                             {% if company.default_payment_method %}
                                 <div class="row default-payment-method mt-4">
-                                    <div class="col-md-8 offset-2 d-flex align-items-center justify-content-between border border-primary rounded p-3">
+                                    <div class="col-md-8 offset-md-2 d-flex align-items-center justify-content-between border border-primary rounded p-3">
                                         <div class="d-flex align-items-center">
                                             <img src="{{ company.default_payment_method.get_icon_path }}" height="40"
                                                  class="mr-4">
-                                            <h5 class="mb-0">{{ company.default_payment_method.get_brand_display }} card
-                                                ending
-                                                in {{ company.default_payment_method.last4 }}</h5>
+                                            <h5 class="mb-0 payment-info-text">ends in {{ company.default_payment_method.last4 }}</h5>
                                         </div>
                                         <div class="d-flex align-items-center">
                                                 <input class="form-check-input mt-0" type="radio" name="defaultPaymentRadio"
@@ -336,7 +384,7 @@
                             {% if subscription %}
                                 <div class="row d-flex-justify-content-center pl-4 pr-4 mt-4">
                                     <div class="col-md-8 offset-2">
-                                        <h5>
+                                        <h5 class="payment-info-text">
                                             {{ subscription.real_price }} per {{ subscription.plan.interval }}
                                             {% if subscription.cancel_at %}expires on {{ subscription.cancel_at|date:"n/j/y" }}
                                             {% elif subscription.next_pending_invoice %}
@@ -380,6 +428,7 @@
         </div>
     </div>
 </div>
+{{ change_password_form.media }}
 {% include 'billing/modals/confirm-cancel-subscription.html' %}
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
@@ -393,6 +442,14 @@
 {% block footer %}
 <script src="{% static 'js/company-settings.js' %}"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        var settingVal = $('#id_safety_policy_setting').val();
+        displaySafetyPolicyHelpText(settingVal);
+    });
+    $('#id_safety_policy_setting').change(function() {
+        var settingVal = $('#id_safety_policy_setting').val();
+        displaySafetyPolicyHelpText(settingVal);
+    });
     $("form#editUserInfoForm").submit(function(e) {
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#editUserInfoForm", false);
@@ -406,6 +463,17 @@
     $("form#companyInfoForm").submit(function(e) {
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#companyInfoForm", false);
+    });
+    $("form#brandSettingForm").submit(function(e) {
+        e.preventDefault();
+        submitCompanySettingPageForm(this, "form#brandSettingForm", false);
+    });
+    $("form#customSafetyPolicyForm").submit(function(e) {
+        e.preventDefault();
+        var brandSettingForm = document.getElementById("brandSettingForm");
+        submitCompanySettingPageForm(brandSettingForm, "form#brandSettingForm", false);
+        tinyMCE.triggerSave();
+        submitCompanySettingPageForm(this, "form#customSafetyPolicyForm", false);
     });
     $('#addPaymentMethodForm').submit(function(e) {
         e.preventDefault();
@@ -423,5 +491,18 @@
             $(this).prop('checked', false);
         }
     });
+    function displaySafetyPolicyHelpText(settingVal) {
+        var custom = ['CB', 'CF', 'CP'];
+        if (custom.includes(settingVal)) {
+            $('#customSafetyPolicyContainer').attr('style', 'display: initial;');
+            $('#hideOnCustomSafetyPolicy').attr('style', 'display: none;');
+        } else {
+            $('#customSafetyPolicyContainer').attr('style', 'display: none;');
+            $('#hideOnCustomSafetyPolicy').attr('style', 'display: initial;');
+        }
+        $('#safetyPolicyHelpTextContainer').empty();
+        var helpText = JSON.parse('{{ safety_policy_help_json | escapejs }}');
+        $('#safetyPolicyHelpTextContainer').append('<div class="pl-3 pr-3"><small class="text-muted">'+ helpText[settingVal] + '</small></div>');
+    };
 </script>
 {% endblock %}

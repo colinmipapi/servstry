@@ -39,12 +39,19 @@
 <body class="overflow-y">
     <div class="signup-container">
         <span class="signup-img-left {% block imgclass %}{% endblock %}">
+            {% block logo %}{% endblock %}
             {% if logo_white %}
-                <a class="float-left mt-3 ml-3" href="{% url 'home' %}"><img src="{% static 'media/logos/Servstry_Logo_All_White.png' %}" width="225"></a>
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_White.png' %}" width="225">
+                </a>
             {% elif logo_blue %}
-                <a class="float-left mt-3 ml-3" href="{% url 'home' %}"><img src="{% static 'media/logos/Servstry_Logo_All_Blue.png' %}" width="225"></a>
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_Blue.png' %}" width="225">
+                </a>
             {% elif logo_pink %}
-                <a class="float-left mt-3 ml-3" href="{% url 'home' %}"><img src="{% static 'media/logos/Servstry_Logo_All_Pink.png' %}" width="225"></a>
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_Pink.png' %}" width="225">
+                </a>
             {% endif %}
             {% if description %}
                 <div class="description-box float-right">
