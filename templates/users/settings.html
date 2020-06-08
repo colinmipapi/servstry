@@ -2,7 +2,26 @@
 {% load static %}
 {% load socialaccount %}
 {% load crispy_forms_tags %}
-{% block header %}{% endblock %}
+{% block title %}Settings{% endblock %}
+{% block header %}
+<script type="text/javascript">
+    function disconnectSocialAccount(accountId) {
+        $.ajax({
+            url: '/api/users/disconnect-social-account/' + accountId + '/user/',
+            type: 'PUT',
+            success: function (data) {
+                $(this).attr('href', data.url);
+                $(this).html('Connect');
+                $(this).removeClass('btn-danger');
+                $(this).addClass('btn-secondary');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    };
+</script>
+{% endblock %}
 {% block content %}
 <div class="main ml-3 mr-3">
     <div class="row settings-box">
@@ -129,7 +148,7 @@
                                         {% if facebook != False %}
                                              <div class="col-sm-5 ml-auto">
                                                  <div class="ml-auto">
-                                                     <a hhref="#disconnect-account" onclick="disconnectSocialAccount('{{ facebook }}')" class="btn btn-danger btn-block break-text">
+                                                     <a hhref="#disconnect-account" onclick="disconnectSocialAccount('{{ facebook }}');" class="btn btn-danger btn-block break-text">
                                                         Disconnect
                                                     </a>
                                                  </div>
@@ -152,7 +171,7 @@
                                         {% if google != False %}
                                             <div class="col-sm-5 ml-auto">
                                                 <div class="ml-auto">
-                                                    <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ google }}')" class="btn btn-danger btn-block break-text">
+                                                    <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ google }}');" class="btn btn-danger btn-block break-text">
                                                         Disconnect
                                                     </a>
                                                 </div>
@@ -212,21 +231,6 @@
                     var $input = $(formId + " #id_" + name);
                     $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
                 }
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-    };
-    function disconnectSocialAccount(accountId) {
-        $.ajax({
-            url: '/api/users/disconnect-social-account/' + accountId + '/user/',
-            type: 'PUT',
-            success: function (data) {
-                $(this).attr('href', data.url);
-                $(this).html('Connect');
-                $(this).removeClass('btn-danger');
-                $(this).addClass('btn-secondary);
             },
             cache: false,
             contentType: false,

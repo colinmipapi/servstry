@@ -5,6 +5,23 @@
 {% block title %}Settings{% endblock %}
 {% block header %}
     {{ custom_safety_policy_form.media }}
+    <script type="text/javascript">
+        function disconnectSocialAccount(accountId) {
+            $.ajax({
+                url: '/api/users/disconnect-social-account/' + accountId + '/user/',
+                type: 'PUT',
+                success: function (data) {
+                    $(this).attr('href', data.url);
+                    $(this).html('Connect');
+                    $(this).removeClass('btn-danger');
+                    $(this).addClass('btn-secondary');
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        };
+    </script>
 {% endblock %}
 {% block content %}
 <div class="main" id="bizAdminMain">
@@ -502,21 +519,6 @@
         $('#safetyPolicyHelpTextContainer').empty();
         var helpText = JSON.parse('{{ safety_policy_help_json | escapejs }}');
         $('#safetyPolicyHelpTextContainer').append('<div class="pl-3 pr-3"><small class="text-muted">'+ helpText[settingVal] + '</small></div>');
-    };
-    function disconnectSocialAccount(accountId) {
-        $.ajax({
-            url: '/api/users/disconnect-social-account/' + accountId + '/company/',
-            type: 'PUT',
-            success: function (data) {
-                $(this).attr('href', data.url);
-                $(this).html('Connect');
-                $(this).removeClass('btn-danger');
-                $(this).addClass('btn-secondary);
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
     };
 </script>
 {% endblock %}
