@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/media/logos/Servstry_Brandmark_Multi_Padding.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/track/migrations/0005_guestvisit_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/migrations/0007_customuser_email_setting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/companies/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/middlewares.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/track/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/track/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/track/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/track/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/track/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/track/signals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,24 +13,24 @@
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/contact_trace/middlewares.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="190">
-                  <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-                  <folding>
-                    <element signature="e#0#55#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="351">
                   <caret line="474" column="37" selection-start-line="474" selection-start-column="37" selection-end-line="474" selection-end-column="37" />
                   <folding>
                     <element signature="e#5331#8327#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/users/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+                  <folding>
+                    <element signature="e#0#28#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -312,7 +287,6 @@
         <option value="$PROJECT_DIR$/templates/track/modals/edit-safety-policy.html" />
         <option value="$PROJECT_DIR$/track/api_views.py" />
         <option value="$PROJECT_DIR$/contact_trace/urls.py" />
-        <option value="$PROJECT_DIR$/users/urls.py" />
         <option value="$PROJECT_DIR$/templates/companies/dashboard.html" />
         <option value="$PROJECT_DIR$/users/api_views.py" />
         <option value="$PROJECT_DIR$/users/api_urls.py" />
@@ -333,6 +307,7 @@
         <option value="$PROJECT_DIR$/templates/companies/profile.html" />
         <option value="$PROJECT_DIR$/users/tasks.py" />
         <option value="$PROJECT_DIR$/templates/companies/settings.html" />
+        <option value="$PROJECT_DIR$/users/urls.py" />
       </list>
     </option>
   </component>
@@ -775,16 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contact_trace/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1020,6 +985,16 @@
           <caret line="474" column="37" selection-start-line="474" selection-start-column="37" selection-end-line="474" selection-end-column="37" />
           <folding>
             <element signature="e#5331#8327#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
