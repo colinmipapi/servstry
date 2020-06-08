@@ -113,6 +113,6 @@ def disconnect_social_account(request, account_id, setting_page):
     connect_url = '/accounts/%s/login/process=connect/next=%s' % (account.provider, setting_redirect)
     if account.user == request.user:
         account.delete()
-        return Response({'url', connect_url}, status.HTTP_200_OK)
+        return Response({'url': connect_url}, status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
