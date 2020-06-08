@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api_views.py" afterDir="false" />
-    </list>
+    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,20 +21,20 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="252">
+                <state relative-caret-position="269">
                   <caret line="501" column="49" selection-start-line="501" selection-start-column="49" selection-end-line="501" selection-end-column="49" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="542">
-                  <caret line="234" column="6" lean-forward="true" selection-start-line="220" selection-start-column="4" selection-end-line="234" selection-end-column="6" />
+                <state relative-caret-position="-581">
+                  <caret line="154" column="114" selection-start-line="154" selection-start-column="91" selection-end-line="154" selection-end-column="114" />
                 </state>
               </provider>
             </entry>
@@ -146,7 +141,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/users/api_urls.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="420">
@@ -158,10 +153,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/users/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="314">
+                <state relative-caret-position="311">
                   <caret line="100" column="63" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="63" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
@@ -908,23 +903,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="234" column="6" lean-forward="true" selection-start-line="220" selection-start-column="4" selection-end-line="234" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/api_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="100" column="63" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/users/api_urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -937,8 +915,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="269">
           <caret line="501" column="49" selection-start-line="501" selection-start-column="49" selection-end-line="501" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/api_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="100" column="63" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-581">
+          <caret line="154" column="114" selection-start-line="154" selection-start-column="91" selection-end-line="154" selection-end-column="114" />
         </state>
       </provider>
     </entry>
