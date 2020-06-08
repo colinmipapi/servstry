@@ -91,6 +91,11 @@
                                 <i class="flaticon-building mr-2"></i>
                                 Dashboard
                             </a>
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'create_company_name_address' %}">
+                                <i class="flaticon-plus-icon mr-2"></i>
+                                Create Company
+                            </a>
                         {% endif %}
                         <!-- <a class="dropdown-item" href="{% url 'help' %}">
                             <i class="flaticon-lifebuoy mr-2"></i>

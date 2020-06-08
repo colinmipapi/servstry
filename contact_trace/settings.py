@@ -229,7 +229,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend"
 )
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'landing'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -240,25 +240,22 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/accounts/login/'
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/dashboard/'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'home'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Servstry - '
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_USERNAME_BLACKLIST = []
-
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-# SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
-
 ACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSignupForm',
     'change_password': 'users.forms.CustomChangePasswordForm',
     'set_password': 'users.forms.CustomSetPasswordForm',
 }
 
+# SOCIALACCOUNT_ADAPTER = 'users.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSocialSignupForm',
 }
-
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',
