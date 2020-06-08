@@ -112,7 +112,7 @@ def disconnect_social_account(request, account_id, setting_page):
 
     setting_redirect = setting_redirect.replace('/', "%2F")
 
-    connect_url = '/accounts/%s/login/process=connect/next=%s' % (account.provider, setting_redirect)
+    connect_url = '/accounts/%s/login/?process=connect&next=%s' % (account.provider, setting_redirect)
     if account.user == request.user:
         account.delete()
         return Response({'url': connect_url}, status.HTTP_200_OK)
