@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
-    </list>
+    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +24,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="432">
-                  <caret line="513" column="48" selection-start-line="513" selection-start-column="48" selection-end-line="513" selection-end-column="48" />
+                <state relative-caret-position="270">
+                  <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
                   <folding>
                     <element signature="e#5331#8327#0" />
                   </folding>
@@ -45,8 +41,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="267">
-                  <caret line="132" column="135" selection-start-line="132" selection-start-column="135" selection-end-line="132" selection-end-column="135" />
+                <state relative-caret-position="90">
+                  <caret line="6" selection-start-line="6" selection-end-line="22" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
@@ -934,15 +930,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="132" column="135" selection-start-line="132" selection-start-column="135" selection-end-line="132" selection-end-column="135" />
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="22" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="513" column="48" selection-start-line="513" selection-start-column="48" selection-end-line="513" selection-end-column="48" />
+        <state relative-caret-position="270">
+          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
           <folding>
             <element signature="e#5331#8327#0" />
           </folding>
