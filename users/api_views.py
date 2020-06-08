@@ -21,6 +21,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from allauth.socialaccount.models import SocialAccount
+from allauth.socialaccount.templatetags.socialaccount import provider_login_url
 
 
 @api_view(['POST', ])
@@ -109,8 +110,7 @@ def disconnect_social_account(request, account_id, setting_page):
     else:
         setting_redirect = '/profile/settings/social/'
 
-    social_company = account.provider
-    connect_url = reverse('provider_login_url', args=[social_company, 'connect', setting_redirect])
+    connect_url = '/accounts/%s/login/process=connect/next=%s' % (account.provider, setting_redirect)
     if account.user == request.user:
         account.delete()
         return Response({'url', connect_url}, status.HTTP_200_OK)
