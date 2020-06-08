@@ -40,8 +40,12 @@ class UserContactInfoForm(forms.ModelForm):
         label='Last Name'
     )
     phone = PhoneNumberField(
-        required=False,
+        required=True,
         label='Phone Number'
+    )
+    create_business = forms.BooleanField(
+        required=False,
+        label='I need to create an account for my business'
     )
 
     password = None
@@ -52,6 +56,20 @@ class UserContactInfoForm(forms.ModelForm):
             'first_name',
             'last_name',
             'phone'
+        )
+
+
+class NotificationSettings(forms.ModelForm):
+
+    email_setting = forms.BooleanField(
+        label='Receive all email notifications',
+        required=False
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'email_setting',
         )
 
 
@@ -153,13 +171,20 @@ class CustomSocialSignupForm(SocialSignupForm):
     email = forms.EmailField(
         label='E-mail Address'
     )
-    phone = PhoneNumberField(required=False, label='Cell Phone')
+    phone = PhoneNumberField(
+        required=True,
+        label='Phone Number'
+    )
     password1 = PasswordField(
         label='Password'
     )
     password2 = PasswordConfirmationField(
         label='Confirm Password',
         confirm_with='password1'
+    )
+    create_business = forms.BooleanField(
+        required=False,
+        label='I also need to create an account for my business'
     )
 
     def signup(self, user):
@@ -176,6 +201,10 @@ class InvitationSignupForm(UserContactInfoForm):
     email = forms.EmailField(
         label='E-mail',
         required=True
+    )
+    phone = PhoneNumberField(
+        required=True,
+        label='Phone Number'
     )
     password1 = PasswordField(
         label='Password'

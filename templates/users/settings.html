@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% block header %}{% endblock %}
+{% block content %}
+<div class="main ml-3 mr-3">
+    <div class="row settings-box">
+        <div class="col-md-3 menu-box font-large mt-5">
+            <div class="list-group w-100" id="nav-tab" role="tab-list">
+                <a class="list-group-item list-group-item-action font-blue" href="{% url 'user_home' %}">
+                    <i class="flaticon-id-book menu-icon ml-2 mr-3"></i>
+                    Visits
+                </a>
+                <!-- <a class="list-group-item list-group-item-action {% if tab == 'password' %}active{% endif %}" id="nav-password-tab" data-toggle="tab"
+                   href="#password-settings" aria-controls="nav-password" aria-selected="true">
+                    <i class="flaticon-lock-closed menu-icon ml-2 mr-3"></i>
+                    Offers
+                </a> -->
+                <a class="list-group-item list-group-item-action font-blue" href="{% url 'user_settings' %}">
+                    <i class="flaticon-settings menu-icon ml-2 mr-3"></i>
+                    Settings
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9 mt-3">
+            <div class="company-settings-container">
+                <ul class="nav nav-tabs" id="settingsTab">
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'contact-info' %}show active{% endif %}" id="contact-info-tab" data-toggle="tab" href="#contact-info" role="tab"
+                           aria-controls="contact-info" aria-selected="true">Contact Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'password' %}show active{% endif %}" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password-tab"
+                           aria-selected="true">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'notifications' %}show active{% endif %}" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab"
+                           aria-controls="notifications-tab" aria-selected="true">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if tab == 'social' %}show active{% endif %}" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social-tab"
+                           aria-selected="true">Social</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="settingTabContent">
+                    <div class="tab-pane fade {% if tab == 'contact-info' %}show active{% endif %}" id="contact-info" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+                            <div class="pt-3 pb-5 settings-tab-container">
+                                <h5 class="font-title font-blue pt-3 mb-3">Contact Information</h5>
+                                <form id="editUserInfoForm" method="post" action="{% url 'edit_user_info_form_api' public_id=request.user.public_id %}" class="font-small pl-sm-5 pr-sm-5 pt-2">
+                                    <div class="form-success-container"></div>
+                                    {% csrf_token %}
+                                    <div class="form-row d-flex justify-content-center">
+                                        <div class="form-group col-md-6">
+                                            {{ edit_user_info_form.first_name|as_crispy_field}}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{ edit_user_info_form.last_name|as_crispy_field}}
+                                        </div>
+                                    </div>
+                                    <div class="form-row pt-1 d-flex justify-content-center">
+                                        <div class="form-group col-md-6">
+                                            {{ edit_user_info_form.phone|as_crispy_field}}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{ edit_user_info_form.email|as_crispy_field}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-row pt-1 d-flex justify-content-center">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-blue">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade {% if tab == 'password' %}show active{% endif %}" id="password" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+                            <div class="pt-3 pb-5 settings-tab-container">
+                                <h5 class="font-title font-blue pt-3 mb-3">Change Password</h5>
+                                <form id="changePasswordForm" method="post" action="{% url 'change_password_form_api' public_id=request.user.public_id %}" class="font-small pl-sm-5 pr-sm-5 pt-2 pb-3">
+                                    <div class="form-success-container">
+                                        <!-- Insert Form Saved Confirmation Element -->
+                                    </div>
+                                    {% csrf_token %}
+                                    {{ change_password_form|crispy }}
+                                    <div class="pb-2"></div>
+                                    <hr>
+                                    <div class="d-flex justify-content-center pt-2">
+                                        <button type="submit" class="btn btn-blue">Change Password</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade {% if tab == 'notifications' %}show active{% endif %}" id="notifications" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+                            <div class="pt-3 pb-5 settings-tab-container">
+                                <h5 class="font-title font-blue pt-3 mb-3">Notifications</h5>
+                                <form id="notificationForm" method="post" action="{% url 'notification_form_api' public_id=request.user.public_id %}" class="font-small pl-sm-5 pr-sm-5 pt-2 pb-3">
+                                    <div class="form-success-container">
+                                        <!-- Insert Form Saved Confirmation Element -->
+                                    </div>
+                                    {% csrf_token %}
+                                    {{ notification_form|crispy }}
+                                    <div class="pb-2"></div>
+                                    <hr>
+                                    <div class="d-flex justify-content-center pt-2">
+                                        <button type="submit" class="btn btn-blue">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade {% if tab == 'social' %}show active{% endif %}" id="social" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+                            <div class="pt-3 pb-5 settings-tab-container">
+                                <h5 class="font-title font-blue pt-3 mb-0">Social Login</h5>
+                                <small class="text-muted pl-2">Use your Facebook or Google Account to login to Servstry</small>
+                                <div class="font-small pl-lg-5 pr-lg-5 pt-4">
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <h5 class="font-large text-center text-sm-left d-block">Facebook</h5>
+                                        </div>
+                                        {% providers_media_js %}
+                                        {% if facebook != False %}
+                                             <div class="col-sm-5 ml-auto">
+                                                 <div class="ml-auto">
+                                                     <a href="{% url 'disconnect_social_account' account_id=facebook %}" class="btn btn-danger btn-block break-text">
+                                                        Disconnect
+                                                    </a>
+                                                 </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-sm-5 ml-auto">
+                                                 <div class="ml-auto">
+                                                    <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                                        Connect
+                                                    </a>
+                                                 </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <h5 class="font-large text-center text-sm-left d-block">Google</h5>
+                                        </div>
+                                        {% if google != False %}
+                                            <div class="col-sm-5 ml-auto">
+                                                <div class="ml-auto">
+                                                    <a href="{% url 'disconnect_social_account' account_id=google %}" class="btn btn-danger btn-block break-text">
+                                                        Disconnect
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-sm-5 ml-auto">
+                                                <div class="ml-auto">
+                                                    <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                                        Connect
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+    $("form#editUserInfoForm").submit(function(e) {
+        e.preventDefault();
+        submitSettingPageForm(this, "form#editUserInfoForm", false);
+    });
+    $("form#changePasswordForm").submit(function(e) {
+        e.preventDefault();
+        submitSettingPageForm(this, "form#changePasswordForm", true);
+    });
+    $("form#notificationForm").submit(function(e) {
+        e.preventDefault();
+        submitSettingPageForm(this, "form#notificationForm", true);
+    });
+    function submitSettingPageForm(formObj, formId, clearForm) {
+    var formData = new FormData(formObj);
+    var url = $(formObj).attr("action");
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            $(".form-success-container").empty();
+            setTimeout(function(){
+              $(formId + " .form-success-container").append('<p class="font-pink font-title mb-3 ml-2"><b>Changes Saved</b></p>');
+                if (clearForm === true) {
+                    formObj.trigger('reset')
+                }
+            }, 300);
+        },
+        error : function(data, textStatus, xhr) {
+            for (var name in data['responseJSON']) {
+                var $input = $(formId + " #id_" + name);
+                $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+};
+</script>
+{% endblock %}

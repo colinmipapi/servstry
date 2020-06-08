@@ -3,7 +3,11 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.mail import mail_admins
+from django.core.paginator import Paginator
 
+from track.models import (
+    GuestVisit,
+)
 from users.models import (
     Invitation,
 )
@@ -11,7 +15,11 @@ from users.forms import (
     UserContactInfoForm,
     RequestDemoForm,
     InvitationSignupForm,
-    ContactUsForm
+    ContactUsForm,
+    EditUserForm,
+    CustomPasswordChangeForm,
+    NotificationSettings,
+    CustomSocialSignupForm
 )
 
 from allauth.account.models import EmailAddress
@@ -24,7 +32,10 @@ def user_contact_info(request):
         form = UserContactInfoForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('create_company_name_address')
+            if form.cleaned_data['create_business'] is True:
+                return redirect('create_company_name_address')
+            else:
+                return redirect('home')
     else:
         form = UserContactInfoForm(instance=request.user)
 
@@ -34,18 +45,82 @@ def user_contact_info(request):
 
 
 @login_required
-def user_settings(request):
+def social_user_signup(request):
 
-    return render(request, 'users/settings.html', {
+    if request.method == 'POST':
+        form = CustomSocialSignupForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            if form.cleaned_data['create_business'] is True:
+                return redirect('create_company_name_address')
+            else:
+                return redirect('home')
+    else:
+        form = CustomSocialSignupForm(instance=request.user)
 
+    return render(request, 'allauth/social/signup.html', {
+        'form': form,
     })
 
 
 @login_required
-def user_home(request):
+def user_settings(request, **kwargs):
+
+    # Contact Info Tab
+    edit_user_info_form = EditUserForm(instance=request.user)
+
+    # Password Tab
+    change_password_form = CustomPasswordChangeForm(request.user)
+
+    # Notifications Tab
+    notification_form = NotificationSettings(instance=request.user)
+
+    # Social Tab
+    google = False
+    facebook = False
+
+    for account in request.user.socialaccount_set.all().iterator():
+
+        if account.provider == "google":
+            google = account.id
+        elif account.provider == "facebook":
+            facebook = account.id
+
+    if 'tab' in kwargs:
+        tab = kwargs['tab']
+    else:
+        tab = 'contact-info'
+
+    return render(request, 'users/settings.html', {
+        'edit_user_info_form': edit_user_info_form,
+        'change_password_form': change_password_form,
+        'notification_form': notification_form,
+        'google': google,
+        'facebook': facebook,
+        'tab': tab,
+        'fixed_nav': True,
+    })
+
+
+@login_required
+def user_home(request, **kwargs):
+
+    visits = GuestVisit.objects.filter(user=request.user).order_by('-arrival')
+
+    if 'tab' in kwargs:
+        tab = kwargs['tab']
+    else:
+        tab = 'visits'
+
+    paginator = Paginator(visits, 25)
+
+    page = request.GET.get('page')
+    guests_page = paginator.get_page(page)
 
     return render(request, 'users/home.html', {
-
+        'guests_page': guests_page,
+        'tab': tab,
+        'fixed_nav': True,
     })
 
 
@@ -108,7 +183,10 @@ def business_landing(request):
 def home(request):
 
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        if request.user.is_company_user:
+            return redirect('dashboard')
+        else:
+            return redirect('user_home')
     else:
         return render(request, 'landing.html', {
             'landing': True,

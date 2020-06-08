@@ -76,6 +76,18 @@ class UserTestCase(TestCase):
         )
         facebook.sites.add(self.current_site)
 
+    def test_user_home(self):
+        self.client.login(username='whatever', password='secret')
+        url = reverse('user_home')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_user_settings(self):
+        self.client.login(username='whatever', password='secret')
+        url = reverse('user_settings')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
     def test_home_anon(self):
         url = reverse('home')
         resp = self.client.get(url)

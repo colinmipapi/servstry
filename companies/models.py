@@ -229,8 +229,7 @@ class Company(models.Model):
 
     def save(self, *args, **kwargs):
         if self.slug:  # edit
-            if slugify(self.name) != self.slug:
-                self.slug = generate_unique_slug(Company, self.name)
+            pass
         else:  # create
             self.slug = generate_unique_slug(Company, self.name)
 

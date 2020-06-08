@@ -189,7 +189,7 @@
             </div>
             <div class="tab-pane fade show {% if tab == 'brand' %}show active{% endif %}" id="brand" role="tabpanel"
                  aria-labelledby="brand-tab">
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center" id="brandTabTop">
                     <div class="pt-3 pb-3 settings-tab-container">
                         <h5 class="font-title font-blue mt-3 mb-3">Profile & Brand Settings</h5>
                         <form id="brandSettingForm" method="post" action="{% url 'brand_settings_form_api' public_id=company.public_id %}">
@@ -454,12 +454,10 @@
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#editUserInfoForm", false);
     });
-
     $("form#changePasswordForm").submit(function(e) {
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#changePasswordForm", true);
     });
-
     $("form#companyInfoForm").submit(function(e) {
         e.preventDefault();
         submitCompanySettingPageForm(this, "form#companyInfoForm", false);
@@ -474,6 +472,7 @@
         submitCompanySettingPageForm(brandSettingForm, "form#brandSettingForm", false);
         tinyMCE.triggerSave();
         submitCompanySettingPageForm(this, "form#customSafetyPolicyForm", false);
+        location.href = '#brandTabTop';
     });
     $('#addPaymentMethodForm').submit(function(e) {
         e.preventDefault();

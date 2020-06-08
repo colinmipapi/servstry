@@ -1,4 +1,5 @@
 from allauth.account.forms import LoginForm, SignupForm
+from django.shortcuts import redirect
 
 
 class LoginFormMiddleware(object):
@@ -15,9 +16,8 @@ class LoginFormMiddleware(object):
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if form.is_valid():
-                print('valid')
-            else:
-                print(form.errors)
+                form.save()
+                return redirect('home')
         else:
             form = LoginForm()
 
@@ -38,7 +38,8 @@ class SignUpFormMiddleware(object):
         if request.method == 'POST':
             form = SignupForm(request.POST)
             if form.is_valid():
-                pass
+                form.save()
+                return redirect('home')
         else:
             form = SignupForm()
 

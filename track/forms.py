@@ -47,6 +47,44 @@ class GuestVisitForm(forms.ModelForm):
         )
 
 
+class UserVisitForm(forms.ModelForm):
+
+    arrival = forms.DateTimeField(
+        input_formats=["%m/%d/%y %I:%M %p"],
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': True,
+                'format': 'M/D/YY h:mm A',
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
+    )
+    email_2 = forms.CharField(
+        max_length=500,
+        label='',
+        widget=forms.TextInput(attrs={'class': 'dispnon'}),
+        required=False,
+    )
+    safety_policy_accept = forms.BooleanField(
+        required=True
+    )
+
+    class Meta:
+
+        model = GuestVisit
+        fields = (
+            'user',
+            'arrival'
+        )
+        widgets = {
+            'user': forms.HiddenInput(),
+        }
+
+
 class GuestVisitFilterForm(forms.Form):
 
     start_filter = forms.DateTimeField(

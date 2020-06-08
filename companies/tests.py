@@ -205,7 +205,8 @@ class CompanyTestCase(TestCase):
             'last_name': 'Bauer',
             'email': 'jack@bauer.com',
             'phone': '(516) 524-5362',
-            'arrival': '6/12/20 8:00 pm'
+            'arrival': '6/12/20 8:00 pm',
+            'safety_policy_accept': True,
         }
         rf = RequestFactory()
         request = rf.post(

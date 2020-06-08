@@ -29,6 +29,9 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True
     )
+    email_setting = models.BooleanField(
+        default=True
+    )
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -51,6 +54,13 @@ class CustomUser(AbstractUser):
         else:
             company = None
         return company
+
+    @property
+    def is_company_user(self):
+        if self.biz_admins.all().exists():
+            return True
+        else:
+            return False
 
 
 class Invitation(models.Model):

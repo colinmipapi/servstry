@@ -7,7 +7,16 @@ from track.tasks import send_confirmation_code_email
 
 
 @receiver(post_save, sender=GuestVisit)
-def add_company_permission(instance, created, **kwargs):
+def send_confirmation_email(instance, created, **kwargs):
 
     if created:
-        send_confirmation_code_email.apply_async([instance.id, ])
+        if instance.user:
+            if instance.user.email_setting:
+                send = True
+            else:
+                send = False
+        else:
+            send = True
+
+        if send:
+            send_confirmation_code_email.apply_async([instance.id, ])

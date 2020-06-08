@@ -4,7 +4,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.contrib.postgres.fields import JSONField
+from django.urls import reverse
 
 from phonenumber_field.modelfields import PhoneNumberField
 import phonenumbers
@@ -51,6 +51,14 @@ class GuestVisit(models.Model):
         verbose_name='Phone Number',
         region='US'
     )
+    # User Model
+    user = models.ForeignKey(
+        'users.CustomUser',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='visits'
+    )
     # Times
     arrival = models.DateTimeField(
         default=timezone.now,
@@ -69,7 +77,54 @@ class GuestVisit(models.Model):
     )
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        if self.user:
+            return self.user.get_full_name()
+        else:
+            return "%s %s" % (self.first_name, self.last_name)
+
+    def get_absolute_url(self):
+        url = reverse('confirmation_page', args=[self.confirmation])
+        return url
+
+    @property
+    def first_name_pretty(self):
+        if self.user:
+            return self.user.first_name
+        else:
+            return self.first_name
+
+    @property
+    def last_name_pretty(self):
+        if self.user:
+            return self.user.last_name
+        else:
+            return self.last_name
+
+    @property
+    def get_full_name(self):
+        if self.user:
+            return self.user.get_full_name
+        else:
+            return "%s %s" % (self.first_name, self.last_name)
+
+    @property
+    def email_pretty(self):
+        if self.user:
+            return self.user.email
+        else:
+            return self.email
+
+    @property
+    def phone_pretty(self):
+        # Phone Field Formatted for Display
+        if self.user:
+            p = self.user.phone_pretty
+        elif self.phone:
+            p = phonenumbers.format_number(phonenumbers.parse(str(self.phone), 'US'),
+                                           phonenumbers.PhoneNumberFormat.NATIONAL)
+        else:
+            p = None
+        return p
 
     @property
     def arrival_pretty(self):
@@ -84,20 +139,12 @@ class GuestVisit(models.Model):
     def arrival_time_pretty(self):
         return self.arrival.strftime("%I:%M %p")
 
-    @property
-    def phone_pretty(self):
-        # Phone Field Formatted for Display
-        if self.phone:
-            p = phonenumbers.format_number(phonenumbers.parse(str(self.phone), 'US'),
-                                           phonenumbers.PhoneNumberFormat.NATIONAL)
-        else:
-            p = None
-        return p
-
-    @property
-    def get_full_name(self):
-
-        return "%s %s" % (self.first_name, self.last_name)
+    def add_user_information(self, user):
+        self.first_name = user.first_name
+        self.last_name = user.last_name
+        self.phone = user.phone
+        self.email = user.email
+        self.save()
 
 
 class CustomSafetyPolicy(models.Model):

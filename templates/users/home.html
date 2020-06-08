@@ -4,9 +4,9 @@
 {% load crispy_forms_tags %}
 {% block header %}{% endblock %}
 {% block content %}
-<div class="container-fluid">
+<div class="main ml-3 mr-3">
     <div class="row settings-box">
-        <div class="col-md-3 menu-box font-large">
+        <div class="col-md-3 menu-box font-large mt-3">
             <div class="list-group w-100" id="nav-tab" role="tab-list">
                 <a class="list-group-item list-group-item-action font-blue {% if tab == 'visits' %}active{% endif %}" id="nav-visits-tab" data-toggle="tab" href="#visits" aria-controls="nav-visits" aria-selected="true">
                     <i class="flaticon-id-book menu-icon ml-2 mr-3"></i>
@@ -23,10 +23,50 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 mt-3">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show {% if tab == 'visits' %}active{% endif %}" id="visits" role="tabpanel">
-
+                <div class="d-flex justify-content-center">
+                    <div class="pb-3 settings-tab-container">
+                        <div class="tab-pane fade show {% if tab == 'visits' %}active{% endif %}" id="visits" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                    <tr class="text-center font-title font-blue">
+                                        <th scope="col">Establishment</th>
+                                        <th scope="col">Arrival</th>
+                                        <th scope="col">Code</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for guest in guests_page %}
+                                    <tr class="text-center font-small">
+                                        <th scope="row"><a href="{{ guest.company.get_absolute_url }}">{{ guest.company.name }}</a></th>
+                                        <td>{{ guest.arrival_pretty }}</td>
+                                        <td><a href="{{ guest.get_absolute_url }}">{{ guest.confirmation }}</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% if guests_page %}
+                            <div class="pagination d-flex justify-content-center  mt-3 mb-3" id="pageSelect">
+                                <span class="step-links">
+                                    {% if guests_page.has_previous %}
+                                        <a href="?page=1">&laquo; first</a>
+                                        <a href="?page={{ guests_page.previous_page_number }}">previous</a>
+                                    {% endif %}
+                                    <span class="current">
+                                        Page {{ guests_page.number }} of {{ guests_page.paginator.num_pages }}
+                                    </span>
+                                    {% if guests_page.has_next %}
+                                        <a href="?page={{ guests_page.next_page_number }}">next</a>
+                                        <a href="?page={{ guests_page.paginator.num_pages }}">last &raquo;</a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

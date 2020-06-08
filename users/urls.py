@@ -4,9 +4,19 @@ from users import views
 
 urlpatterns = [
     path(
-        'user-settings/',
+        'settings/<str:tab>/',
+        views.user_settings,
+        name='user_settings_tab'
+    ),
+    path(
+        'settings/',
         views.user_settings,
         name='user_settings'
+    ),
+    path(
+        '<str:tab>/',
+        views.user_home,
+        name='user_home_tab'
     ),
     path(
         '',

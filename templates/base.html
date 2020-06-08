@@ -60,14 +60,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           {% if request.user.is_authenticated %}
-            <!-- <ul class="navbar-nav mr-auto d-flex align-items-end ml-5">
-                <li class="nav-item active">
-                    <a class="nav-link font-pink font-title" href="#">
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-            </ul> -->
+            {% if request.user.is_company_user %}
+                <ul class="navbar-nav mr-auto d-flex align-items-end ml-5">
+                    <li class="nav-item active">
+                        <a class="nav-link font-pink font-title" href="{% url 'dashboard' %}">
+                            Company
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item avatar dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,22 +78,28 @@
                         {% elif request.user.default_company %}
                             <img src="{{ request.user.default_company.logo_url }}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
                         {% else %}
-                            <img src="{% static 'media/imgs/default-profile-img.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                            <img src="{% static 'media/logos/Servstry_Brandmark_Multi_Padding.png' %}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
                         {% endif %}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
-                        <a class="dropdown-item" href="{% url 'dashboard' %}">
+                        <a class="dropdown-item" href="{% url 'user_home' %}">
                             <i class="flaticon-home mr-2"></i>
-                            Dashboard
+                            Home
                         </a>
+                        {% if request.user.is_company_user %}
+                            <a class="dropdown-item" href="{% url 'dashboard' %}">
+                                <i class="flaticon-building mr-2"></i>
+                                Dashboard
+                            </a>
+                        {% endif %}
                         <!-- <a class="dropdown-item" href="{% url 'help' %}">
                             <i class="flaticon-lifebuoy mr-2"></i>
                             Help
-                        </a>
-                        <a class="dropdown-item" href="#">
+                        </a> -->
+                        <a class="dropdown-item" href="{% url 'user_settings' %}">
                             <i class="flaticon-settings mr-2"></i>
                             Settings
-                        </a> -->
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
                     </div>
@@ -107,18 +115,28 @@
                   </li>
                 </ul>
             {% else %}
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a href="#loginModal" class="nav-link" onclick="toggleRegisterModal()">
-                      Sign Up
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#loginModal" class="nav-link" onclick="toggleLoginModal()">
-                      Login
-                    </a>
-                  </li>
-                </ul>
+                {% if request.user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <a href="{% url 'home' %}" class="nav-link">
+                          Home
+                        </a>
+                      </li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <a href="#loginModal" class="nav-link" onclick="toggleRegisterModal()">
+                          Sign Up
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#loginModal" class="nav-link" onclick="toggleLoginModal()">
+                          Login
+                        </a>
+                      </li>
+                    </ul>
+                {% endif %}
             {% endif %}
           {% endif %}
         </div>

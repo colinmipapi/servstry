@@ -8,7 +8,8 @@ from users.models import (
 from users.forms import (
     EditUserForm,
     RequestDemoForm,
-    CustomPasswordChangeForm
+    CustomPasswordChangeForm,
+    NotificationSettings
 )
 from users.serializers import (
     CustomUserSerializer,
@@ -75,4 +76,19 @@ def change_password_form(request, public_id):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
+@api_view(['POST', ])
+def notification_form(request, public_id):
+    try:
+        user = CustomUser.objects.get(public_id=public_id)
+    except:
+        raise Http404
+    if request.user == user:
+        form = NotificationSettings(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return Response({}, status.HTTP_200_OK)
+        else:
+            return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)

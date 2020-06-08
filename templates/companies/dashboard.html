@@ -64,9 +64,9 @@
                 {% for guest in guests_page %}
                 <tr class="text-center font-small">
                     <th scope="row">{{ guest.arrival_pretty }}</th>
-                    <td>{{ guest.first_name }}</td>
-                    <td>{{ guest.last_name }}</td>
-                    <td>{{ guest.email }}</td>
+                    <td>{{ guest.first_name_pretty }}</td>
+                    <td>{{ guest.last_name_pretty }}</td>
+                    <td>{{ guest.email_pretty }}</td>
                     <td>{{ guest.phone_pretty }}</td>
                     <td>{{ guest.confirmation }}</td>
                 </tr>

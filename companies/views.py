@@ -41,6 +41,7 @@ from track.models import (
 )
 from track.forms import (
     GuestVisitForm,
+    UserVisitForm,
     GuestVisitFilterForm,
     GuestVisitExportForm,
     CustomSafetyPolicyForm
@@ -178,7 +179,10 @@ def company_profile(request, slug):
         raise Http404
 
     if request.method == 'POST':
-        guest_visit_form = GuestVisitForm(request.POST)
+        if request.user.is_authenticated:
+            guest_visit_form = UserVisitForm(request.POST)
+        else:
+            guest_visit_form = GuestVisitForm(request.POST)
         if guest_visit_form.is_valid():
             email_2 = guest_visit_form.cleaned_data['email_2']
             if email_2 != '':
@@ -186,36 +190,43 @@ def company_profile(request, slug):
             gv = guest_visit_form.save(commit=False)
             gv.company = company
             gv.ip_address = get_client_ip(request)
-            gv.save()
+            if request.user.is_authenticated:
+                gv.add_user_information(request.user)
+            else:
+                gv.save()
             return redirect('confirmation_page', code=gv.confirmation)
         else:
             print(guest_visit_form.errors)
+
+    if company.safety_policy_setting in ['B', 'CB']:
+        safety_initial = True
+    else:
+        safety_initial = False
 
     if company_user:
         logo_form = LogoForm(instance=company)
         cover_img_form = CoverImgForm(instance=company)
         edit = True
         company_info_form = EditCompanyInfoForm(instance=company)
+        nav = True
     else:
         logo_form = False
         cover_img_form = False
         company_info_form = False
         edit = False
-
-    if request.user.is_authenticated:
-        nav = True
-    else:
-        nav = False
-
-    if company.safety_policy_setting == 'B':
-        safety_initial = True
-    else:
-        safety_initial = False
-
-    guest_visit_form = GuestVisitForm(initial={
-        'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
-        'safety_policy_accept': safety_initial
-    })
+        if request.user.is_authenticated:
+            nav = True
+            guest_visit_form = UserVisitForm(initial={
+                'user': request.user,
+                'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
+                'safety_policy_accept': safety_initial
+            })
+        else:
+            nav = False
+            guest_visit_form = GuestVisitForm(initial={
+                'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
+                'safety_policy_accept': safety_initial
+            })
 
     return render(request, 'companies/profile.html', {
         'company': company,

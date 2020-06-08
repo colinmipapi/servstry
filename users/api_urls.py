@@ -17,5 +17,10 @@ urlpatterns = [
         'change-password-form/<uuid:public_id>/',
         views.change_password_form,
         name='change_password_form_api'
+    ),
+    path(
+        'notification-settings/<uuid:public_id>/',
+        views.notification_form,
+        name='notification_form_api'
     )
 ]
