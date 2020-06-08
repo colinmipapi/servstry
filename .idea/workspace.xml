@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
-    </list>
+    <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,14 +21,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-6033">
-                  <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-                  <folding>
-                    <element signature="e#5331#8327#0" />
-                  </folding>
+                <state relative-caret-position="201">
+                  <caret line="142" column="113" selection-start-line="142" selection-start-column="113" selection-end-line="142" selection-end-column="113" />
                 </state>
               </provider>
             </entry>
@@ -44,11 +39,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="232">
-                  <caret line="158" column="123" selection-start-line="158" selection-start-column="123" selection-end-line="158" selection-end-column="123" />
+                <state relative-caret-position="2673">
+                  <caret line="181" column="121" selection-start-line="181" selection-start-column="121" selection-end-line="181" selection-end-column="121" />
                 </state>
               </provider>
             </entry>
@@ -244,8 +239,8 @@
         <option value="$PROJECT_DIR$/static/js/stripe-payment.js" />
         <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/users/api_views.py" />
-        <option value="$PROJECT_DIR$/templates/companies/settings.html" />
         <option value="$PROJECT_DIR$/templates/users/settings.html" />
+        <option value="$PROJECT_DIR$/templates/companies/settings.html" />
       </list>
     </option>
   </component>
@@ -909,20 +904,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
+    <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6033">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding>
-            <element signature="e#5331#8327#0" />
-          </folding>
+        <state relative-caret-position="2673">
+          <caret line="181" column="121" selection-start-line="181" selection-start-column="121" selection-end-line="181" selection-end-column="121" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/users/settings.html">
+    <entry file="file://$PROJECT_DIR$/templates/companies/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="158" column="123" selection-start-line="158" selection-start-column="123" selection-end-line="158" selection-end-column="123" />
+        <state relative-caret-position="201">
+          <caret line="142" column="113" selection-start-line="142" selection-start-column="113" selection-end-line="142" selection-end-column="113" />
         </state>
       </provider>
     </entry>

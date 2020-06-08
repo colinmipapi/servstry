@@ -6,8 +6,8 @@
 {% block header %}
     {{ custom_safety_policy_form.media }}
     <script type="text/javascript">
-        function disconnectSocialAccount(accountId) {
-            var btn = this;
+        function disconnectSocialAccount(e, accountId) {
+            var btn = e;
             $.ajax({
                 url: '/api/users/disconnect-social-account/' + accountId + '/user/',
                 type: 'PUT',

@@ -5,8 +5,8 @@
 {% block title %}Settings{% endblock %}
 {% block header %}
 <script type="text/javascript">
-    function disconnectSocialAccount(accountId) {
-        var btn = this;
+    function disconnectSocialAccount(e, accountId) {
+        var btn = e;
         console.log(btn);
         $.ajax({
             url: '/api/users/disconnect-social-account/' + accountId + '/user/',
