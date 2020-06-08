@@ -6,6 +6,7 @@
 {% block header %}
 <script type="text/javascript">
     function disconnectSocialAccount(accountId) {
+        var btn = this;
         $.ajax({
             url: '/api/users/disconnect-social-account/' + accountId + '/user/',
             type: 'PUT',
