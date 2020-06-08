@@ -109,7 +109,7 @@ def disconnect_social_account(request, account_id, setting_page):
     else:
         setting_redirect = '/profile/settings/social/'
 
-    social_company = account.provider.name
+    social_company = account.provider
     connect_url = reverse('provider_login_url', args=[social_company, 'connect', setting_redirect])
     if account.user == request.user:
         account.delete()
