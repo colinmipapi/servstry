@@ -93,7 +93,7 @@
                                 {% if facebook != False %}
                                      <div class="col-sm-5 ml-auto">
                                          <div class="ml-auto">
-                                             <a href="{% url 'disconnect_social_account' account_id=facebook %}" class="btn btn-danger btn-block break-text">
+                                             <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ facebook }}')" class="btn btn-danger btn-block break-text">
                                                 Disconnect
                                             </a>
                                          </div>
@@ -101,7 +101,7 @@
                                 {% else %}
                                     <div class="col-sm-5 ml-auto">
                                          <div class="ml-auto">
-                                            <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                            <a href="{% provider_login_url 'facebook' process='connect' next='/dashboard/settings/personal/' %}" class="btn btn-secondary btn-block break-text">
                                                 Connect
                                             </a>
                                          </div>
@@ -116,7 +116,7 @@
                                 {% if google != False %}
                                     <div class="col-sm-5 ml-auto">
                                         <div class="ml-auto">
-                                            <a href="{% url 'disconnect_social_account' account_id=google %}" class="btn btn-danger btn-block break-text">
+                                            <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ google }}')" class="btn btn-danger btn-block break-text">
                                                 Disconnect
                                             </a>
                                         </div>
@@ -124,7 +124,7 @@
                                 {% else %}
                                     <div class="col-sm-5 ml-auto">
                                         <div class="ml-auto">
-                                            <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                            <a href="{% provider_login_url 'google' process='connect' next='/dashboard/settings/personal/' %}" class="btn btn-secondary btn-block break-text">
                                                 Connect
                                             </a>
                                         </div>
@@ -502,6 +502,21 @@
         $('#safetyPolicyHelpTextContainer').empty();
         var helpText = JSON.parse('{{ safety_policy_help_json | escapejs }}');
         $('#safetyPolicyHelpTextContainer').append('<div class="pl-3 pr-3"><small class="text-muted">'+ helpText[settingVal] + '</small></div>');
+    };
+    function disconnectSocialAccount(accountId) {
+        $.ajax({
+            url: '/api/users/disconnect-social-account/' + accountId + '/company/',
+            type: 'PUT',
+            success: function (data) {
+                $(this).attr('href', data.url);
+                $(this).html('Connect');
+                $(this).removeClass('btn-danger');
+                $(this).addClass('btn-secondary);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
     };
 </script>
 {% endblock %}

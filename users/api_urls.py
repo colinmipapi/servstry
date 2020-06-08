@@ -22,5 +22,10 @@ urlpatterns = [
         'notification-settings/<uuid:public_id>/',
         views.notification_form,
         name='notification_form_api'
+    ),
+    path(
+        'disconnect-social-account/<str:account_id>/<str:setting_page>/',
+        views.disconnect_social_account,
+        name="disconnect_social_account_api"
     )
 ]

@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.contrib.auth import update_session_auth_hash
+from django.urls import reverse
 
 from users.backends import demo_request_email
 from users.models import (
@@ -18,6 +19,8 @@ from users.serializers import (
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+
+from allauth.socialaccount.models import SocialAccount
 
 
 @api_view(['POST', ])
@@ -90,5 +93,26 @@ def notification_form(request, public_id):
         else:
             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['PUT', ])
+def disconnect_social_account(request, account_id, setting_page):
+    try:
+        account = SocialAccount.objects.get(id=account_id)
+    except:
+        raise Http404
+
+    if setting_page == 'company':
+        setting_redirect = '/dashboard/settings/personal/'
+    else:
+        setting_redirect = '/profile/settings/social/'
+
+    social_company = account.provider.name
+    connect_url = reverse('provider_login_url', args=[social_company, 'connect', setting_redirect])
+    if account.user == request.user:
+        account.delete()
+        return Response({'url', connect_url}, status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)

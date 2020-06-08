@@ -129,7 +129,7 @@
                                         {% if facebook != False %}
                                              <div class="col-sm-5 ml-auto">
                                                  <div class="ml-auto">
-                                                     <a href="{% url 'disconnect_social_account' account_id=facebook %}" class="btn btn-danger btn-block break-text">
+                                                     <a hhref="#disconnect-account" onclick="disconnectSocialAccount('{{ facebook }}')" class="btn btn-danger btn-block break-text">
                                                         Disconnect
                                                     </a>
                                                  </div>
@@ -137,7 +137,7 @@
                                         {% else %}
                                             <div class="col-sm-5 ml-auto">
                                                  <div class="ml-auto">
-                                                    <a href="{% provider_login_url 'facebook' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                                    <a href="{% provider_login_url 'facebook' process='connect' next='/profile/settings/social/' %}" class="btn btn-secondary btn-block break-text">
                                                         Connect
                                                     </a>
                                                  </div>
@@ -152,7 +152,7 @@
                                         {% if google != False %}
                                             <div class="col-sm-5 ml-auto">
                                                 <div class="ml-auto">
-                                                    <a href="{% url 'disconnect_social_account' account_id=google %}" class="btn btn-danger btn-block break-text">
+                                                    <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ google }}')" class="btn btn-danger btn-block break-text">
                                                         Disconnect
                                                     </a>
                                                 </div>
@@ -160,7 +160,7 @@
                                         {% else %}
                                             <div class="col-sm-5 ml-auto">
                                                 <div class="ml-auto">
-                                                    <a href="{% provider_login_url 'google' process='connect' next='/settings/social/' %}" class="btn btn-secondary btn-block break-text">
+                                                    <a href="{% provider_login_url 'google' process='connect' next='/profile/settings/social/' %}" class="btn btn-secondary btn-block break-text">
                                                         Connect
                                                     </a>
                                                 </div>
@@ -192,31 +192,46 @@
         submitSettingPageForm(this, "form#notificationForm", true);
     });
     function submitSettingPageForm(formObj, formId, clearForm) {
-    var formData = new FormData(formObj);
-    var url = $(formObj).attr("action");
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: formData,
-        success: function (data) {
-            $(".form-success-container").empty();
-            setTimeout(function(){
-              $(formId + " .form-success-container").append('<p class="font-pink font-title mb-3 ml-2"><b>Changes Saved</b></p>');
-                if (clearForm === true) {
-                    formObj.trigger('reset')
+        var formData = new FormData(formObj);
+        var url = $(formObj).attr("action");
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                $(".form-success-container").empty();
+                setTimeout(function(){
+                  $(formId + " .form-success-container").append('<p class="font-pink font-title mb-3 ml-2"><b>Changes Saved</b></p>');
+                    if (clearForm === true) {
+                        formObj.trigger('reset')
+                    }
+                }, 300);
+            },
+            error : function(data, textStatus, xhr) {
+                for (var name in data['responseJSON']) {
+                    var $input = $(formId + " #id_" + name);
+                    $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
                 }
-            }, 300);
-        },
-        error : function(data, textStatus, xhr) {
-            for (var name in data['responseJSON']) {
-                var $input = $(formId + " #id_" + name);
-                $input.before("<div class='alert alert-block alert-danger'><small>" + data['responseJSON'][name][0] + "</small></div>");
-            }
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    });
-};
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    };
+    function disconnectSocialAccount(accountId) {
+        $.ajax({
+            url: '/api/users/disconnect-social-account/' + accountId + '/user/',
+            type: 'PUT',
+            success: function (data) {
+                $(this).attr('href', data.url);
+                $(this).html('Connect');
+                $(this).removeClass('btn-danger');
+                $(this).addClass('btn-secondary);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    };
 </script>
 {% endblock %}
