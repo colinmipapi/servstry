@@ -117,7 +117,7 @@
                                 {% if facebook != False %}
                                      <div class="col-sm-5 ml-auto">
                                          <div class="ml-auto">
-                                             <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ facebook }}')" class="btn btn-danger btn-block break-text">
+                                             <a href="#disconnect-account" onclick="disconnectSocialAccount(this, '{{ facebook }}')" class="btn btn-danger btn-block break-text">
                                                 Disconnect
                                             </a>
                                          </div>
@@ -140,7 +140,7 @@
                                 {% if google != False %}
                                     <div class="col-sm-5 ml-auto">
                                         <div class="ml-auto">
-                                            <a href="#disconnect-account" onclick="disconnectSocialAccount('{{ google }}')" class="btn btn-danger btn-block break-text">
+                                            <a href="#disconnect-account" onclick="disconnectSocialAccount(this, '{{ google }}')" class="btn btn-danger btn-block break-text">
                                                 Disconnect
                                             </a>
                                         </div>
