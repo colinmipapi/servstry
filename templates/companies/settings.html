@@ -18,10 +18,11 @@
                   'Content-Type': 'application/json',
                 },
                 success: function (data) {
-                    $(btn).attr('href', data.url);
+                    $(btn).attr('href', url);
                     $(btn).html('Connect');
                     $(btn).removeClass('btn-danger');
                     $(btn).addClass('btn-secondary');
+                    $(btn).prop("onclick", null);
                 },
                 cache: false,
                 contentType: false,

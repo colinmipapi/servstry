@@ -7,7 +7,6 @@
 <script type="text/javascript">
     function disconnectSocialAccount(e, accountId) {
         var btn = e;
-        console.log(btn);
         $.ajax({
             url: '/api/users/disconnect-social-account/' + accountId + '/user/',
             type: 'PUT',
@@ -18,10 +17,12 @@
                 'Content-Type': 'application/json',
             },
             success: function (data) {
-                $(btn).attr('href', data.url);
+                console.log(data);
+                $(btn).attr('href', data);
                 $(btn).html('Connect');
                 $(btn).removeClass('btn-danger');
                 $(btn).addClass('btn-secondary');
+                $(btn).prop("onclick", null);
             },
             cache: false,
             contentType: false,
