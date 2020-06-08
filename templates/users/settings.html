@@ -9,6 +9,12 @@
         $.ajax({
             url: '/api/users/disconnect-social-account/' + accountId + '/user/',
             type: 'PUT',
+            credentials: "same-origin",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Accept": "application/json",
+                'Content-Type': 'application/json',
+            },
             success: function (data) {
                 $(this).attr('href', data.url);
                 $(this).html('Connect');
