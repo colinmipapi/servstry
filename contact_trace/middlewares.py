@@ -16,7 +16,6 @@ class LoginFormMiddleware(object):
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if form.is_valid():
-                form.save()
                 return redirect('home')
         else:
             form = LoginForm()

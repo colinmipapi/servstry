@@ -166,14 +166,8 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 class CustomSocialSignupForm(SocialSignupForm):
 
-    first_name = forms.CharField(max_length=100, label='First Name')
-    last_name = forms.CharField(max_length=100, label='Last Name')
     email = forms.EmailField(
         label='E-mail Address'
-    )
-    phone = PhoneNumberField(
-        required=True,
-        label='Phone Number'
     )
     password1 = PasswordField(
         label='Password'
@@ -182,17 +176,6 @@ class CustomSocialSignupForm(SocialSignupForm):
         label='Confirm Password',
         confirm_with='password1'
     )
-    create_business = forms.BooleanField(
-        required=False,
-        label='I also need to create an account for my business'
-    )
-
-    def signup(self, user):
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.phone = self.cleaned_data['phone']
-        user.save()
-        return user
 
 
 class InvitationSignupForm(UserContactInfoForm):
