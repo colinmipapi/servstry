@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/companies/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/companies/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/api_views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -136,8 +135,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/users/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="605">
-                  <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+                <state relative-caret-position="494">
+                  <caret line="112" column="57" selection-start-line="112" selection-start-column="57" selection-end-line="112" selection-end-column="57" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
                   </folding>
@@ -241,9 +240,9 @@
         <option value="$PROJECT_DIR$/static/js/main.js" />
         <option value="$PROJECT_DIR$/static/js/stripe-payment.js" />
         <option value="$PROJECT_DIR$/users/views.py" />
-        <option value="$PROJECT_DIR$/users/api_views.py" />
         <option value="$PROJECT_DIR$/templates/users/settings.html" />
         <option value="$PROJECT_DIR$/templates/companies/settings.html" />
+        <option value="$PROJECT_DIR$/users/api_views.py" />
       </list>
     </option>
   </component>
@@ -890,16 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/api_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -918,6 +907,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/api_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="112" column="57" selection-start-line="112" selection-start-column="57" selection-end-line="112" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
