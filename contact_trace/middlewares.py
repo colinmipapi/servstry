@@ -38,7 +38,7 @@ class SignUpFormMiddleware(object):
         if request.method == 'POST':
             form = SignupForm(request.POST)
             if form.is_valid():
-                form.save()
+                form.save(request)
                 return redirect('home')
         else:
             form = SignupForm()
