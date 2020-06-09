@@ -190,7 +190,7 @@ def company_profile(request, slug):
             gv = guest_visit_form.save(commit=False)
             gv.company = company
             gv.ip_address = get_client_ip(request)
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and not company_user:
                 gv.add_user_information(request.user)
             else:
                 gv.save()

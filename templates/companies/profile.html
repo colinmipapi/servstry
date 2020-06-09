@@ -226,14 +226,11 @@
             readURL(this,'logoSampleImg','image');
         });
     {% endif %}
-    {% if company.safety_policy_setting in 'P,CP' %}
+    {% if company.safety_policy_setting in 'P,CP' and not company_user %}
         $(document).ready(function () {
             $('#safetyPolicyModal').modal({backdrop: 'static', keyboard: false});
             $('#safetyPolicyModal').modal('show');
         });
-        function acceptGuestVisitForm() {
-            $('#id_safety_policy_accept').attr("checked", true);
-        };
     {% endif %}
 </script>
 {% endblock %}
