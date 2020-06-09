@@ -36,7 +36,7 @@
 	<h1>{{ company.name }}</h1>
 	<h4>Use the QR code or visit the URL below to enter your contact information and view our safety policy</h4>
 	<div class="qr-container">
-		<img src="{% qr_url_from_text company.get_full_url size=5 version=10 image_format='png' %}">
+		<img src="{% qr_url_from_text company.get_full_url size=4 version=10 image_format='png' %}">
 	</div>
 	<h3>{{ company.get_simple_url }}</h3>
 </div>

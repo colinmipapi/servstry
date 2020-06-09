@@ -209,6 +209,10 @@ def company_profile(request, slug):
         edit = True
         company_info_form = EditCompanyInfoForm(instance=company)
         nav = True
+        guest_visit_form = GuestVisitForm(initial={
+            'arrival': timezone.now().strftime('%Y-%m-%dT%H:%M'),
+            'safety_policy_accept': safety_initial
+        })
     else:
         logo_form = False
         cover_img_form = False
