@@ -27,7 +27,7 @@ app.conf.beat_schedule = {
         'schedule': crontab(minute=0, hour=0),
     },
     'update-plan': {
-        'task': 'billing.tasks.update_plan',
+        'task': 'billing.tasks.update_plans',
         'schedule': crontab(minute=30, hour=0),
     },
     'update-coupon': {

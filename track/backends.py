@@ -49,9 +49,9 @@ def generate_csv_report_email(guest_visits, to_user):
     ])
     for guest in guest_visits:
         csv_writer.writerow([
-            guest.first_name,
-            guest.last_name,
-            guest.email,
+            guest.first_name_pretty,
+            guest.last_name_pretty,
+            guest.email_pretty,
             guest.phone_pretty,
             guest.arrival_date_pretty,
             guest.arrival_time_pretty,
@@ -105,9 +105,9 @@ def generate_xls_report_email(guest_visits, to_user):
     for guest in guest_visits:
 
         row = [
-            guest.first_name,
-            guest.last_name,
-            guest.email,
+            guest.first_name_pretty,
+            guest.last_name_pretty,
+            guest.email_pretty,
             guest.phone_pretty,
             guest.arrival_date_pretty,
             guest.arrival_time_pretty,
