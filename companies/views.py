@@ -74,7 +74,7 @@ def create_company_name_address(request):
         form = NameAddressForm(request.POST)
         if form.is_valid():
             company = form.save(commit=False)
-            company.status = 'SU'
+            company.status = 'SB'
             company.save()
             company.admins.add(request.user)
             form.save_m2m()
