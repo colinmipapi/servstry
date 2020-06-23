@@ -5,10 +5,12 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-<div class="user-landing waiting-list-background">
-    <div class="waiting-list-background-screen"></div>
-    <div class="d-flex justify-content-center wait-list-form-container pb-5">
-        <div class="wait-list-form-box text-center">
+<video autoplay muted loop id="landingVideo">
+    <source id="videoSource" src="{% static 'media/videos/outside.mp4' %}" type="video/mp4">
+</video>
+<div class="landing-background-content">
+    <div class="d-flex justify-content-center align-items-end main-content-container pb-md-5">
+        <div class="main-content-box text-center">
             <h1 class="mb-5">Working with Bars and Restaurants to Protect our Community</h1>
             <div class="company-search-form-container mx-auto">
                 <div class="row mt-5">

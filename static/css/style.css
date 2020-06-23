@@ -89,6 +89,40 @@
     color: var(--blue) !important;
 }
 
+#landingVideo, #noVideo {
+     position: fixed;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     object-fit: cover;
+     overflow-y: hidden;
+}
+
+#landingVideo {
+    z-index: -2;
+}
+
+.landing-background-content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  color: #f1f1f1;
+  width: 100%;
+  top: 0;
+}
+
+.main-content-container {
+    width: 100vw;
+    height: 75vh;
+}
+
+.main-content-box {
+    width: 60%;
+    min-width: 300px;
+}
+
 .waiting-list-background {
     background: url('/static/media/imgs/cafe-interior-2.jpg');
     background-repeat: no-repeat;
@@ -117,11 +151,6 @@
     height: 100vh;
 }
 
-.wait-list-form-box {
-    width: 60%;
-    min-width: 300px;
-}
-
 .wait-list-form-box h1 {
     color: var(--white);
     font-size: 2rem;
@@ -132,7 +161,7 @@
     color: var(--white);
 }
 
-.wait-list-form-box input {
+.main-content-box input {
     width: 100%;
     padding: 10px;
 }
