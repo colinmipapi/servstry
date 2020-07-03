@@ -22,6 +22,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
+    '''
     'update-subscription': {
         'task': 'billing.tasks.update_subscriptions',
         'schedule': crontab(minute=0, hour=0),
@@ -42,6 +43,7 @@ app.conf.beat_schedule = {
         'task': 'billing.tasks.update_invoices',
         'schedule': crontab(minute=0, hour=2),
     },
+    '''
 }
 
 
