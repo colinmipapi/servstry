@@ -3,52 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/heroku.yml" beforeDir="false" afterPath="$PROJECT_DIR$/heroku.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/landing.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/landing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_trace/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>btn-f</find>
-      <find>signup</find>
-      <find>account-page</find>
-      <find>gues</find>
-      <find>box-shadow</find>
-      <find>mag</find>
-      <find>btn-blu</find>
-      <find>searc</find>
-      <find>subscription_look</find>
-      <find>download</find>
-      <find>card</find>
-      <find>retrieve</find>
-      <find>company-s</find>
-      <find>#</find>
-      <find>#guest</find>
-      <find>companyau</find>
-      <find>suggest</find>
-      <find>company</find>
-      <find>.home</find>
-      <find>disc</find>
-      <find>onclick</find>
-      <find>removeCompan</find>
-      <find>discon</find>
-      <find>SIt</find>
-      <find>overflow-y</find>
-      <find>.overflow-y</find>
-      <find>crispy</find>
-      <find>dispnon</find>
-      <find>li</find>
-      <find>apply_async</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>Servstry</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1590168637210</updated>
       <workItem from="1593706580959" duration="582000" />
-      <workItem from="1593785965656" duration="319000" />
+      <workItem from="1593785965656" duration="1123000" />
     </task>
     <servers />
   </component>
