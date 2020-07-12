@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="94842fd9-1fce-4695-8bcb-c0e3f6e40854" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_trace/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_trace/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/business_landing.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/business_landing.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +56,8 @@
       <option name="presentableId" value="Default" />
       <updated>1590168637210</updated>
       <workItem from="1593706580959" duration="582000" />
-      <workItem from="1593785965656" duration="1123000" />
+      <workItem from="1593785965656" duration="1743000" />
+      <workItem from="1594574333842" duration="29000" />
     </task>
     <servers />
   </component>
