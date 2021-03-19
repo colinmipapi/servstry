@@ -42,7 +42,7 @@ django-timezone-field==4.0
 django-tinymce==3.0.2
 django-twilio==0.13.0.post1
 django-zxcvbn-password==2.1.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 docutils==0.15.2
 elasticsearch==7.7.0
 elasticsearch-dsl==7.2.0
