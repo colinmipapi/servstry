@@ -76,7 +76,7 @@ python-crontab==2.5.1
 python-dateutil==2.8.1
 python3-openid==3.1.0
 pytz==2020.1
-PyYAML==5.3.1
+PyYAML==5.4
 qrcode==6.1
 redis==3.5.2
 requests==2.23.0
